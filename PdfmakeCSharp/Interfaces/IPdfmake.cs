@@ -1,4 +1,4 @@
-﻿namespace PdfmakeCSharp.Interfaces
+﻿namespace PdfmakeCSharp
 {
     public interface IPdfmake<T> : IBasePdfMake<T>
     {

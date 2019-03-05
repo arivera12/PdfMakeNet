@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace PdfmakeCSharp.Interfaces
+namespace PdfmakeCSharp
 {
     public interface IQRCode
     {

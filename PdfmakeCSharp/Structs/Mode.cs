@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace PdfmakeCSharp.Structs
+﻿namespace PdfmakeCSharp
 {
     public struct Mode
     {

@@ -1,6 +1,6 @@
 ﻿using PdfmakeCSharp.Structs;
 
-namespace PdfmakeCSharp.Interfaces
+namespace PdfmakeCSharp
 {
     public interface IStyle
     {

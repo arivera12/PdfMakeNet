@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace PdfmakeCSharp.Interfaces
+namespace PdfmakeCSharp
 {
     public interface IText : IStyle
     {

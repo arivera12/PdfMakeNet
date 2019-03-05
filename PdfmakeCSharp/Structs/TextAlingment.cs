@@ -1,4 +1,4 @@
-﻿namespace PdfmakeCSharp.Structs
+﻿namespace PdfmakeCSharp
 {
     public struct TextAlingment
     {
