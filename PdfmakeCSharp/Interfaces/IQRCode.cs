@@ -1,9 +1,4 @@
-﻿using PdfmakeCSharp.Structs;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace PdfmakeCSharp
+﻿namespace PdfmakeCSharp
 {
     public interface IQRCode
     {

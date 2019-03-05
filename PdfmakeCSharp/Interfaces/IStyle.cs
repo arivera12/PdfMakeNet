@@ -1,6 +1,4 @@
-﻿using PdfmakeCSharp.Structs;
-
-namespace PdfmakeCSharp
+﻿namespace PdfmakeCSharp
 {
     public interface IStyle
     {
@@ -13,7 +11,7 @@ namespace PdfmakeCSharp
         int Width { get; set; }
         int Height { get; set; }
         double Opacity { get; set; }
-        int [] Fit { get; set; }
+        int[] Fit { get; set; }
         PageBreak PageBreak { get; set; }
         TextAlingment Alignment { get; set; }
     }
