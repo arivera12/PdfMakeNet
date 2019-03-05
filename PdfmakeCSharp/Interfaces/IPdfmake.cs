@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace PdfmakeCSharp.Interfaces
+﻿namespace PdfmakeCSharp.Interfaces
 {
-    interface IPdfmake <T> : IBasePdfMake <T>
+    public interface IPdfmake<T> : IBasePdfMake<T>
     {
         void Download();
         void Open();

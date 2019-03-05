@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using PdfmakeCSharp.Structs;
 
 namespace PdfmakeCSharp.Interfaces
 {
-    interface IStyle
+    public interface IStyle
     {
-        int fontSize { get; set; }
-        bool bold { get; set; }
-        bool italics { get; set; }
-        string alignment { get; set; }
+        int FontSize { get; set; }
+        bool Bold { get; set; }
+        bool Italics { get; set; }
+        TextAlingment Alignment { get; set; }
     }
 }

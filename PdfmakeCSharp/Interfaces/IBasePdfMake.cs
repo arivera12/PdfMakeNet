@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace PdfmakeCSharp.Interfaces
 {
-    interface IBasePdfMake <T>
+    public interface IBasePdfMake<T>
     {
-        List<T> content { get; set; }
-        object styles { get; set; }
+        List<T> Content { get; set; }
+        object Styles { get; set; }
         void AddText(IText Text);
         void AddText(IList<IText> TextList);
     }

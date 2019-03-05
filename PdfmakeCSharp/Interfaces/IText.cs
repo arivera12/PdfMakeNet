@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace PdfmakeCSharp.Interfaces
 {
-    interface IText : IStyle
+    public interface IText : IStyle
     {
-        string text { get; set; }
-        IList<string> style { get; set; }
+        string Text { get; set; }
+        IList<string> Style { get; set; }
     }
 }

@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace PdfmakeCSharp.Enums
+﻿namespace PdfmakeCSharp.Structs
 {
-    public static class TextAlingment
+    public struct TextAlingment
     {
         public const string Left = "left";
         public const string Right = "rigth";
