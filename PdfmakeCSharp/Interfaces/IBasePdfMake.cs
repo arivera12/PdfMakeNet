@@ -24,6 +24,9 @@ namespace PdfmakeCSharp
         ///  Document Style Definitions
         /// </summary>
         object Styles { get; set; }
+
+
+
         /// <summary>
         /// Adds text to the body
         /// </summary>
@@ -44,5 +47,47 @@ namespace PdfmakeCSharp
         /// </summary>
         /// <param name="qRCodes"></param>
         void AddQRCode(IList<IQRCode> qRCodes);
+        /// <summary>
+        /// Adds text to the Header
+        /// </summary>
+        /// <param name="text"></param>
+        void AddHeaderText(IText text);
+        /// <summary>
+        /// Adds a collection of texts to the Header
+        /// </summary>
+        /// <param name="text"></param>
+        void AddHeaderText(IList<IText> text);
+        /// <summary>
+        /// Adds a QRcode to the body
+        /// </summary>
+        /// <param name="qRCode"></param>
+        void AddHeaderQRCode(IQRCode qRCode);
+        /// <summary>
+        /// Adds a collection of QRCodes to the Header
+        /// </summary>
+        /// <param name="qRCode"></param>
+        void AddHeaderQRCode(IList<IQRCode> qRCode);
+        /// <summary>
+        /// Adds text to the Footer
+        /// </summary>
+        /// <param name="text"></param>
+        /// 
+        void AddFooterText(IText text);
+        /// <summary>
+        /// Adds a collection of texts to the Footer
+        /// </summary>
+        /// <param name="text"></param>
+        void AddFooterText(IList<IText> text);
+        /// <summary>
+        /// Adds a QRcode to the Footer
+        /// </summary>
+        /// <param name="qRCode"></param>
+        void AddFooterQRCode(IQRCode qRCode);
+        /// <summary>
+        /// Adds a collection of texts to the Footer
+        /// </summary>
+        /// <param name="qRCode"></param>
+        void AddFooterQRCode(IList<IQRCode> qRCode);
+
     }
 }
