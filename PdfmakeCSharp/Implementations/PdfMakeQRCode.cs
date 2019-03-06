@@ -11,9 +11,7 @@ namespace PdfmakeCSharp
         public string Foreground { get; set; }
         [Key("background")]
         public string Background { get; set; }
-        [Key("fit")]
-        public int Fit { get; set; }
-        [Key("Version")]
+        [Key("version")]
         public string Version { get; set; }
         [Key("eccLevel")]
         public EccLevel EccLevel { get; set; }

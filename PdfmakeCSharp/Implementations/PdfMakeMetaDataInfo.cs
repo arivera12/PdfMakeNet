@@ -5,7 +5,7 @@ namespace PdfmakeCSharp
     [MessagePackObject]
     public class PdfMakeMetaDataInfo
     {
-        [Key("Title")]
+        [Key("title")]
         public string Title { get; set; }
         [Key("author")]
         public string Author { get; set; }
@@ -18,7 +18,7 @@ namespace PdfmakeCSharp
         [Key("producer")]
         public string Producer { get; set; }
         [Key("creationDate")]
-        public string reationDate { get; set; }
+        public string CreationDate { get; set; }
         [Key("modDate")]
         public string ModDate { get; set; }
         [Key("trapped")]
