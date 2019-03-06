@@ -1,6 +1,6 @@
 ﻿using MessagePack;
 
-namespace PdfmakeCSharp
+namespace PdfMakeCSharp
 {
     [MessagePackObject]
     public class PdfMakeMetaDataInfo

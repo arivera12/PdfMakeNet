@@ -1,10 +1,22 @@
-﻿namespace PdfmakeCSharp
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
+
+namespace PdfMakeCSharp
 {
-    //TODO Finish interface with global methods to be implemented.
-    public interface IPdfmake<T> : IPdfMakeBase<T>
+    public interface IPdfmake
     {
-        void Download();
-        void Open();
-        void Print();
+        ContentResult DownloadInBrowser(string Filename);
+        ContentResult OpenInBrowser(bool SameWindow);
+        ContentResult PrintInBrowser(bool SameWindow);
+        ContentResult EmbedInBrowserIframe(string IFrameQuerySelector);
+        ContentResult DocumentDefinitionInBrowser();
+        string GetDownloadInBrowser(string Filename);
+        string GetOpenInBrowser(bool SameWindow);
+        string GetPrintInBrowser(bool SameWindow);
+        string GetEmbedInBrowserIframe(string IFrameQuerySelector);
+        string GetDocumentDefinition();
+        string GetBase64Data();
+        uint[] GetBufferData();
+        byte[] GetBlobData();
     }
 }

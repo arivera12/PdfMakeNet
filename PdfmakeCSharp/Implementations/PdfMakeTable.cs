@@ -1,7 +1,7 @@
 ﻿using MessagePack;
 using System.Collections.Generic;
 
-namespace PdfmakeCSharp
+namespace PdfMakeCSharp
 {
     [MessagePackObject]
     public class PdfMakeTable<T> : PdfMakeStyle

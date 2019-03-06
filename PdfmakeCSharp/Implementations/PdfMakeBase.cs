@@ -1,10 +1,10 @@
 ﻿using MessagePack;
 using System.Collections.Generic;
 
-namespace PdfmakeCSharp
+namespace PdfMakeCSharp
 {
     [MessagePackObject]
-    class PdfMakeBase : IPdfMakeBase<object>
+    public abstract class PdfMakeBase : IPdfMakeBase<object>
     {
         #region Fields
         [Key("header")]
@@ -20,11 +20,11 @@ namespace PdfmakeCSharp
         [Key("styles")]
         public object Styles { get; set; }
         [Key("pageSize")]
-        public PageSize PageSize { get; set; }
+        public string PageSize { get; set; }
         [Key("pageMargins")]
         public List<int> PageMargins { get; set; }
         [Key("pageOrientation")]
-        public PageOrientation PageOrientation { get; set; }
+        public string PageOrientation { get; set; }
         [Key("compress")]
         public bool Compress { get; set; }
         [Key("userPassword")]
@@ -33,6 +33,16 @@ namespace PdfmakeCSharp
         public string OwnerPassword { get; set; }
         [Key("permissions")]
         public PdfMakePermissions Permissions { get; set; }
+        #endregion
+
+        #region Constructor
+        public PdfMakeBase()
+        {
+            Body = new List<object>();
+            Header = new List<object>();
+            Footer = new List<object>();
+            PageSize = PdfMakeCSharp.PageSize.LETTER;
+        }
         #endregion
 
         #region Body
@@ -49,12 +59,12 @@ namespace PdfmakeCSharp
             }
         }
 
-        public void AddPdfMakeText(PdfMakeText PdfMakeText)
+        public void AddText(PdfMakeText PdfMakeText)
         {
             Body.Add(PdfMakeText);
         }
 
-        public void AddPdfMakeText(IEnumerable<PdfMakeText> PdfMakeTexts)
+        public void AddText(IEnumerable<PdfMakeText> PdfMakeTexts)
         {
             Body.Add(new { PdfMakeTexts });
         }
@@ -114,12 +124,12 @@ namespace PdfmakeCSharp
             }
         }
 
-        public void AddHeaderPdfMakeText(PdfMakeText PdfMakeText)
+        public void AddHeaderText(PdfMakeText PdfMakeText)
         {
             Header.Add(PdfMakeText);
         }
 
-        public void AddHeaderPdfMakeText(IEnumerable<PdfMakeText> PdfMakeTexts)
+        public void AddHeaderText(IEnumerable<PdfMakeText> PdfMakeTexts)
         {
             Header.Add(new { PdfMakeTexts });
         }
@@ -174,12 +184,12 @@ namespace PdfmakeCSharp
             }
         }
 
-        public void AddFooterPdfMakeText(PdfMakeText PdfMakeText)
+        public void AddFooterText(PdfMakeText PdfMakeText)
         {
             Footer.Add(PdfMakeText);
         }
 
-        public void AddFooterPdfMakeText(IEnumerable<PdfMakeText> PdfMakeTexts)
+        public void AddFooterText(IEnumerable<PdfMakeText> PdfMakeTexts)
         {
             Footer.Add(new { PdfMakeTexts });
         }

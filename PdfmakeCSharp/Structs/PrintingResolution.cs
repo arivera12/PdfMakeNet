@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using MessagePack;
 
-namespace PdfmakeCSharp
+namespace PdfMakeCSharp
 {
+    [MessagePackObject]
     public struct PrintingResolution
     {
         public const string HighResolution = "highResolution";

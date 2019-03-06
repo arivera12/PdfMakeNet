@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace PdfmakeCSharp
+namespace PdfMakeCSharp
 {
     public interface IPdfMakeBase<T>
     {
@@ -11,9 +11,9 @@ namespace PdfmakeCSharp
         T Background { get; set; }
         object Images { get; set; }
         object Styles { get; set; }
-        PageSize PageSize { get; set; }
+        string PageSize { get; set; }
         List<int> PageMargins { get; set; }
-        PageOrientation PageOrientation { get; set; }
+        string PageOrientation { get; set; }
         bool Compress { get; set; }
         string UserPassword { get; set; }
         string OwnerPassword { get; set; }
@@ -21,8 +21,8 @@ namespace PdfmakeCSharp
         #endregion
 
         #region Body
-        void AddPdfMakeText(PdfMakeText pdfMakeText);
-        void AddPdfMakeText(IEnumerable<PdfMakeText> pdfMakeTexts);
+        void AddText(PdfMakeText pdfMakeText);
+        void AddText(IEnumerable<PdfMakeText> pdfMakeTexts);
         void AddQRCode(PdfMakeQRCode qRCode);
         void AddQRCode(IEnumerable<PdfMakeQRCode> qRCodes);
         void AddColumns(IEnumerable<PdfMakeColumns<T>> Columns);
@@ -36,8 +36,8 @@ namespace PdfmakeCSharp
         #endregion
 
         #region Header
-        void AddHeaderPdfMakeText(PdfMakeText pdfMakeText);
-        void AddHeaderPdfMakeText(IEnumerable<PdfMakeText> pdfMakeTexts);
+        void AddHeaderText(PdfMakeText pdfMakeText);
+        void AddHeaderText(IEnumerable<PdfMakeText> pdfMakeTexts);
         void AddHeaderQRCode(PdfMakeQRCode qRCode);
         void AddHeaderQRCode(IEnumerable<PdfMakeQRCode> qRCodes);
         void AddHeaderColumns(IEnumerable<PdfMakeColumns<T>> Columns);
@@ -50,8 +50,8 @@ namespace PdfmakeCSharp
         #endregion
 
         #region Footer
-        void AddFooterPdfMakeText(PdfMakeText pdfMakeText);
-        void AddFooterPdfMakeText(IEnumerable<PdfMakeText> pdfMakeTexts);
+        void AddFooterText(PdfMakeText pdfMakeText);
+        void AddFooterText(IEnumerable<PdfMakeText> pdfMakeTexts);
         void AddFooterQRCode(PdfMakeQRCode qRCode);
         void AddFooterQRCode(IEnumerable<PdfMakeQRCode> qRCodes);
         void AddFooterColumns(IEnumerable<PdfMakeColumns<T>> Columns);

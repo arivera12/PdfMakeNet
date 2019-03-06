@@ -1,6 +1,6 @@
 ﻿using MessagePack;
 
-namespace PdfmakeCSharp
+namespace PdfMakeCSharp
 {
     [MessagePackObject]
     public class PdfMakeQRCode : PdfMakeStyle
@@ -14,9 +14,9 @@ namespace PdfmakeCSharp
         [Key("version")]
         public string Version { get; set; }
         [Key("eccLevel")]
-        public EccLevel EccLevel { get; set; }
+        public string EccLevel { get; set; }
         [Key("mode")]
-        public Mode Mode { get; set; }
+        public string Mode { get; set; }
         [Key("mask")]
         public string Mask { get; set; }
     }

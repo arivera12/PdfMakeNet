@@ -1,5 +1,8 @@
-﻿namespace PdfmakeCSharp
+﻿using MessagePack;
+
+namespace PdfMakeCSharp
 {
+    [MessagePackObject]
     public struct EccLevel
     {
         public const string L = "L";

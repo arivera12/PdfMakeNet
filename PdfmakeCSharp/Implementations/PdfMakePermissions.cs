@@ -3,13 +3,13 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace PdfmakeCSharp
+namespace PdfMakeCSharp
 {
     [MessagePackObject]
     public class PdfMakePermissions
     {
         [Key("printing")]
-        public PrintingResolution Printing { get; set; }
+        public string Printing { get; set; }
         [Key("modifying")]
         public bool Modifying { get; set; }
         [Key("copying")]
