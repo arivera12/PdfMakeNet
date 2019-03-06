@@ -1,6 +1,7 @@
 ﻿namespace PdfmakeCSharp
 {
-    public interface IPdfmake<T> : IBasePdfMake<T>
+    //TODO Finish interface with global methods to be implemented.
+    public interface IPdfmake<T> : IPdfMakeBase<T>
     {
         void Download();
         void Open();
