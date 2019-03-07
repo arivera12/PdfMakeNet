@@ -17,6 +17,8 @@ namespace PdfMakeCSharp
         public object Background { get; set; }
         [Key("images")]
         public object Images { get; set; }
+        [Key("defaultStyle")]
+        public PdfMakeStyle DefaultStyle { get; set; }
         [Key("styles")]
         public object Styles { get; set; }
         [Key("pageSize")]

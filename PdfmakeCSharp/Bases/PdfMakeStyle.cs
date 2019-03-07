@@ -4,15 +4,15 @@ using System.Collections.Generic;
 namespace PdfMakeCSharp
 {
     [MessagePackObject]
-    public abstract class PdfMakeStyle
+    public class PdfMakeStyle
     {
         [Key("fontSize")]
-        public int FontSize { get; set; }
+        public int FontSize { get; set; } = 12;
         [Key("bold")]
         public bool Bold { get; set; }
         [Key("italics")]
         public bool Italics { get; set; }
-        [Key("Color")]
+        [Key("color")]
         public string Color { get; set; }
         //margin: [left, top, right, bottom] OR margin: [horizontal, vertical] OR margin: equalLeftTopRightBottom
         [Key("margin")]
@@ -30,11 +30,11 @@ namespace PdfMakeCSharp
         [Key("tocItem")]
         public object TocItem { get; set; }
         [Key("pageBreak")]
-        public PageBreak PageBreak { get; set; }
+        public string PageBreak { get; set; }
         [Key("alignment")]
-        public TextAlingment Alignment { get; set; }
+        public string Alignment { get; set; }
         [Key("pageOrientation")]
-        public PageOrientation PageOrientation { get; set; }
+        public string PageOrientation { get; set; }
 
     }
 }

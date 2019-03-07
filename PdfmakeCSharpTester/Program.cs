@@ -8,11 +8,12 @@ namespace PdfmakeCSharpTester
     {
         static void Main(string[] args)
         {
-            //var baseScript = PdfmakeCSharp.IO.ReadEmbeddedResource.ReadResourceContent("pdfmake.min.js");
-
+            //var PdfMake = PdfMakeCSharp.IO.ReadEmbeddedResource.ReadResourceContent("pdfmake.min.js");
+            //var Fonts = PdfMakeCSharp.IO.ReadEmbeddedResource.ReadResourceContent("vfs_fonts.js"); 
             //var engine = new Engine();
 
-            //engine.Execute(baseScript);
+            //engine.Execute(PdfMake);
+            //engine.Execute(Fonts);
 
             TestPdfMakeObjectStructure();
         }
@@ -21,7 +22,8 @@ namespace PdfmakeCSharpTester
         {
             PdfMake pdfMake = new PdfMake();
 
-            pdfMake.AddText(new PdfMakeText() { Text = "Hello World!" });
+            pdfMake.AddText(new PdfMakeText() { Text = "Hello World!", PageBreak = PageBreak.After, PageOrientation = PageOrientation.Landscape });
+            pdfMake.AddText(new PdfMakeText() { Text = "Hello World in a new page in landscape!" });
 
             Console.WriteLine(pdfMake.GetDocumentDefinition());
         }

@@ -7,10 +7,12 @@
 
   <ItemGroup>
     <None Remove="Resources\pdfmake.min.js" />
+    <None Remove="Resources\vfs_fonts.js" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="Resources\pdfmake.min.js" />
+    <EmbeddedResource Include="Resources\vfs_fonts.js" />
   </ItemGroup>
 
   <ItemGroup>
