@@ -53,14 +53,6 @@ namespace PdfMakeCSharp
             Body.Add(qRCode);
         }
 
-        public void AddQRCode(IEnumerable<PdfMakeQRCode> qRCodes)
-        {
-            foreach (var item in qRCodes)
-            {
-                Body.Add(item);
-            }
-        }
-
         public void AddText(PdfMakeText PdfMakeText)
         {
             Body.Add(PdfMakeText);
@@ -71,44 +63,44 @@ namespace PdfMakeCSharp
             Body.Add(new { PdfMakeTexts });
         }
 
-        public void AddColumns(IEnumerable<PdfMakeColumns<object>> Columns)
+        public void AddColumns(PdfMakeColumns<object> Columns)
         {
-            Body.Add(Columns);
+            Body.Add(new { Columns });
         }
 
         public void AddTable(PdfMakeTable<object> pdfMakeTable)
         {
-            throw new System.NotImplementedException();
+            Body.Add(pdfMakeTable);
         }
 
         public void AddOrderedList(PdfMakeOrderedList<object> pdfMakeOrderedList)
         {
-            throw new System.NotImplementedException();
+            Body.Add(pdfMakeOrderedList);
         }
 
         public void AddUnorderedList(PdfMakeUnorderedList<object> pdfMakeUnorderedList)
         {
-            throw new System.NotImplementedException();
+            Body.Add(pdfMakeUnorderedList);
         }
 
-        public void AddStack(IEnumerable<PdfMakeStack<object>> pdfMakeStacks)
+        public void AddStack(PdfMakeStack<object> pdfMakeStacks)
         {
-            throw new System.NotImplementedException();
+            Body.Add(new { pdfMakeStacks });
         }
 
         public void AddImage(PdfMakeImage pdfMakeImage)
         {
-            throw new System.NotImplementedException();
+            Body.Add(pdfMakeImage);
         }
 
         public void AddLink(PdfMakeLink pdfMakeLink)
         {
-            throw new System.NotImplementedException();
+            Body.Add(pdfMakeLink);
         }
 
         public void AddTableOfContent(PdfMakeTableOfContent pdfMakeTableOfContent)
         {
-            throw new System.NotImplementedException();
+            Body.Add(pdfMakeTableOfContent);
         }
         #endregion
 
@@ -116,14 +108,6 @@ namespace PdfMakeCSharp
         public void AddHeaderQRCode(PdfMakeQRCode qRCode)
         {
             Header.Add(qRCode);
-        }
-
-        public void AddHeaderQRCode(IEnumerable<PdfMakeQRCode> qRCodes)
-        {
-            foreach (var item in qRCodes)
-            {
-                Header.Add(item);
-            }
         }
 
         public void AddHeaderText(PdfMakeText PdfMakeText)
@@ -136,39 +120,39 @@ namespace PdfMakeCSharp
             Header.Add(new { PdfMakeTexts });
         }
 
-        public void AddHeaderColumns(IEnumerable<PdfMakeColumns<object>> Columns)
+        public void AddHeaderColumns(PdfMakeColumns<object> Columns)
         {
-            Header.Add(Columns);
+            Header.Add(new { Columns });
         }
 
         public void AddHeaderTable(PdfMakeTable<object> pdfMakeTable)
         {
-            throw new System.NotImplementedException();
+            Header.Add(pdfMakeTable);
         }
 
         public void AddHeaderOrderedList(PdfMakeOrderedList<object> pdfMakeOrderedList)
         {
-            throw new System.NotImplementedException();
+            Header.Add(pdfMakeOrderedList);
         }
 
         public void AddHeaderUnorderedList(PdfMakeUnorderedList<object> pdfMakeUnorderedList)
         {
-            throw new System.NotImplementedException();
+            Header.Add(pdfMakeUnorderedList);
         }
 
-        public void AddHeaderStack(IEnumerable<PdfMakeStack<object>> pdfMakeStacks)
+        public void AddHeaderStack(PdfMakeStack<object> pdfMakeStacks)
         {
-            throw new System.NotImplementedException();
+            Header.Add(new { pdfMakeStacks });
         }
 
         public void AddHeaderImage(PdfMakeImage pdfMakeImage)
         {
-            throw new System.NotImplementedException();
+            Header.Add(pdfMakeImage);
         }
 
         public void AddHeaderLink(PdfMakeLink pdfMakeLink)
         {
-            throw new System.NotImplementedException();
+            Header.Add(pdfMakeLink);
         }
         #endregion
 
@@ -176,14 +160,6 @@ namespace PdfMakeCSharp
         public void AddFooterQRCode(PdfMakeQRCode qRCode)
         {
             Footer.Add(qRCode);
-        }
-
-        public void AddFooterQRCode(IEnumerable<PdfMakeQRCode> qRCodes)
-        {
-            foreach (var item in qRCodes)
-            {
-                Footer.Add(item);
-            }
         }
 
         public void AddFooterText(PdfMakeText PdfMakeText)
@@ -196,39 +172,39 @@ namespace PdfMakeCSharp
             Footer.Add(new { PdfMakeTexts });
         }
 
-        public void AddFooterColumns(IEnumerable<PdfMakeColumns<object>> Columns)
+        public void AddFooterColumns(PdfMakeColumns<object> Columns)
         {
-            Footer.Add(Columns);
+            Footer.Add(new { Columns });
         }
 
         public void AddFooterTable(PdfMakeTable<object> pdfMakeTable)
         {
-            throw new System.NotImplementedException();
+            Footer.Add(pdfMakeTable);
         }
 
         public void AddFooterOrderedList(PdfMakeOrderedList<object> pdfMakeOrderedList)
         {
-            throw new System.NotImplementedException();
+            Footer.Add(pdfMakeOrderedList);
         }
 
         public void AddFooterUnorderedList(PdfMakeUnorderedList<object> pdfMakeUnorderedList)
         {
-            throw new System.NotImplementedException();
+            Footer.Add(pdfMakeUnorderedList);
         }
 
-        public void AddFooterStack(IEnumerable<PdfMakeStack<object>> pdfMakeStacks)
+        public void AddFooterStack(PdfMakeStack<object> pdfMakeStacks)
         {
-            throw new System.NotImplementedException();
+            Footer.Add(new { pdfMakeStacks });
         }
 
         public void AddFooterImage(PdfMakeImage pdfMakeImage)
         {
-            throw new System.NotImplementedException();
+            Footer.Add(pdfMakeImage);
         }
 
         public void AddFooterLink(PdfMakeLink pdfMakeLink)
         {
-            throw new System.NotImplementedException();
+            Footer.Add(pdfMakeLink);
         }
         #endregion
     }
