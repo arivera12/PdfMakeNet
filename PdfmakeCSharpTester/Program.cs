@@ -22,8 +22,20 @@ namespace PdfmakeCSharpTester
         {
             PdfMake pdfMake = new PdfMake();
 
-            pdfMake.AddText(new PdfMakeText() { Text = "Hello World!", PageBreak = PageBreak.After, PageOrientation = PageOrientation.Landscape });
-            pdfMake.AddText(new PdfMakeText() { Text = "Hello World in a new page in landscape!" });
+            pdfMake.AddText(new PdfMakeText() {
+                Text = "Hello World!",
+                PageBreak = PageBreak.After,
+                PageOrientation = PageOrientation.Landscape
+            });
+
+            pdfMake.AddText(new PdfMakeText() {
+                Text = "Hello World in a new page in landscape, red, bold, aligned to the right, italics and with some margins!",
+                Color = "red",
+                Bold = true,
+                Alignment = Alingment.Right,
+                Italics = true,
+                Margin = new int[] { 0, 50, 10, 0 }
+            });
 
             Console.WriteLine(pdfMake.GetDocumentDefinition());
         }
