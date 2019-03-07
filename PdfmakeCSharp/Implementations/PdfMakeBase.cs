@@ -60,7 +60,7 @@ namespace PdfMakeCSharp
 
         public void AddText(IEnumerable<PdfMakeText> PdfMakeTexts)
         {
-            Body.Add(new { PdfMakeTexts });
+            Body.Add(new { text = PdfMakeTexts });
         }
 
         public void AddColumns(PdfMakeColumns<object> Columns)
@@ -117,7 +117,7 @@ namespace PdfMakeCSharp
 
         public void AddHeaderText(IEnumerable<PdfMakeText> PdfMakeTexts)
         {
-            Header.Add(new { PdfMakeTexts });
+            Header.Add(new { text = PdfMakeTexts });
         }
 
         public void AddHeaderColumns(PdfMakeColumns<object> Columns)
@@ -169,7 +169,7 @@ namespace PdfMakeCSharp
 
         public void AddFooterText(IEnumerable<PdfMakeText> PdfMakeTexts)
         {
-            Footer.Add(new { PdfMakeTexts });
+            Footer.Add(new { text = PdfMakeTexts });
         }
 
         public void AddFooterColumns(PdfMakeColumns<object> Columns)

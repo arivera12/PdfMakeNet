@@ -6,18 +6,18 @@ namespace PdfMakeCSharp
     public class PdfMakeQRCode : PdfMakeStyle
     {
         [Key("qr")]
-        public string Qr { get; set; }
+        public string Text { get; set; }
         [Key("foreground")]
         public string Foreground { get; set; }
         [Key("background")]
         public string Background { get; set; }
         [Key("version")]
-        public string Version { get; set; }
+        public Version Version { get; set; }
         [Key("eccLevel")]
         public string EccLevel { get; set; }
         [Key("mode")]
         public string Mode { get; set; }
         [Key("mask")]
-        public string Mask { get; set; }
+        public Mask Mask { get; set; }
     }
 }
