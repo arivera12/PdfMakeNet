@@ -1,5 +1,4 @@
 ﻿using MessagePack;
-using System.Collections.Generic;
 
 namespace PdfMakeCSharp
 {
@@ -12,7 +11,7 @@ namespace PdfMakeCSharp
         /// </summary>
         [Key("layout")]
         public string Layout { get; set; }
-        
+
         [Key("table")]
         public PdfMakeTableBody<T> TableBody { get; set; }
     }

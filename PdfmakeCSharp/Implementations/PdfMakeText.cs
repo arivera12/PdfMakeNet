@@ -9,6 +9,6 @@ namespace PdfMakeCSharp
         [Key("text")]
         public string Text { get; set; }
         [Key("style")]
-        public IList<string> Style { get; set; }
+        public List<string> Style { get; set; }
     }
 }

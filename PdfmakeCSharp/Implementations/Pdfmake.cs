@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace PdfMakeCSharp
 {
@@ -58,7 +56,7 @@ namespace PdfMakeCSharp
             };
         }
         #endregion
-       
+
         #region String Document Definitions
         public string GetDocumentDefinition()
         {
@@ -81,7 +79,7 @@ namespace PdfMakeCSharp
             if (string.IsNullOrWhiteSpace(IFrameQuerySelector))
                 throw new ArgumentNullException("The IframeQuerySelector is null, empty or whitespace.");
 
-            return  @"pdfMake.createPdf(" + GetDocumentDefinition() + @").getDataUrl(function(dataUrl) {
+            return @"pdfMake.createPdf(" + GetDocumentDefinition() + @").getDataUrl(function(dataUrl) {
                         document.querySelector('" + IFrameQuerySelector + @"').src = dataUrl
                     });";
         }
