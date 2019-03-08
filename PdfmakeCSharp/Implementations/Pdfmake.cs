@@ -12,7 +12,7 @@ namespace PdfMakeCSharp
             return new ContentResult()
             {
                 Content = GetDocumentDefinition(),
-                ContentType = "application/javascript",
+                ContentType = "application/json",
                 StatusCode = 200
             };
         }
@@ -53,6 +53,16 @@ namespace PdfMakeCSharp
             {
                 Content = GetPrintInBrowser(SameWindow),
                 ContentType = "application/javascript",
+                StatusCode = 200
+            };
+        }
+
+        public ContentResult DocumentDataUrlInBrowser()
+        {
+            return new ContentResult()
+            {
+                Content = GetUrlData(),
+                ContentType = "text/plain",
                 StatusCode = 200
             };
         }
@@ -124,8 +134,8 @@ namespace PdfMakeCSharp
                 " " +
                 @"
                 pdfMake.createPdf(" + GetDocumentDefinition() + @").getBase64(function(data) {
-                    return data;
-                }); 
+                    return data
+                }) 
             ")
             .GetCompletionValue()
             .ToObject()
@@ -144,8 +154,8 @@ namespace PdfMakeCSharp
                     " " +
                     @"
                     pdfMake.createPdf(" + GetDocumentDefinition() + @").getBlob(function(blob) {
-                        return blob;
-                    }); 
+                        return blob
+                    }) 
                 ")
                 .GetCompletionValue()
                 .ToObject();
@@ -163,11 +173,31 @@ namespace PdfMakeCSharp
                     " " +
                     @"
                     pdfMake.createPdf(" + GetDocumentDefinition() + @").getBuffer(function(buffer) {
-                        return buffer;
-                    }); 
+                        return buffer
+                    }) 
                 ")
                 .GetCompletionValue()
                 .ToObject();
+        }
+
+        public string GetUrlData()
+        {
+            var PdfMakeLib = IO.ReadEmbeddedResource.ReadResourceContent("pdfmake.min.js");
+            var PdfMakeFonts = IO.ReadEmbeddedResource.ReadResourceContent("vfs_fonts.js");
+            var engine = new Engine();
+            return engine.Execute(
+                    PdfMakeLib +
+                    " " +
+                    PdfMakeFonts +
+                    " " +
+                    @"
+                    pdfMake.createPdf(" + GetDocumentDefinition() + @").getDataUrl(function(dataUrl) {
+                        return dataUrl
+                    }) 
+                ")
+                .GetCompletionValue()
+                .ToObject()
+                .ToString();
         }
         #endregion
     }
