@@ -1,5 +1,6 @@
 ﻿using MessagePack;
 using System.Collections.Generic;
+using System.Reflection;
 
 namespace PdfMakeCSharp
 {
@@ -205,6 +206,37 @@ namespace PdfMakeCSharp
         public void AddFooterLink(PdfMakeLink pdfMakeLink)
         {
             Footer.Add(pdfMakeLink);
+        }
+        #endregion
+
+        #region Helpers
+        public List<object> AddTableBodyStructure(List<string> Columns, List<object> Rows)
+        {
+            var body = new List<object>
+            {
+                Columns
+            };
+            foreach (var items in Rows)
+            {
+                var values = new List<object>();
+                var type = items.GetType();
+                if (type.GetGenericArguments()[0].IsSimpleType() && !type.IsAnonymousType())
+                {
+                    foreach (var item in (dynamic)items)
+                    {
+                        values.Add(item);
+                    }
+                }
+                else
+                {
+                    foreach (PropertyInfo prop in items.GetType().GetProperties())
+                    {
+                        values.Add(items.GetType().GetProperty(prop.Name).GetValue(items));
+                    }
+                }
+                body.Add(values);
+            }
+            return body;
         }
         #endregion
     }

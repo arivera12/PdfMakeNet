@@ -71,7 +71,102 @@ namespace PdfmakeCSharpTester
                 Foreground = "red",
                 Alignment = Alingment.Center
             });
-
+            pdfMake.AddText(new PdfMakeText()
+            {
+                Text = "PdfMake Table Test",
+            });
+            pdfMake.AddTable(new PdfMakeTable<object>()
+            {
+                TableBody = new PdfMakeTableBody<object>()
+                {
+                    HeaderRows = 1,
+                    Body = new List<object>()
+                    {
+                        new List<string>()
+                        {
+                            "Column1",
+                            "Column2"
+                        },
+                        new List<string>()
+                        {
+                            "row11",
+                            "row21"
+                        },
+                        new List<string>()
+                        {
+                            "row12",
+                            "row22"
+                        }
+                    }
+                }
+            });
+            pdfMake.AddText(new PdfMakeText()
+            {
+                Text = "PdfMake Table Test using helper method on primitive datatype",
+            });
+            pdfMake.AddTable(new PdfMakeTable<object>()
+            {
+                TableBody = new PdfMakeTableBody<object>()
+                {
+                    HeaderRows = 1,
+                    Body = pdfMake.AddTableBodyStructure(
+                        new List<string>()
+                        {
+                            "Column1",
+                            "Column2"
+                        },
+                        new List<object>()
+                        {
+                            new List<string>()
+                            {
+                                "row11",
+                                "row21"
+                            },
+                            new List<string>()
+                            {
+                                "row12",
+                                "row22"
+                            }
+                        }
+                    )
+                }
+            });
+            pdfMake.AddText(new PdfMakeText()
+            {
+                Text = "PdfMake Table Test using helper method on anonymous object",
+            });
+            pdfMake.AddTable(new PdfMakeTable<object>()
+            {
+                TableBody = new PdfMakeTableBody<object>()
+                {
+                    HeaderRows = 1,
+                    Body = pdfMake.AddTableBodyStructure(
+                        new List<string>()
+                        {
+                            "Column1",
+                            "Column2"
+                        },
+                        new List<object>()
+                        {
+                            new
+                            {
+                                c0 = "row11",
+                                c1 = "row21"
+                            },
+                            new
+                            {
+                                c0 = "row12",
+                                c1 = "row22"
+                            },
+                            new
+                            {
+                                c0 = "row13",
+                                c1 = "row23"
+                            }
+                        }
+                    )
+                }
+            });
             Console.WriteLine(pdfMake.GetDocumentDefinition());
         }
     }

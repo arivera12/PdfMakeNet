@@ -59,5 +59,9 @@ namespace PdfMakeCSharp
         void AddFooterImage(PdfMakeImage pdfMakeImage);
         void AddFooterLink(PdfMakeLink pdfMakeLink);
         #endregion
+
+        #region Helpers
+        List<object> AddTableBodyStructure(List<string> Columns, List<T> Rows);
+        #endregion
     }
 }
