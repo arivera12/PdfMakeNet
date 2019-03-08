@@ -7,22 +7,46 @@ namespace PdfmakeCSharpTester
 {
     class Program
     {
+        static readonly PdfMake pdfMake = new PdfMake();
         static void Main(string[] args)
         {
-            //var PdfMake = PdfMakeCSharp.IO.ReadEmbeddedResource.ReadResourceContent("pdfmake.min.js");
-            //var Fonts = PdfMakeCSharp.IO.ReadEmbeddedResource.ReadResourceContent("vfs_fonts.js"); 
-            //var engine = new Engine();
-
-            //engine.Execute(PdfMake);
-            //engine.Execute(Fonts);
-
             TestPdfMakeObjectStructure();
+            TestJint();
+        }
+
+        private static void TestJint()
+        {
+            //var PdfMakeLib = PdfMakeCSharp.IO.ReadEmbeddedResource.ReadResourceContent("pdfmake.min.js");
+            //var PdfMakeFonts = PdfMakeCSharp.IO.ReadEmbeddedResource.ReadResourceContent("vfs_fonts.js");
+            var engine = new Engine();
+
+            //var result = engine.Execute(
+            //    PdfMakeLib + 
+            //    " " + 
+            //    PdfMakeFonts + 
+            //    " " + 
+            //    @"
+            //    pdfMake.createPdf(" + pdfMake.GetDocumentDefinition() + @").getBase64(function(data) {
+            //        return data;
+            //    }); 
+            //")
+            //.GetCompletionValue()
+            //.ToObject();
+
+            //Testing callbacks
+            var result = engine.Execute(
+                @"
+                var myfunction = function fu(callback) { return callback('noob') };
+                myfunction(function(data) { return data;  });
+            ")
+            .GetCompletionValue()
+            .ToObject();
+
+            Console.WriteLine(result);
         }
 
         static void TestPdfMakeObjectStructure()
         {
-            PdfMake pdfMake = new PdfMake();
-
             pdfMake.AddText(new PdfMakeText()
             {
                 Text = "First paragraph"
