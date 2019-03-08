@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Jint;
+using Microsoft.AspNetCore.Mvc;
 using System;
 
 namespace PdfMakeCSharp
@@ -112,17 +113,61 @@ namespace PdfMakeCSharp
         #region Server Side Rendering
         public string GetBase64Data()
         {
-            throw new NotImplementedException();
+            var PdfMakeLib = IO.ReadEmbeddedResource.ReadResourceContent("pdfmake.min.js");
+            var PdfMakeFonts = IO.ReadEmbeddedResource.ReadResourceContent("vfs_fonts.js");
+            var engine = new Engine();
+
+            return engine.Execute(
+                PdfMakeLib +
+                " " +
+                PdfMakeFonts +
+                " " +
+                @"
+                pdfMake.createPdf(" + GetDocumentDefinition() + @").getBase64(function(data) {
+                    return data;
+                }); 
+            ")
+            .GetCompletionValue()
+            .ToObject()
+            .ToString();
         }
 
         public byte[] GetBlobData()
         {
-            throw new NotImplementedException();
+            var PdfMakeLib = IO.ReadEmbeddedResource.ReadResourceContent("pdfmake.min.js");
+            var PdfMakeFonts = IO.ReadEmbeddedResource.ReadResourceContent("vfs_fonts.js");
+            var engine = new Engine();
+            return (byte[]) engine.Execute(
+                    PdfMakeLib +
+                    " " +
+                    PdfMakeFonts +
+                    " " +
+                    @"
+                    pdfMake.createPdf(" + GetDocumentDefinition() + @").getBlob(function(blob) {
+                        return blob;
+                    }); 
+                ")
+                .GetCompletionValue()
+                .ToObject();
         }
 
         public uint[] GetBufferData()
         {
-            throw new NotImplementedException();
+            var PdfMakeLib = IO.ReadEmbeddedResource.ReadResourceContent("pdfmake.min.js");
+            var PdfMakeFonts = IO.ReadEmbeddedResource.ReadResourceContent("vfs_fonts.js");
+            var engine = new Engine();
+            return (uint[])engine.Execute(
+                    PdfMakeLib +
+                    " " +
+                    PdfMakeFonts +
+                    " " +
+                    @"
+                    pdfMake.createPdf(" + GetDocumentDefinition() + @").getBuffer(function(buffer) {
+                        return buffer;
+                    }); 
+                ")
+                .GetCompletionValue()
+                .ToObject();
         }
         #endregion
     }

@@ -11,28 +11,12 @@ namespace PdfmakeCSharpTester
         static void Main(string[] args)
         {
             TestPdfMakeObjectStructure();
-            TestJint();
+            //TestJint();
         }
 
         private static void TestJint()
         {
-            //var PdfMakeLib = PdfMakeCSharp.IO.ReadEmbeddedResource.ReadResourceContent("pdfmake.min.js");
-            //var PdfMakeFonts = PdfMakeCSharp.IO.ReadEmbeddedResource.ReadResourceContent("vfs_fonts.js");
             var engine = new Engine();
-
-            //var result = engine.Execute(
-            //    PdfMakeLib + 
-            //    " " + 
-            //    PdfMakeFonts + 
-            //    " " + 
-            //    @"
-            //    pdfMake.createPdf(" + pdfMake.GetDocumentDefinition() + @").getBase64(function(data) {
-            //        return data;
-            //    }); 
-            //")
-            //.GetCompletionValue()
-            //.ToObject();
-
             //Testing callbacks
             var result = engine.Execute(
                 @"
@@ -41,6 +25,11 @@ namespace PdfmakeCSharpTester
             ")
             .GetCompletionValue()
             .ToObject();
+
+            //Methods to be tested afterJint is fixed
+            //var result = pdfMake.GetBase64Data();
+            //var result = pdfMake.GetBlobData();
+            //var result = pdfMake.GetBufferData();
 
             Console.WriteLine(result);
         }
