@@ -29,7 +29,6 @@ c# wrapper around [Pdfmake](http://pdfmake.org/#/) with server side rendering en
 ## Documentation
 
 The wrapper implements the same methods as pdfmake but using c# objects and some helper methods. 
-Examples will be available soon.
 Documentation URL: https://pdfmake.github.io/docs/
 
 ## Nuget (Available Soon) 
@@ -44,3 +43,7 @@ MIT
 ## Authors
 * [@arivera12](https://github.com/arivera12) (founder)
 * [@ChrisMichaelPerezSantiago](https://github.com/ChrisMichaelPerezSantiago)
+
+## Examples
+
+Examples will be available soon.
