@@ -40,10 +40,6 @@ Install-Package PdfmakeCSharp
 ## License
 MIT
 
-## Authors
-* [@arivera12](https://github.com/arivera12) (founder)
-* [@ChrisMichaelPerezSantiago](https://github.com/ChrisMichaelPerezSantiago)
-
 ## Examples
 
 Examples will be available soon.
