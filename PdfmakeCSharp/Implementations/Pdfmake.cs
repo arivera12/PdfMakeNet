@@ -204,7 +204,7 @@ namespace PdfMakeCSharp
         
         public void WriteToDisk(string path)
         {
-            File.WriteAllText(path, GetBase64Data());
+            File.WriteAllBytes(path, Convert.FromBase64String(GetBase64Data()));
         }
         #endregion
     }
