@@ -6,11 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Jint" Version="3.0.0-beta-1353" />
+    <ProjectReference Include="..\PdfmakeCSharp\PdfMakeCSharp.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PdfmakeCSharp\PdfMakeCSharp.csproj" />
+    <None Update="vfs_fonts.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

@@ -1,7 +1,6 @@
-﻿using Jint;
-using System;
-using PdfMakeCSharp;
+﻿using PdfMakeCSharp;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace PdfmakeCSharpTester
 {
@@ -11,27 +10,6 @@ namespace PdfmakeCSharpTester
         static void Main(string[] args)
         {
             TestPdfMakeObjectStructure();
-            //TestJint();
-        }
-
-        private static void TestJint()
-        {
-            var engine = new Engine();
-            //Testing callbacks
-            var result = engine.Execute(
-                @"
-                var myfunction = function fu(callback) { return callback('noob') };
-                myfunction(function(data) { return data;  });
-            ")
-            .GetCompletionValue()
-            .ToObject();
-
-            //Methods to be tested afterJint is fixed
-            //var result = pdfMake.GetBase64Data();
-            //var result = pdfMake.GetBlobData();
-            //var result = pdfMake.GetBufferData();
-
-            Console.WriteLine(result);
         }
 
         static void TestPdfMakeObjectStructure()
@@ -180,7 +158,7 @@ namespace PdfmakeCSharpTester
                     )
                 }
             });
-            Console.WriteLine(pdfMake.GetDocumentDefinition());
+            pdfMake.WriteToDisk("test.pdf");
         }
     }
 }

@@ -25,6 +25,7 @@ namespace PdfMakeCSharp
         uint[] GetBufferData();
         byte[] GetBlobData();
         string GetUrlData();
+        void WriteToDisk(string path);
         #endregion
     }
 }

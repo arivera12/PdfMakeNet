@@ -1,6 +1,8 @@
-﻿using Jint;
+﻿using System;
 using Microsoft.AspNetCore.Mvc;
-using System;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
+using System.IO;
 
 namespace PdfMakeCSharp
 {
@@ -123,81 +125,86 @@ namespace PdfMakeCSharp
         #region Server Side Rendering
         public string GetBase64Data()
         {
-            var PdfMakeLib = IO.ReadEmbeddedResource.ReadResourceContent("pdfmake.min.js");
-            var PdfMakeFonts = IO.ReadEmbeddedResource.ReadResourceContent("vfs_fonts.js");
-            var engine = new Engine();
-
-            return engine.Execute(
-                PdfMakeLib +
-                " " +
-                PdfMakeFonts +
-                " " +
-                @"
-                pdfMake.createPdf(" + GetDocumentDefinition() + @").getBase64(function(data) {
-                    return data
-                }) 
-            ")
-            .GetCompletionValue()
-            .ToObject()
-            .ToString();
+            using (IWebDriver driver = new ChromeDriver(Directory.GetCurrentDirectory() + "/Resources"))
+            {
+                var PdfMakeLib = IO.ReadEmbeddedResource.ReadResourceContent("pdfmake.min.js");
+                var PdfMakeFonts = IO.ReadEmbeddedResource.ReadResourceContent("vfs_fonts.js");
+                IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
+                js.ExecuteScript(PdfMakeLib);
+                js.ExecuteScript(PdfMakeFonts);
+                return (string)js
+                    .ExecuteAsyncScript(@"
+                        var done = arguments[0];
+                        pdfMake.createPdf(" + GetDocumentDefinition() + @").getBase64(function(data) {
+                           done(data)
+                        });
+                    ");
+            }
         }
 
+        //TODO TEST
         public byte[] GetBlobData()
         {
-            var PdfMakeLib = IO.ReadEmbeddedResource.ReadResourceContent("pdfmake.min.js");
-            var PdfMakeFonts = IO.ReadEmbeddedResource.ReadResourceContent("vfs_fonts.js");
-            var engine = new Engine();
-            return (byte[]) engine.Execute(
-                    PdfMakeLib +
-                    " " +
-                    PdfMakeFonts +
-                    " " +
-                    @"
-                    pdfMake.createPdf(" + GetDocumentDefinition() + @").getBlob(function(blob) {
-                        return blob
-                    }) 
-                ")
-                .GetCompletionValue()
-                .ToObject();
+            using (IWebDriver driver = new ChromeDriver(Directory.GetCurrentDirectory() + "/Resources"))
+            {
+                var PdfMakeLib = IO.ReadEmbeddedResource.ReadResourceContent("pdfmake.min.js");
+                var PdfMakeFonts = IO.ReadEmbeddedResource.ReadResourceContent("vfs_fonts.js");
+                IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
+                js.ExecuteScript(PdfMakeLib);
+                js.ExecuteScript(PdfMakeFonts);
+                return (byte[])js
+                    .ExecuteAsyncScript(@"
+                        var done = arguments[0];
+                        pdfMake.createPdf(" + GetDocumentDefinition() + @").getBlob(function(blob) {
+                           done(blob)
+                        });
+                    ");
+            }
         }
 
+        //TODO TEST
         public uint[] GetBufferData()
         {
-            var PdfMakeLib = IO.ReadEmbeddedResource.ReadResourceContent("pdfmake.min.js");
-            var PdfMakeFonts = IO.ReadEmbeddedResource.ReadResourceContent("vfs_fonts.js");
-            var engine = new Engine();
-            return (uint[])engine.Execute(
-                    PdfMakeLib +
-                    " " +
-                    PdfMakeFonts +
-                    " " +
-                    @"
-                    pdfMake.createPdf(" + GetDocumentDefinition() + @").getBuffer(function(buffer) {
-                        return buffer
-                    }) 
-                ")
-                .GetCompletionValue()
-                .ToObject();
+            using (IWebDriver driver = new ChromeDriver(Directory.GetCurrentDirectory() + "/Resources"))
+            {
+                var PdfMakeLib = IO.ReadEmbeddedResource.ReadResourceContent("pdfmake.min.js");
+                var PdfMakeFonts = IO.ReadEmbeddedResource.ReadResourceContent("vfs_fonts.js");
+                IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
+                js.ExecuteScript(PdfMakeLib);
+                js.ExecuteScript(PdfMakeFonts);
+                return (uint[])js
+                    .ExecuteAsyncScript(@"
+                        var done = arguments[0];
+                        pdfMake.createPdf(" + GetDocumentDefinition() + @").getBuffer(function(buffer) {
+                           done(buffer)
+                        });
+                    ");
+            }
         }
 
+        //TODO TEST
         public string GetUrlData()
         {
-            var PdfMakeLib = IO.ReadEmbeddedResource.ReadResourceContent("pdfmake.min.js");
-            var PdfMakeFonts = IO.ReadEmbeddedResource.ReadResourceContent("vfs_fonts.js");
-            var engine = new Engine();
-            return engine.Execute(
-                    PdfMakeLib +
-                    " " +
-                    PdfMakeFonts +
-                    " " +
-                    @"
-                    pdfMake.createPdf(" + GetDocumentDefinition() + @").getDataUrl(function(dataUrl) {
-                        return dataUrl
-                    }) 
-                ")
-                .GetCompletionValue()
-                .ToObject()
-                .ToString();
+            using (IWebDriver driver = new ChromeDriver(Directory.GetCurrentDirectory() + "/Resources"))
+            {
+                var PdfMakeLib = IO.ReadEmbeddedResource.ReadResourceContent("pdfmake.min.js");
+                var PdfMakeFonts = IO.ReadEmbeddedResource.ReadResourceContent("vfs_fonts.js");
+                IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
+                js.ExecuteScript(PdfMakeLib);
+                js.ExecuteScript(PdfMakeFonts);
+                return (string)js
+                    .ExecuteAsyncScript(@"
+                        var done = arguments[0];
+                        pdfMake.createPdf(" + GetDocumentDefinition() + @").getDataUrl(function(dataUrl) {
+                           done(dataUrl)
+                        });
+                    ");
+            }
+        }
+        
+        public void WriteToDisk(string path)
+        {
+            File.WriteAllText(path, GetBase64Data());
         }
         #endregion
     }

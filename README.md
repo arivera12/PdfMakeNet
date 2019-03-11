@@ -1,6 +1,6 @@
 # PdfmakeCSharp
 
-c# wrapper around [Pdfmake](http://pdfmake.org/#/) with server side rendering engine using [Jint](https://github.com/sebastienros/jint)
+c# wrapper around [Pdfmake](http://pdfmake.org/#/) with server side rendering engine using [Selenium](https://github.com/SeleniumHQ/selenium)
 
 ### Features
 
