@@ -6,6 +6,10 @@ namespace PdfMakeCSharp
     [MessagePackObject]
     public class PdfMakeStyle
     {
+        [Key("background")]
+        public string BackgroundColor { get; set; }
+        [Key("fillColor")]
+        public string FillColor { get; set; }
         [Key("fontSize")]
         public int FontSize { get; set; } = 12;
         [Key("bold")]
@@ -20,9 +24,9 @@ namespace PdfMakeCSharp
         [Key("columnGap")]
         public int ColumnGap { get; set; }
         [Key("width")]
-        public int Width { get; set; }
+        public string Width { get; set; }
         [Key("height")]
-        public int Height { get; set; }
+        public string Height { get; set; }
         [Key("opacity")]
         public double Opacity { get; set; }
         [Key("fit")]
@@ -35,6 +39,5 @@ namespace PdfMakeCSharp
         public string Alignment { get; set; }
         [Key("pageOrientation")]
         public string PageOrientation { get; set; }
-
     }
 }

@@ -14,6 +14,13 @@ namespace PdfmakeCSharpTester
 
         static void TestPdfMakeObjectStructure()
         {
+            pdfMake.AddHeaderText(new PdfMakeText()
+            {
+                Text = "Text On Header",
+                Alignment = Alingment.Center,
+                Color = "#666",
+                Bold = true
+            });
             pdfMake.AddText(new PdfMakeText()
             {
                 Text = "First paragraph"
@@ -25,13 +32,13 @@ namespace PdfmakeCSharpTester
             pdfMake.AddText(new List<PdfMakeText>() {
                 new PdfMakeText()
                 {
-                    Text = "Hello ",
+                    Text = "Hello [ ]",
                     Color = "green",
                     Bold = true
                 },
                 new PdfMakeText()
                 {
-                    Text = "Pdfmake!",
+                    Text = " Pdfmake [x] !",
                     Color = "purple",
                     Italics = true
                 }

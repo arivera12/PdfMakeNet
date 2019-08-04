@@ -66,7 +66,7 @@ namespace PdfMakeCSharp
 
         public void AddColumns(PdfMakeColumns<object> Columns)
         {
-            Body.Add(new { Columns });
+            Body.Add(Columns);
         }
 
         public void AddTable(PdfMakeTable<object> pdfMakeTable)
@@ -123,7 +123,7 @@ namespace PdfMakeCSharp
 
         public void AddHeaderColumns(PdfMakeColumns<object> Columns)
         {
-            Header.Add(new { Columns });
+            Header.Add(Columns);
         }
 
         public void AddHeaderTable(PdfMakeTable<object> pdfMakeTable)
@@ -175,7 +175,7 @@ namespace PdfMakeCSharp
 
         public void AddFooterColumns(PdfMakeColumns<object> Columns)
         {
-            Footer.Add(new { Columns });
+            Footer.Add(Columns);
         }
 
         public void AddFooterTable(PdfMakeTable<object> pdfMakeTable)
