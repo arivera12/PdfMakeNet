@@ -1,8 +1,5 @@
-﻿using MessagePack;
-
-namespace PdfMakeCSharp
+﻿namespace PdfMakeCSharp
 {
-    [MessagePackObject]
     public struct PageBreak
     {
         public const string After = "after";

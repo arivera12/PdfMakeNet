@@ -1,16 +1,15 @@
-﻿using MessagePack;
+﻿using Newtonsoft.Json;
 using System.Collections.Generic;
 
 namespace PdfMakeCSharp
 {
-    [MessagePackObject]
     public class PdfMakeTableBody<T>
     {
-        [Key("headerRows")]
+        [JsonProperty("headerRows")]
         public int HeaderRows { get; set; }
-        [Key("widths")]
+        [JsonProperty("widths")]
         public List<string> Widths { get; set; }
-        [Key("body")]
+        [JsonProperty("body")]
         public List<T> Body { get; set; }
     }
 }

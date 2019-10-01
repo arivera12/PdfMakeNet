@@ -1,13 +1,12 @@
-﻿using MessagePack;
+﻿using Newtonsoft.Json;
 
 namespace PdfMakeCSharp
-{
-    [MessagePackObject]
+{  
     public class PdfMakeLink : PdfMakeStyle
     {
-        [Key("link")]
+        [JsonProperty("link")]
         public string Link { get; set; }
-        [Key("linkToPage")]
+        [JsonProperty("linkToPage")]
         public int LinkToPage { get; set; }
     }
 }

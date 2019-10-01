@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System;
 
 namespace PdfMakeCSharp
 {
@@ -11,7 +10,6 @@ namespace PdfMakeCSharp
         ContentResult PrintInBrowser(bool SameWindow);
         ContentResult EmbedInBrowserIframe(string IFrameQuerySelector);
         ContentResult DocumentDefinitionInBrowser();
-        ContentResult DocumentDataUrlInBrowser();
         #endregion
         #region String Document Definitions
         string GetDownloadInBrowser(string Filename);
@@ -19,13 +17,6 @@ namespace PdfMakeCSharp
         string GetPrintInBrowser(bool SameWindow);
         string GetEmbedInBrowserIframe(string IFrameQuerySelector);
         string GetDocumentDefinition();
-        #endregion
-        #region Server Side Rendering
-        string GetBase64Data();
-        uint[] GetBufferData();
-        byte[] GetBlobData();
-        string GetUrlData();
-        void WriteToDisk(string path);
         #endregion
     }
 }

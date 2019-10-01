@@ -1,18 +1,17 @@
-﻿using MessagePack;
+﻿using Newtonsoft.Json;
 
 namespace PdfMakeCSharp
 {
-    [MessagePackObject]
     public class PdfMakeTable<T> : PdfMakeStyle
     {
         /// <summary>
         /// Available table layouts: noBorders, headerLineOnly, lightHorizontalLines. You can do table layouts as well
         /// <see cref="https://pdfmake.github.io/docs/document-definition-object/tables/"/>
         /// </summary>
-        [Key("layout")]
+        [JsonProperty("layout")]
         public string Layout { get; set; }
 
-        [Key("table")]
+        [JsonProperty("table")]
         public PdfMakeTableBody<T> TableBody { get; set; }
     }
 }

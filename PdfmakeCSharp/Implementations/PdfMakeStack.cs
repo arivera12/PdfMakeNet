@@ -1,12 +1,11 @@
-﻿using MessagePack;
+﻿using Newtonsoft.Json;
 using System.Collections.Generic;
 
 namespace PdfMakeCSharp
 {
-    [MessagePackObject]
     public class PdfMakeStack<T>
     {
-        [Key("stack")]
+        [JsonProperty("stack")]
         public List<T> Stack { get; set; }
     }
 }

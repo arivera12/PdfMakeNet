@@ -1,11 +1,10 @@
-﻿using MessagePack;
+﻿using Newtonsoft.Json;
 
 namespace PdfMakeCSharp
 {
-    [MessagePackObject]
     public class PdfMakeImage : PdfMakeStyle
     {
-        [Key("image")]
+        [JsonProperty("image")]
         public string Image { get; set; }
     }
 }

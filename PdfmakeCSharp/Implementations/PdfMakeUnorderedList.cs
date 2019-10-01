@@ -1,12 +1,11 @@
-﻿using MessagePack;
+﻿using Newtonsoft.Json;
 using System.Collections.Generic;
 
 namespace PdfMakeCSharp
 {
-    [MessagePackObject]
     public class PdfMakeUnorderedList<T> : PdfMakeStyle
     {
-        [Key("ul")]
+        [JsonProperty("ul")]
         public List<T> Ul { get; set; }
     }
 }

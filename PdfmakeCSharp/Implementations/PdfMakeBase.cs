@@ -1,40 +1,39 @@
-﻿using MessagePack;
+﻿using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Reflection;
 
 namespace PdfMakeCSharp
 {
-    [MessagePackObject]
     public abstract class PdfMakeBase : IPdfMakeBase<object>
     {
         #region Fields
-        [Key("header")]
+        [JsonProperty("header")]
         public List<object> Header { get; set; }
-        [Key("footer")]
+        [JsonProperty("footer")]
         public List<object> Footer { get; set; }
-        [Key("content")]
+        [JsonProperty("content")]
         public List<object> Body { get; set; }
-        [Key("background")]
+        [JsonProperty("background")]
         public object Background { get; set; }
-        [Key("images")]
+        [JsonProperty("images")]
         public object Images { get; set; }
-        [Key("defaultStyle")]
+        [JsonProperty("defaultStyle")]
         public PdfMakeStyle DefaultStyle { get; set; }
-        [Key("styles")]
+        [JsonProperty("styles")]
         public object Styles { get; set; }
-        [Key("pageSize")]
+        [JsonProperty("pageSize")]
         public string PageSize { get; set; }
-        [Key("pageMargins")]
+        [JsonProperty("pageMargins")]
         public List<int> PageMargins { get; set; }
-        [Key("pageOrientation")]
+        [JsonProperty("pageOrientation")]
         public string PageOrientation { get; set; }
-        [Key("compress")]
+        [JsonProperty("compress")]
         public bool Compress { get; set; }
-        [Key("userPassword")]
+        [JsonProperty("userPassword")]
         public string UserPassword { get; set; }
-        [Key("ownerPassword")]
+        [JsonProperty("ownerPassword")]
         public string OwnerPassword { get; set; }
-        [Key("permissions")]
+        [JsonProperty("permissions")]
         public PdfMakePermissions Permissions { get; set; }
         #endregion
 

@@ -1,16 +1,12 @@
-﻿using MessagePack;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Newtonsoft.Json;
 
 namespace PdfMakeCSharp
 {
-    [MessagePackObject]
     public class PdfMakeToc
     {
-        [Key("id")]
+        [JsonProperty("id")]
         public string Id { get; set; }
-        [Key("title")]
+        [JsonProperty("title")]
         public PdfMakeText Title { get; set; }
     }
 }

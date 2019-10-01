@@ -1,27 +1,26 @@
-﻿using MessagePack;
+﻿using Newtonsoft.Json;
 
 namespace PdfMakeCSharp
 {
-    [MessagePackObject]
     public class PdfMakeMetaDataInfo
     {
-        [Key("title")]
+        [JsonProperty("title")]
         public string Title { get; set; }
-        [Key("author")]
+        [JsonProperty("author")]
         public string Author { get; set; }
-        [Key("subject")]
+        [JsonProperty("subject")]
         public string Subject { get; set; }
-        [Key("keywords")]
-        public string Keywords { get; set; }
-        [Key("creator")]
+        [JsonProperty("JsonPropertywords")]
+        public string JsonPropertywords { get; set; }
+        [JsonProperty("creator")]
         public string Creator { get; set; }
-        [Key("producer")]
+        [JsonProperty("producer")]
         public string Producer { get; set; }
-        [Key("creationDate")]
+        [JsonProperty("creationDate")]
         public string CreationDate { get; set; }
-        [Key("modDate")]
+        [JsonProperty("modDate")]
         public string ModDate { get; set; }
-        [Key("trapped")]
+        [JsonProperty("trapped")]
         public bool Trapped { get; set; }
     }
 }

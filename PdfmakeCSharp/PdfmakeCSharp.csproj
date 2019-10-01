@@ -6,25 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Resources\pdfmake.min.js" />
-    <None Remove="Resources\vfs_fonts.js" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\pdfmake.min.js" />
-    <EmbeddedResource Include="Resources\vfs_fonts.js" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="MessagePack" Version="1.7.3.4" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.2" />
-    <PackageReference Include="Selenium.WebDriver" Version="3.141.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="Resources\chromedriver.exe">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3-beta1" />
   </ItemGroup>
 
 </Project>

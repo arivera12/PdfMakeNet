@@ -1,8 +1,5 @@
-﻿using MessagePack;
-
-namespace PdfMakeCSharp
+﻿namespace PdfMakeCSharp
 {
-    [MessagePackObject]
     public struct Alingment
     {
         public const string Left = "left";

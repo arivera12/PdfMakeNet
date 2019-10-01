@@ -1,8 +1,5 @@
-﻿using MessagePack;
-
-namespace PdfMakeCSharp
+﻿namespace PdfMakeCSharp
 {
-    [MessagePackObject]
     public struct PageSize
     {
         public const string _4A0 = "4A0";

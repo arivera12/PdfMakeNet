@@ -1,23 +1,22 @@
-﻿using MessagePack;
+﻿using Newtonsoft.Json;
 
 namespace PdfMakeCSharp
 {
-    [MessagePackObject]
     public class PdfMakePermissions
     {
-        [Key("printing")]
+        [JsonProperty("printing")]
         public string Printing { get; set; }
-        [Key("modifying")]
+        [JsonProperty("modifying")]
         public bool Modifying { get; set; }
-        [Key("copying")]
+        [JsonProperty("copying")]
         public bool Copying { get; set; }
-        [Key("annotating")]
+        [JsonProperty("annotating")]
         public bool Annotating { get; set; }
-        [Key("fillingForms")]
+        [JsonProperty("fillingForms")]
         public bool FillingForms { get; set; }
-        [Key("contentAccessibility")]
+        [JsonProperty("contentAccessibility")]
         public bool ContentAccessibility { get; set; }
-        [Key("documentAssembly")]
+        [JsonProperty("documentAssembly")]
         public bool DocumentAssembly { get; set; }
     }
 }

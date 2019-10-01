@@ -1,23 +1,22 @@
-﻿using MessagePack;
+﻿using Newtonsoft.Json;
 
 namespace PdfMakeCSharp
 {
-    [MessagePackObject]
     public class PdfMakeQRCode : PdfMakeStyle
     {
-        [Key("qr")]
+        [JsonProperty("qr")]
         public string Text { get; set; }
-        [Key("foreground")]
+        [JsonProperty("foreground")]
         public string Foreground { get; set; }
-        [Key("background")]
+        [JsonProperty("background")]
         public string Background { get; set; }
-        [Key("version")]
+        [JsonProperty("version")]
         public Version Version { get; set; }
-        [Key("eccLevel")]
+        [JsonProperty("eccLevel")]
         public string EccLevel { get; set; }
-        [Key("mode")]
+        [JsonProperty("mode")]
         public string Mode { get; set; }
-        [Key("mask")]
+        [JsonProperty("mask")]
         public Mask Mask { get; set; }
     }
 }

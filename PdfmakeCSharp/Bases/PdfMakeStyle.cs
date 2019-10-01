@@ -1,43 +1,44 @@
-﻿using MessagePack;
+﻿using Newtonsoft.Json;
 using System.Collections.Generic;
 
 namespace PdfMakeCSharp
 {
-    [MessagePackObject]
     public class PdfMakeStyle
     {
-        [Key("background")]
+        [JsonProperty("background")]
         public string BackgroundColor { get; set; }
-        [Key("fillColor")]
+        [JsonProperty("fillColor")]
         public string FillColor { get; set; }
-        [Key("fontSize")]
+        [JsonProperty("fontSize")]
         public int FontSize { get; set; } = 12;
-        [Key("bold")]
+        [JsonProperty("bold")]
         public bool Bold { get; set; }
-        [Key("italics")]
+        [JsonProperty("italics")]
         public bool Italics { get; set; }
-        [Key("color")]
+        [JsonProperty("color")]
         public string Color { get; set; }
         //margin: [left, top, right, bottom] OR margin: [horizontal, vertical] OR margin: equalLeftTopRightBottom
-        [Key("margin")]
+        [JsonProperty("margin")]
         public object Margin { get; set; }
-        [Key("columnGap")]
+        [JsonProperty("columnGap")]
         public int ColumnGap { get; set; }
-        [Key("width")]
-        public string Width { get; set; }
-        [Key("height")]
-        public string Height { get; set; }
-        [Key("opacity")]
+        [JsonProperty("width")]
+        public object Width { get; set; }
+        [JsonProperty("height")]
+        public object Height { get; set; }
+        [JsonProperty("opacity")]
         public double Opacity { get; set; }
-        [Key("fit")]
+        [JsonProperty("fit")]
         public List<int> Fit { get; set; }
-        [Key("tocItem")]
+        [JsonProperty("tocItem")]
         public object TocItem { get; set; }
-        [Key("pageBreak")]
+        [JsonProperty("pageBreak")]
         public string PageBreak { get; set; }
-        [Key("alignment")]
+        [JsonProperty("alignment")]
         public string Alignment { get; set; }
-        [Key("pageOrientation")]
+        [JsonProperty("pageOrientation")]
         public string PageOrientation { get; set; }
+        [JsonProperty("style")]
+        public List<string> Style { get; set; }
     }
 }

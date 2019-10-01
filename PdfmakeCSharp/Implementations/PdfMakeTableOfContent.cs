@@ -1,11 +1,10 @@
-﻿using MessagePack;
+﻿using Newtonsoft.Json;
 
 namespace PdfMakeCSharp
 {
-    [MessagePackObject]
     public class PdfMakeTableOfContent
     {
-        [Key("toc")]
+        [JsonProperty("toc")]
         public PdfMakeToc Toc { get; set; }
     }
 }
