@@ -1,6 +1,6 @@
 ﻿namespace PdfMakeCSharp
 {
-    public struct Alingment
+    public class Alingment
     {
         public const string Left = "left";
         public const string Right = "right";

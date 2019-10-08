@@ -1,6 +1,6 @@
 ﻿namespace PdfMakeCSharp
 {
-    public struct EccLevel
+    public class EccLevel
     {
         public const string L = "L";
         public const string M = "M";

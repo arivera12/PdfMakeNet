@@ -1,6 +1,6 @@
 ﻿namespace PdfMakeCSharp
 {
-    public struct PageSize
+    public class PageSize
     {
         public const string _4A0 = "4A0";
         public const string _2A0 = "2A0";
