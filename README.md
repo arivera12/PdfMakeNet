@@ -1,6 +1,6 @@
-# PdfmakeCSharp
+# PdfMakeNet
 
-c# wrapper for [Pdfmake](http://pdfmake.org/#/)
+c# wrapper for [PdfMake](http://pdfmake.org/#/)
 
 ### Features
 
