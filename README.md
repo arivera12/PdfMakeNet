@@ -52,11 +52,18 @@ This wrapper implements the same methods and options as pdfmake but using strong
 
 The code is already documented but if you want more documentation you can visit: https://pdfmake.github.io/docs/
 
-## Nuget (Available Soon) 
+## Nuget 
 
 ```
-Install-Package PdfMakeNet
+Install-Package PdfMakeNet -Version 1.0.2
 ```
+## Issues
+
+I you find any bug or issue please file an issue I will fix it as soon as posible.
+
+## Pull Request
+
+Pull request are welcome. Please submit a pull request letting me know if is a bug fix or new feature.
 
 ## License
 MIT
