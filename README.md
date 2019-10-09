@@ -2,7 +2,7 @@
 
 c# wrapper for [PdfMake](http://pdfmake.org/#/)
 
-### Features
+### Implemented and Pending Features
 
 * [x] line-wrapping
 * [x] text-alignments
@@ -48,13 +48,14 @@ c# wrapper for [PdfMake](http://pdfmake.org/#/)
 
 ## Documentation
 
-The wrapper implements the same methods as pdfmake but using c# objects and some helper methods. 
-Documentation URL: https://pdfmake.github.io/docs/
+This wrapper implements the same methods and options as pdfmake but using strong datatypes and some extensions methods using c#
+
+The code is already documented but if you want more documentation you can visit: https://pdfmake.github.io/docs/
 
 ## Nuget (Available Soon) 
 
 ```
-Install-Package PdfmakeCSharp
+Install-Package PdfMakeNet
 ```
 
 ## License
