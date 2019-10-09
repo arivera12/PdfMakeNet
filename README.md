@@ -28,7 +28,7 @@ c# wrapper for [PdfMake](http://pdfmake.org/#/)
 * [ ] font embedding (default at the moment)
 * [x] support for complex, multi-level (nested) structures
 * [x] table of contents
-* [x] helper methods for opening/printing/downloading the generated PDF
+* [x] Extension methods for opening/printing/downloading the generated PDF
 * [x] setting of PDF metadata (e.g. author, subject)
 * [x] compression
 * [x] encryption and access privileges
@@ -41,9 +41,9 @@ c# wrapper for [PdfMake](http://pdfmake.org/#/)
   * [x] filling forms
   * [x] content accessibility
   * [x] document assembly
-* [x] client-side helper methods
+* [x] client-side extension methods
   * [x] download with the specified filename
-  * [x] open in another tab
+  * [x] open in same or another window
   * [x] print auto-triggering print
 
 ## Documentation
