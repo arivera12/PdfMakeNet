@@ -52,7 +52,7 @@ This wrapper implements the same methods and options as pdfmake but using strong
 
 The code is already documented but if you want more documentation you can visit: https://pdfmake.github.io/docs/
 
-## Nuget (Available Soon) 
+## Nuget 
 
 ```
 Install-Package PdfMakeNet
