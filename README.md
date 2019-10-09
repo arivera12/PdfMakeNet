@@ -48,7 +48,7 @@ c# wrapper for [PdfMake](http://pdfmake.org/#/)
 
 ## Documentation
 
-This wrapper implements the same methods and options as pdfmake but using strong datatypes in c#.
+This wrapper implements the same methods and options as pdfmake but using strong datatypes and some extensions methods using c#
 
 The code is already documented but if you want more documentation you can visit: https://pdfmake.github.io/docs/
 
