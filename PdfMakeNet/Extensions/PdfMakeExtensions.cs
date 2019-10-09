@@ -141,7 +141,7 @@ namespace PdfMakeNet
             if (!Filename.EndsWith(".pdf"))
                 throw new FormatException("The Filename does not end with .pdf extension.");
 
-            return "pdfMake.createPdf(" + pdfMake.GetDocumentDefinition() + ").download(" + Filename + ");";
+            return $"pdfMake.createPdf({pdfMake.GetDocumentDefinition()}).download({Filename});";
         }
 
         /// <summary>
@@ -154,9 +154,9 @@ namespace PdfMakeNet
             if (string.IsNullOrWhiteSpace(IFrameQuerySelector))
                 throw new ArgumentNullException("The IframeQuerySelector is null, empty or whitespace.");
 
-            return @"pdfMake.createPdf(" + pdfMake.GetDocumentDefinition() + @").getDataUrl(function(dataUrl) {
-                        document.querySelector('" + IFrameQuerySelector + @"').src = dataUrl
-                    });";
+            return $@"pdfMake.createPdf({pdfMake.GetDocumentDefinition()}).getDataUrl(function(dataUrl) {{
+                        document.querySelector('{IFrameQuerySelector }').src = dataUrl
+                    }});";
         }
 
         /// <summary>
@@ -168,11 +168,11 @@ namespace PdfMakeNet
         {
             if (SameWindow)
             {
-                return "pdfMake.createPdf(" + pdfMake.GetDocumentDefinition() + ").open({}, window);";
+                return $"pdfMake.createPdf({pdfMake.GetDocumentDefinition()}).open({{}}, window);";
             }
             else
             {
-                return "pdfMake.createPdf(" + pdfMake.GetDocumentDefinition() + ").open({}, window.open('', '_blank'));";
+                return $"pdfMake.createPdf({pdfMake.GetDocumentDefinition()}).open({{}}, window.open('', '_blank'));";
             }
         }
 
@@ -185,11 +185,11 @@ namespace PdfMakeNet
         {
             if (SameWindow)
             {
-                return "pdfMake.createPdf(" + pdfMake.GetDocumentDefinition() + ").print({}, window);";
+                return $"pdfMake.createPdf({pdfMake.GetDocumentDefinition()}).print({{}}, window);";
             }
             else
             {
-                return "pdfMake.createPdf(" + pdfMake.GetDocumentDefinition() + ").print({}, window.open('', '_blank'));";
+                return $"pdfMake.createPdf({pdfMake.GetDocumentDefinition()}).print({{}}, window.open('', '_blank'));";
             }
         }
         #endregion
