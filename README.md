@@ -41,7 +41,7 @@ c# wrapper for [PdfMake](http://pdfmake.org/#/)
   * [x] filling forms
   * [x] content accessibility
   * [x] document assembly
-* [x] client-side helper methods
+* [x] client-side extension methods
   * [x] download with the specified filename
   * [x] open in another tab
   * [x] print auto-triggering print
