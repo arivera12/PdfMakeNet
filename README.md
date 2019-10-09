@@ -57,6 +57,13 @@ The code is already documented but if you want more documentation you can visit:
 ```
 Install-Package PdfMakeNet
 ```
+## Issues
+
+I you find any bug or issue please file an issue I will fix it as soon as posible.
+
+## Pull Request
+
+Pull request are welcome. Please submit a pull request letting me know if is a bug fix or new feature.
 
 ## License
 MIT
