@@ -58,6 +58,10 @@ So based on the last sentence you still need to reference pdfmake.js and vfs_fon
 
 The code is already documented but if you want more documentation you can visit: https://pdfmake.github.io/docs/
 
+## Browsers Supported
+
+https://pdfmake.github.io/docs/getting-started/client-side/supported-browsers/
+
 ## Nuget 
 
 ```
