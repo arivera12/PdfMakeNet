@@ -55,7 +55,7 @@ The code is already documented but if you want more documentation you can visit:
 ## Nuget 
 
 ```
-Install-Package PdfMakeNet
+Install-Package PdfMakeNet -Version 1.0.2
 ```
 ## Issues
 
