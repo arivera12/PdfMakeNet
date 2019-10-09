@@ -1,6 +1,6 @@
 # PdfMakeNet
 
-c# wrapper for [PdfMake](http://pdfmake.org/#/)
+c# wrapper for [PdfMake](http://pdfmake.org/#/).
 
 ### Implemented and Pending Features
 
@@ -48,7 +48,9 @@ c# wrapper for [PdfMake](http://pdfmake.org/#/)
 
 ## Documentation
 
-This wrapper implements the same methods and options as pdfmake but using strong datatypes and some extensions methods using c#
+This wrapper implements the same methods and options as pdfmake and will help you build pdfmake object structure more faster and easier using strong datatypes and some extension methods using c#
+
+You still need to reference pdfmake.js and vfs_fonts.js files on your client or create your own pdfmake viewer for flawless integration.
 
 The code is already documented but if you want more documentation you can visit: https://pdfmake.github.io/docs/
 
