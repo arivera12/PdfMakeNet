@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace PdfMakeNet
 {
-    public abstract class PdfMake : IPdfmake<object>
+    public class PdfMake : IPdfmake<object>
     {
         #region Fields
         /// <summary>
