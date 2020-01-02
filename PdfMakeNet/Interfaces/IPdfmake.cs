@@ -5,15 +5,15 @@ namespace PdfMakeNet
     public interface IPdfmake<T>
     {
         #region Fields
-        List<object> Header { get; set; }
-        List<object> Footer { get; set; }
-        List<object> Body { get; set; }
+        IList<object> Header { get; set; }
+        IList<object> Footer { get; set; }
+        IList<object> Body { get; set; }
         T Background { get; set; }
         object Images { get; set; }
         object Styles { get; set; }
-        string PageSize { get; set; }
-        List<int> PageMargins { get; set; }
-        string PageOrientation { get; set; }
+        PageSize PageSize { get; set; }
+        IList<int> PageMargins { get; set; }
+        PageOrientation PageOrientation { get; set; }
         bool Compress { get; set; }
         string UserPassword { get; set; }
         string OwnerPassword { get; set; }

@@ -10,17 +10,17 @@ namespace PdfMakeNet
         /// The header section
         /// </summary>
         [JsonProperty("header")]
-        public List<object> Header { get; set; }
+        public IList<object> Header { get; set; }
         /// <summary>
         /// The footer section
         /// </summary>
         [JsonProperty("footer")]
-        public List<object> Footer { get; set; }
+        public IList<object> Footer { get; set; }
         /// <summary>
         /// The body section
         /// </summary>
         [JsonProperty("content")]
-        public List<object> Body { get; set; }
+        public IList<object> Body { get; set; }
         /// <summary>
         /// The background color section
         /// </summary>
@@ -45,17 +45,17 @@ namespace PdfMakeNet
         /// The page size option
         /// </summary>
         [JsonProperty("pageSize")]
-        public string PageSize { get; set; }
+        public PageSize PageSize { get; set; }
         /// <summary>
         /// The page margins option
         /// </summary>
         [JsonProperty("pageMargins")]
-        public List<int> PageMargins { get; set; }
+        public IList<int> PageMargins { get; set; }
         /// <summary>
         /// The page orientation option
         /// </summary>
         [JsonProperty("pageOrientation")]
-        public string PageOrientation { get; set; }
+        public PageOrientation PageOrientation { get; set; }
         /// <summary>
         /// The compression option
         /// </summary>
@@ -87,7 +87,7 @@ namespace PdfMakeNet
             Body = new List<object>();
             Header = new List<object>();
             Footer = new List<object>();
-            PageSize = PdfMakeNet.PageSize.LETTER;
+            PageSize = PageSize.LETTER;
         }
         #endregion
 
@@ -109,7 +109,7 @@ namespace PdfMakeNet
             Body.Add(PdfMakeText);
         }
         /// <summary>
-        /// Add a list of texts to the body section
+        /// Add a IList of texts to the body section
         /// </summary>
         /// <param name="PdfMakeTexts"></param>
         public void AddText(IEnumerable<PdfMakeText> PdfMakeTexts)
@@ -133,7 +133,7 @@ namespace PdfMakeNet
             Body.Add(pdfMakeTable);
         }
         /// <summary>
-        ///  Adds a ordered list to the body section
+        ///  Adds a ordered IList to the body section
         /// </summary>
         /// <param name="pdfMakeOrderedList"></param>
         public void AddOrderedList(PdfMakeOrderedList<object> pdfMakeOrderedList)
@@ -141,7 +141,7 @@ namespace PdfMakeNet
             Body.Add(pdfMakeOrderedList);
         }
         /// <summary>
-        /// Adds a unordered list to the body section
+        /// Adds a unordered IList to the body section
         /// </summary>
         /// <param name="pdfMakeUnorderedList"></param>
         public void AddUnorderedList(PdfMakeUnorderedList<object> pdfMakeUnorderedList)
@@ -200,7 +200,7 @@ namespace PdfMakeNet
             Header.Add(PdfMakeText);
         }
         /// <summary>
-        /// Adds list of texts to the header section
+        /// Adds IList of texts to the header section
         /// </summary>
         /// <param name="PdfMakeText"></param>
         public void AddHeaderText(IEnumerable<PdfMakeText> PdfMakeTexts)
@@ -224,7 +224,7 @@ namespace PdfMakeNet
             Header.Add(pdfMakeTable);
         }
         /// <summary>
-        /// Adds a ordered list to the header section
+        /// Adds a ordered IList to the header section
         /// </summary>
         /// <param name="pdfMakeOrderedList"></param>
         public void AddHeaderOrderedList(PdfMakeOrderedList<object> pdfMakeOrderedList)
@@ -232,7 +232,7 @@ namespace PdfMakeNet
             Header.Add(pdfMakeOrderedList);
         }
         /// <summary>
-        /// Adds a unordered list to the header section
+        /// Adds a unordered IList to the header section
         /// </summary>
         /// <param name="pdfMakeUnorderedList"></param>
         public void AddHeaderUnorderedList(PdfMakeUnorderedList<object> pdfMakeUnorderedList)
@@ -283,7 +283,7 @@ namespace PdfMakeNet
             Footer.Add(PdfMakeText);
         }
         /// <summary>
-        /// Adds a list of texts to the footer section
+        /// Adds a IList of texts to the footer section
         /// </summary>
         /// <param name="PdfMakeTexts"></param>
         public void AddFooterText(IEnumerable<PdfMakeText> PdfMakeTexts)
@@ -307,7 +307,7 @@ namespace PdfMakeNet
             Footer.Add(pdfMakeTable);
         }
         /// <summary>
-        /// Adds a ordered list to the footer section
+        /// Adds a ordered IList to the footer section
         /// </summary>
         /// <param name="pdfMakeOrderedList"></param>
         public void AddFooterOrderedList(PdfMakeOrderedList<object> pdfMakeOrderedList)
@@ -315,7 +315,7 @@ namespace PdfMakeNet
             Footer.Add(pdfMakeOrderedList);
         }
         /// <summary>
-        /// Adds a unordered list to the footer section
+        /// Adds a unordered IList to the footer section
         /// </summary>
         /// <param name="pdfMakeUnorderedList"></param>
         public void AddFooterUnorderedList(PdfMakeUnorderedList<object> pdfMakeUnorderedList)

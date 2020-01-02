@@ -9,6 +9,6 @@ namespace PdfMakeNet
         /// Adds a stack
         /// </summary>
         [JsonProperty("stack")]
-        public List<T> Stack { get; set; }
+        public IList<T> Stack { get; set; }
     }
 }

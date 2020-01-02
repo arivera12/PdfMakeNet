@@ -11,7 +11,7 @@ namespace PdfMakeNet
         /// Whether printing is allowed. Specify "lowResolution" to allow degraded printing, or "highResolution" to allow printing with high resolution
         /// </summary>
         [JsonProperty("printing")]
-        public string Printing { get; set; }
+        public PrintingResolution Printing { get; set; }
         /// <summary>
         /// Whether modifying the file is allowed. Specify true to allow modifying document content
         /// </summary>

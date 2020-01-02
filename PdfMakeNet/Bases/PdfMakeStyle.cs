@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.Drawing;
 
 namespace PdfMakeNet
 {
@@ -9,7 +10,7 @@ namespace PdfMakeNet
         /// background option
         /// </summary>
         [JsonProperty("background")]
-        public string BackgroundColor { get; set; }
+        public Color BackgroundColor { get; set; }
         /// <summary>
         /// fill color option
         /// </summary>
@@ -34,9 +35,9 @@ namespace PdfMakeNet
         /// Color option
         /// </summary>
         [JsonProperty("color")]
-        public string Color { get; set; }
+        public Color Color { get; set; }
         /// <summary>
-        /// margin option. Possible options: margin: [left, top, right, bottom] or [horizontal, vertical] or equalLeftTopRightBottom
+        /// margin option. Possible options: margin: [left, top, right, bottom] or [horizontal, vertical] or one value equal LeftTopRightBottom
         /// </summary>
         [JsonProperty("margin")]
         public object Margin { get; set; }
@@ -64,7 +65,7 @@ namespace PdfMakeNet
         /// Fit option
         /// </summary>
         [JsonProperty("fit")]
-        public List<int> Fit { get; set; }
+        public IList<int> Fit { get; set; }
         /// <summary>
         /// Table of content item option
         /// </summary>
@@ -74,21 +75,21 @@ namespace PdfMakeNet
         /// Page break option
         /// </summary>
         [JsonProperty("pageBreak")]
-        public string PageBreak { get; set; }
+        public PageBreak PageBreak { get; set; }
         /// <summary>
         /// Alignment option
         /// </summary>
         [JsonProperty("alignment")]
-        public string Alignment { get; set; }
+        public Alingment Alignment { get; set; }
         /// <summary>
         /// Page orientation option
         /// </summary>
         [JsonProperty("pageOrientation")]
-        public string PageOrientation { get; set; }
+        public PageOrientation PageOrientation { get; set; }
         /// <summary>
         /// Style option
         /// </summary>
         [JsonProperty("style")]
-        public List<string> Style { get; set; }
+        public IList<string> Style { get; set; }
     }
 }

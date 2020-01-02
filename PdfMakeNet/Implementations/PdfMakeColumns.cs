@@ -9,6 +9,6 @@ namespace PdfMakeNet
         /// Lis of columns
         /// </summary>
         [JsonProperty("columns")]
-        public List<T> Columns { get; set; }
+        public IList<T> Columns { get; set; }
     }
 }

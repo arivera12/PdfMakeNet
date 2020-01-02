@@ -16,11 +16,11 @@ namespace PdfMakeNet
         /// Others possible width values: ['*', 'auto']
         /// </summary>
         [JsonProperty("widths")]
-        public List<object> Widths { get; set; }
+        public IList<object> Widths { get; set; }
         /// <summary>
         /// Add the body of the table
         /// </summary>
         [JsonProperty("body")]
-        public List<T> Body { get; set; }
+        public IList<T> Body { get; set; }
     }
 }

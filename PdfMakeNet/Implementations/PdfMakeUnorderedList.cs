@@ -9,6 +9,6 @@ namespace PdfMakeNet
         /// Add unordered list
         /// </summary>
         [JsonProperty("ul")]
-        public List<T> Ul { get; set; }
+        public IList<T> Ul { get; set; }
     }
 }

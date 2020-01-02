@@ -6,9 +6,9 @@ namespace PdfMakeNet
     public class PdfMakeOrderedList<T> : PdfMakeStyle
     {
         /// <summary>
-        /// Add unorderes list
+        /// Add unordered list
         /// </summary>
         [JsonProperty("ol")]
-        public List<T> Ol { get; set; }
+        public IList<T> Ol { get; set; }
     }
 }

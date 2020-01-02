@@ -28,12 +28,12 @@ namespace PdfMakeNet
         /// Add the Ecc Level
         /// </summary>
         [JsonProperty("eccLevel")]
-        public string EccLevel { get; set; }
+        public EccLevel EccLevel { get; set; }
         /// <summary>
         /// Add the mode
         /// </summary>
         [JsonProperty("mode")]
-        public string Mode { get; set; }
+        public Mode Mode { get; set; }
         /// <summary>
         /// Add the mask
         /// </summary>
