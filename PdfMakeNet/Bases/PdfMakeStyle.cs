@@ -1,6 +1,5 @@
 ﻿using Newtonsoft.Json;
 using System.Collections.Generic;
-using System.Drawing;
 
 namespace PdfMakeNet
 {
@@ -10,7 +9,7 @@ namespace PdfMakeNet
         /// background option
         /// </summary>
         [JsonProperty("background")]
-        public Color BackgroundColor { get; set; }
+        public string BackgroundColor { get; set; }
         /// <summary>
         /// fill color option
         /// </summary>
@@ -35,7 +34,7 @@ namespace PdfMakeNet
         /// Color option
         /// </summary>
         [JsonProperty("color")]
-        public Color Color { get; set; }
+        public string Color { get; set; }
         /// <summary>
         /// margin option. Possible options: margin: [left, top, right, bottom] or [horizontal, vertical] or one value equal LeftTopRightBottom
         /// </summary>

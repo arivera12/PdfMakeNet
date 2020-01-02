@@ -13,12 +13,12 @@
     <PackageLicenseExpression></PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/arivera12/PdfMakeNet</PackageProjectUrl>
     <RepositoryUrl>https://github.com/arivera12/PdfMakeNet</RepositoryUrl>
-    <PackageReleaseNotes>The contants classes Alingment, EccLevel, Mode, PageBreak, PageBreak, PageOrientation, PageSize and PrintinResolutions are now class types for better reference. Changed List to IList. BackgroundColor and Color now uses System.Drawing.Color struct for better reference.</PackageReleaseNotes>
+    <PackageReleaseNotes>BackgroundColor and Color were rolled back to string cause newtonsoft json have issues serializing structs.</PackageReleaseNotes>
     <NeutralLanguage>en-US</NeutralLanguage>
-    <AssemblyVersion>0.1.0.3</AssemblyVersion>
-    <FileVersion>0.1.0.3</FileVersion>
+    <AssemblyVersion>0.1.0.4</AssemblyVersion>
+    <FileVersion>0.1.0.4</FileVersion>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
-    <Version>1.0.3</Version>
+    <Version>1.0.4</Version>
   </PropertyGroup>
 
   <ItemGroup>
