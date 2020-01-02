@@ -65,7 +65,7 @@ https://pdfmake.github.io/docs/getting-started/client-side/supported-browsers/
 ## Nuget 
 
 ```
-Install-Package PdfMakeNet -Version 1.0.3
+Install-Package PdfMakeNet -Version 1.0.4
 ```
 ## Issues
 
