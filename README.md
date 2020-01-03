@@ -62,11 +62,61 @@ The code is already documented but if you want more documentation you can visit:
 
 https://pdfmake.github.io/docs/getting-started/client-side/supported-browsers/
 
-## Nuget 
+## Installation
+
+### Install Nuget Package 
 
 ```
 Install-Package PdfMakeNet -Version 1.0.4
 ```
+
+### Include the pdfmake script and font
+
+```
+<script src='build/pdfmake.min.js'></script>
+<script src='build/vfs_fonts.js'></script>
+```
+
+## Basic Example
+
+```
+using PdfMakeNet;
+
+//Outputs the documents definition in a http json response
+public ContentResult DocumentDefinitionInBrowser()
+{
+   var pdfmake = new PdfMake();
+   pdfmake.AddText(new PdfMakeText() 
+   { 
+      Alignment = Alingment.Center,
+      BackgroundColor = "red",
+      Bold = true,
+      Color = "white",
+      FontSize = 18,
+      Italics = true,
+      Text = "Hello World!"
+   });
+    return pdfmake.DocumentDefinitionInBrowser();
+}
+
+//Gets the document definition in a json string
+public string GetDocumentDefinition()
+{
+   var pdfmake = new PdfMake();
+   pdfmake.AddText(new PdfMakeText() 
+   { 
+      Alignment = Alingment.Center,
+      BackgroundColor = "red",
+      Bold = true,
+      Color = "white",
+      FontSize = 18,
+      Italics = true,
+      Text = "Hello World!"
+   });
+    return pdfmake.GetDocumentDefinition();
+}
+```
+
 ## Issues
 
 If you find any bug or issue please file an issue I will fix it as soon as posible.
@@ -77,7 +127,3 @@ Pull requests are welcome. Please submit a pull request letting me know if is a 
 
 ## License
 MIT
-
-## Examples
-
-Examples will be available soon.
