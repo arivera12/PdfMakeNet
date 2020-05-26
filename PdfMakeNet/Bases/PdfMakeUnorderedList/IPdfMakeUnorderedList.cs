@@ -3,12 +3,12 @@ using System.Collections.Generic;
 
 namespace PdfMakeNet
 {
-    public class PdfMakeUnorderedList<T> : PdfMakeStyle
+    public interface IPdfMakeUnorderedList<T> : IPdfMakeStyle
     {
         /// <summary>
         /// Add unordered list
         /// </summary>
         [JsonProperty("ul")]
-        public IList<T> Ul { get; set; }
+        IList<T> Ul { get; set; }
     }
 }

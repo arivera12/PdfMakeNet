@@ -2,7 +2,7 @@
 
 namespace PdfMakeNet
 {
-    public class PdfMakeToc
+    public class PdfMakeToc : IPdfMakeToc
     {
         /// <summary>
         /// Id od the table of content

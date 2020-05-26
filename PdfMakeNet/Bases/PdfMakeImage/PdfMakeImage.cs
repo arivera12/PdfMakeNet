@@ -2,7 +2,7 @@
 
 namespace PdfMakeNet
 {
-    public class PdfMakeImage : PdfMakeStyle
+    public class PdfMakeImage : PdfMakeStyle, IPdfMakeStyle, IPdfMakeImage
     {
         /// <summary>
         /// Adds an image

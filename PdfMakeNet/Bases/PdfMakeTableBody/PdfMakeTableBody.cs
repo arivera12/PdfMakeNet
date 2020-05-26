@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace PdfMakeNet
 {
-    public class PdfMakeTableBody<T>
+    public class PdfMakeTableBody<T> : IPdfMakeTableBody<T>
     {
         /// <summary>
         /// Add header rows.

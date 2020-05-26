@@ -3,7 +3,7 @@ using PdfMakeNet.Extensions;
 
 namespace PdfMakeNet
 {
-    public class PdfMakeQRCode : PdfMakeStyle
+    public class PdfMakeQRCode : PdfMakeStyle, IPdfMakeStyle, IPdfMakeQRCode
     {
         /// <summary>
         /// Adds a qr code text

@@ -2,19 +2,19 @@
 
 namespace PdfMakeNet
 {
-    public class PdfMakeTable<T> : PdfMakeStyle
+    public interface IPdfMakeTable<T> : IPdfMakeStyle
     {
         /// <summary>
         /// Adds a layout ot the table
-        /// Available table layouts: noBorders, headerLineOnly, lightHorizontalLines. You can do table layouts as well
+        /// Available table layouts: noBorders, headerLineOnly, lightHorizontalLines. You can do your own table layouts as well
         /// <see cref="https://pdfmake.github.io/docs/document-definition-object/tables/"/>
         /// </summary>
         [JsonProperty("layout")]
-        public string Layout { get; set; }
+        string Layout { get; set; }
         /// <summary>
         /// Adds a table
         /// </summary>
         [JsonProperty("table")]
-        public PdfMakeTableBody<T> TableBody { get; set; }
+        PdfMakeTableBody<T> TableBody { get; set; }
     }
 }

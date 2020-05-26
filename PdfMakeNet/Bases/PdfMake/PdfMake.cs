@@ -4,9 +4,8 @@ using System.Collections.Generic;
 
 namespace PdfMakeNet
 {
-    public class PdfMake : IPdfmake<object>
+    public class PdfMake : IPdfMake
     {
-        #region Fields
         /// <summary>
         /// The header section
         /// </summary>
@@ -80,27 +79,162 @@ namespace PdfMakeNet
         [JsonProperty("permissions")]
         [JsonConverter(typeof(ToStringJsonConverter))]
         public PdfMakePermissions Permissions { get; set; }
-        #endregion
-
-        #region Constructor
         /// <summary>
-        /// Default constructor
+        /// Default constuctor
         /// </summary>
         public PdfMake()
         {
             Body = new List<object>();
             Header = new List<object>();
             Footer = new List<object>();
-            PageSize = PageSize.LETTER;
         }
-        #endregion
-
-        #region Body
+        /// <summary>
+        /// Overload constructor
+        /// </summary>
+        /// <param name="pageSize"></param>
+        public PdfMake(PageSize pageSize)
+        {
+            Body = new List<object>();
+            Header = new List<object>();
+            Footer = new List<object>();
+            PageSize = pageSize;
+        }
+        /// <summary>
+        /// Overload constructor
+        /// </summary>
+        /// <param name="compress"></param>
+        public PdfMake(bool compress)
+        {
+            Body = new List<object>();
+            Header = new List<object>();
+            Footer = new List<object>();
+            Compress = compress;
+        }
+        /// <summary>
+        /// Overload constructor
+        /// </summary>
+        /// <param name="userPassword"></param>
+        /// <param name="ownerPassword"></param>
+        public PdfMake(string userPassword, string ownerPassword)
+        {
+            Body = new List<object>();
+            Header = new List<object>();
+            Footer = new List<object>();
+            UserPassword = userPassword;
+            OwnerPassword = ownerPassword;
+        }
+        /// <summary>
+        /// Overload constructor
+        /// </summary>
+        /// <param name="permissions"></param>
+        public PdfMake(PdfMakePermissions permissions)
+        {
+            Body = new List<object>();
+            Header = new List<object>();
+            Footer = new List<object>();
+            Permissions = permissions;
+        }
+        /// <summary>
+        /// Overload constructor
+        /// </summary>
+        /// <param name="pageSize"></param>
+        /// <param name="compress"></param>
+        public PdfMake(PageSize pageSize, bool compress)
+        {
+            Body = new List<object>();
+            Header = new List<object>();
+            Footer = new List<object>();
+            PageSize = pageSize;
+            Compress = compress;
+        }
+        /// <summary>
+        /// Overload constructor
+        /// </summary>
+        /// <param name="pageSize"></param>
+        /// <param name="compress"></param>
+        /// <param name="userPassword"></param>
+        /// <param name="ownerPassword"></param>
+        public PdfMake(PageSize pageSize, bool compress, string userPassword, string ownerPassword)
+        {
+            Body = new List<object>();
+            Header = new List<object>();
+            Footer = new List<object>();
+            PageSize = pageSize;
+            Compress = compress;
+            UserPassword = userPassword;
+            OwnerPassword = ownerPassword;
+        }
+        /// <summary>
+        /// Overload constructor
+        /// </summary>
+        /// <param name="pageSize"></param>
+        /// <param name="compress"></param>
+        /// <param name="userPassword"></param>
+        /// <param name="ownerPassword"></param>
+        /// <param name="permissions"></param>
+        public PdfMake(PageSize pageSize, bool compress, string userPassword, string ownerPassword, PdfMakePermissions permissions)
+        {
+            Body = new List<object>();
+            Header = new List<object>();
+            Footer = new List<object>();
+            PageSize = pageSize;
+            Compress = compress;
+            UserPassword = userPassword;
+            OwnerPassword = ownerPassword;
+            Permissions = permissions;
+        }
+        /// <summary>
+        /// Overload constructor
+        /// </summary>
+        /// <param name="compress"></param>
+        /// <param name="userPassword"></param>
+        /// <param name="ownerPassword"></param>
+        public PdfMake(bool compress, string userPassword, string ownerPassword)
+        {
+            Body = new List<object>();
+            Header = new List<object>();
+            Footer = new List<object>();
+            Compress = compress;
+            UserPassword = userPassword;
+            OwnerPassword = ownerPassword;
+        }
+        /// <summary>
+        /// Overload constructor
+        /// </summary>
+        /// <param name="compress"></param>
+        /// <param name="userPassword"></param>
+        /// <param name="ownerPassword"></param>
+        /// <param name="permissions"></param>
+        public PdfMake(bool compress, string userPassword, string ownerPassword, PdfMakePermissions permissions)
+        {
+            Body = new List<object>();
+            Header = new List<object>();
+            Footer = new List<object>();
+            Compress = compress;
+            UserPassword = userPassword;
+            OwnerPassword = ownerPassword;
+            Permissions = permissions;
+        }
+        /// <summary>
+        /// Overload constructor
+        /// </summary>
+        /// <param name="userPassword"></param>
+        /// <param name="ownerPassword"></param>
+        /// <param name="permissions"></param>
+        public PdfMake(string userPassword, string ownerPassword, PdfMakePermissions permissions)
+        {
+            Body = new List<object>();
+            Header = new List<object>();
+            Footer = new List<object>();
+            UserPassword = userPassword;
+            OwnerPassword = ownerPassword;
+            Permissions = permissions;
+        }
         /// <summary>
         /// Adds a qr code to the body section
         /// </summary>
         /// <param name="qRCode"></param>
-        public void AddQRCode(PdfMakeQRCode qRCode)
+        public void AddBodyQRCode(IPdfMakeQRCode qRCode)
         {
             Body.Add(qRCode);
         }
@@ -108,7 +242,7 @@ namespace PdfMakeNet
         /// Adds a text to the body section
         /// </summary>
         /// <param name="PdfMakeText"></param>
-        public void AddText(PdfMakeText PdfMakeText)
+        public void AddBodyText(IPdfMakeText PdfMakeText)
         {
             Body.Add(PdfMakeText);
         }
@@ -116,7 +250,7 @@ namespace PdfMakeNet
         /// Add a IList of texts to the body section
         /// </summary>
         /// <param name="PdfMakeTexts"></param>
-        public void AddText(IEnumerable<PdfMakeText> PdfMakeTexts)
+        public void AddBodyText(IEnumerable<IPdfMakeText> PdfMakeTexts)
         {
             Body.Add(new { text = PdfMakeTexts });
         }
@@ -124,7 +258,7 @@ namespace PdfMakeNet
         /// Adds columns to the body section
         /// </summary>
         /// <param name="Columns"></param>
-        public void AddColumns(PdfMakeColumns<object> Columns)
+        public void AddBodyColumns<T>(IPdfMakeColumns<T> Columns)
         {
             Body.Add(Columns);
         }
@@ -132,7 +266,7 @@ namespace PdfMakeNet
         /// Adds a table to the body section
         /// </summary>
         /// <param name="pdfMakeTable"></param>
-        public void AddTable(PdfMakeTable<object> pdfMakeTable)
+        public void AddBodyTable<T>(IPdfMakeTable<T> pdfMakeTable)
         {
             Body.Add(pdfMakeTable);
         }
@@ -140,7 +274,7 @@ namespace PdfMakeNet
         ///  Adds a ordered IList to the body section
         /// </summary>
         /// <param name="pdfMakeOrderedList"></param>
-        public void AddOrderedList(PdfMakeOrderedList<object> pdfMakeOrderedList)
+        public void AddBodyOrderedList<T>(IPdfMakeOrderedList<T> pdfMakeOrderedList)
         {
             Body.Add(pdfMakeOrderedList);
         }
@@ -148,7 +282,7 @@ namespace PdfMakeNet
         /// Adds a unordered IList to the body section
         /// </summary>
         /// <param name="pdfMakeUnorderedList"></param>
-        public void AddUnorderedList(PdfMakeUnorderedList<object> pdfMakeUnorderedList)
+        public void AddBodyUnorderedList<T>(IPdfMakeUnorderedList<T> pdfMakeUnorderedList)
         {
             Body.Add(pdfMakeUnorderedList);
         }
@@ -156,7 +290,7 @@ namespace PdfMakeNet
         /// Adds a stack to the body section
         /// </summary>
         /// <param name="pdfMakeStacks"></param>
-        public void AddStack(PdfMakeStack<object> pdfMakeStacks)
+        public void AddBodyStack<T>(IPdfMakeStack<T> pdfMakeStacks)
         {
             Body.Add(new { pdfMakeStacks });
         }
@@ -164,7 +298,7 @@ namespace PdfMakeNet
         /// Adds an image to the body section
         /// </summary>
         /// <param name="pdfMakeImage"></param>
-        public void AddImage(PdfMakeImage pdfMakeImage)
+        public void AddBodyImage(IPdfMakeImage pdfMakeImage)
         {
             Body.Add(pdfMakeImage);
         }
@@ -172,7 +306,7 @@ namespace PdfMakeNet
         /// Adds a link to the body section
         /// </summary>
         /// <param name="pdfMakeLink"></param>
-        public void AddLink(PdfMakeLink pdfMakeLink)
+        public void AddBodyLink(IPdfMakeLink pdfMakeLink)
         {
             Body.Add(pdfMakeLink);
         }
@@ -180,18 +314,15 @@ namespace PdfMakeNet
         /// Adds a table of content to the body section
         /// </summary>
         /// <param name="pdfMakeTableOfContent"></param>
-        public void AddTableOfContent(PdfMakeTableOfContent pdfMakeTableOfContent)
+        public void AddTableOfContent(IPdfMakeTableOfContent pdfMakeTableOfContent)
         {
             Body.Add(pdfMakeTableOfContent);
         }
-        #endregion
-
-        #region Header
         /// <summary>
         /// Adds a qr code to the header section
         /// </summary>
         /// <param name="qRCode"></param>
-        public void AddHeaderQRCode(PdfMakeQRCode qRCode)
+        public void AddHeaderQRCode(IPdfMakeQRCode qRCode)
         {
             Header.Add(qRCode);
         }
@@ -199,7 +330,7 @@ namespace PdfMakeNet
         /// Adds a text to the header section
         /// </summary>
         /// <param name="PdfMakeText"></param>
-        public void AddHeaderText(PdfMakeText PdfMakeText)
+        public void AddHeaderText(IPdfMakeText PdfMakeText)
         {
             Header.Add(PdfMakeText);
         }
@@ -207,7 +338,7 @@ namespace PdfMakeNet
         /// Adds IList of texts to the header section
         /// </summary>
         /// <param name="PdfMakeText"></param>
-        public void AddHeaderText(IEnumerable<PdfMakeText> PdfMakeTexts)
+        public void AddHeaderText(IEnumerable<IPdfMakeText> PdfMakeTexts)
         {
             Header.Add(new { text = PdfMakeTexts });
         }
@@ -215,7 +346,7 @@ namespace PdfMakeNet
         ///  Adds text to the header section
         /// </summary>
         /// <param name="Columns"></param>
-        public void AddHeaderColumns(PdfMakeColumns<object> Columns)
+        public void AddHeaderColumns<T>(IPdfMakeColumns<T> Columns)
         {
             Header.Add(Columns);
         }
@@ -223,7 +354,7 @@ namespace PdfMakeNet
         /// Adds a table to the header section
         /// </summary>
         /// <param name="pdfMakeTable"></param>
-        public void AddHeaderTable(PdfMakeTable<object> pdfMakeTable)
+        public void AddHeaderTable<T>(IPdfMakeTable<T> pdfMakeTable)
         {
             Header.Add(pdfMakeTable);
         }
@@ -231,7 +362,7 @@ namespace PdfMakeNet
         /// Adds a ordered IList to the header section
         /// </summary>
         /// <param name="pdfMakeOrderedList"></param>
-        public void AddHeaderOrderedList(PdfMakeOrderedList<object> pdfMakeOrderedList)
+        public void AddHeaderOrderedList<T>(IPdfMakeOrderedList<T> pdfMakeOrderedList)
         {
             Header.Add(pdfMakeOrderedList);
         }
@@ -239,7 +370,7 @@ namespace PdfMakeNet
         /// Adds a unordered IList to the header section
         /// </summary>
         /// <param name="pdfMakeUnorderedList"></param>
-        public void AddHeaderUnorderedList(PdfMakeUnorderedList<object> pdfMakeUnorderedList)
+        public void AddHeaderUnorderedList<T>(IPdfMakeUnorderedList<T> pdfMakeUnorderedList)
         {
             Header.Add(pdfMakeUnorderedList);
         }
@@ -247,7 +378,7 @@ namespace PdfMakeNet
         /// Adds a stack to the header section
         /// </summary>
         /// <param name="pdfMakeStacks"></param>
-        public void AddHeaderStack(PdfMakeStack<object> pdfMakeStacks)
+        public void AddHeaderStack<T>(IPdfMakeStack<T> pdfMakeStacks)
         {
             Header.Add(new { pdfMakeStacks });
         }
@@ -255,7 +386,7 @@ namespace PdfMakeNet
         /// Adds an image to the header section
         /// </summary>
         /// <param name="pdfMakeImage"></param>
-        public void AddHeaderImage(PdfMakeImage pdfMakeImage)
+        public void AddHeaderImage(IPdfMakeImage pdfMakeImage)
         {
             Header.Add(pdfMakeImage);
         }
@@ -263,18 +394,15 @@ namespace PdfMakeNet
         /// Adds a link to the header section
         /// </summary>
         /// <param name="pdfMakeLink"></param>
-        public void AddHeaderLink(PdfMakeLink pdfMakeLink)
+        public void AddHeaderLink(IPdfMakeLink pdfMakeLink)
         {
             Header.Add(pdfMakeLink);
         }
-        #endregion
-
-        #region Footer
         /// <summary>
         /// Adds a qr code to the footer section
         /// </summary>
         /// <param name="qRCode"></param>
-        public void AddFooterQRCode(PdfMakeQRCode qRCode)
+        public void AddFooterQRCode(IPdfMakeQRCode qRCode)
         {
             Footer.Add(qRCode);
         }
@@ -282,7 +410,7 @@ namespace PdfMakeNet
         /// Adds a text to the footer section
         /// </summary>
         /// <param name="PdfMakeText"></param>
-        public void AddFooterText(PdfMakeText PdfMakeText)
+        public void AddFooterText(IPdfMakeText PdfMakeText)
         {
             Footer.Add(PdfMakeText);
         }
@@ -290,7 +418,7 @@ namespace PdfMakeNet
         /// Adds a IList of texts to the footer section
         /// </summary>
         /// <param name="PdfMakeTexts"></param>
-        public void AddFooterText(IEnumerable<PdfMakeText> PdfMakeTexts)
+        public void AddFooterText(IEnumerable<IPdfMakeText> PdfMakeTexts)
         {
             Footer.Add(new { text = PdfMakeTexts });
         }
@@ -298,7 +426,7 @@ namespace PdfMakeNet
         /// Adds a columns to the footer section
         /// </summary>
         /// <param name="Columns"></param>
-        public void AddFooterColumns(PdfMakeColumns<object> Columns)
+        public void AddFooterColumns<T>(IPdfMakeColumns<T> Columns)
         {
             Footer.Add(Columns);
         }
@@ -306,7 +434,7 @@ namespace PdfMakeNet
         /// Adds a table to the footer section
         /// </summary>
         /// <param name="pdfMakeTable"></param>
-        public void AddFooterTable(PdfMakeTable<object> pdfMakeTable)
+        public void AddFooterTable<T>(IPdfMakeTable<T> pdfMakeTable)
         {
             Footer.Add(pdfMakeTable);
         }
@@ -314,7 +442,7 @@ namespace PdfMakeNet
         /// Adds a ordered IList to the footer section
         /// </summary>
         /// <param name="pdfMakeOrderedList"></param>
-        public void AddFooterOrderedList(PdfMakeOrderedList<object> pdfMakeOrderedList)
+        public void AddFooterOrderedList<T>(IPdfMakeOrderedList<T> pdfMakeOrderedList)
         {
             Footer.Add(pdfMakeOrderedList);
         }
@@ -322,7 +450,7 @@ namespace PdfMakeNet
         /// Adds a unordered IList to the footer section
         /// </summary>
         /// <param name="pdfMakeUnorderedList"></param>
-        public void AddFooterUnorderedList(PdfMakeUnorderedList<object> pdfMakeUnorderedList)
+        public void AddFooterUnorderedList<T>(IPdfMakeUnorderedList<T> pdfMakeUnorderedList)
         {
             Footer.Add(pdfMakeUnorderedList);
         }
@@ -330,7 +458,7 @@ namespace PdfMakeNet
         /// Adds a stack to the footer section
         /// </summary>
         /// <param name="pdfMakeStacks"></param>
-        public void AddFooterStack(PdfMakeStack<object> pdfMakeStacks)
+        public void AddFooterStack<T>(IPdfMakeStack<T> pdfMakeStacks)
         {
             Footer.Add(new { pdfMakeStacks });
         }
@@ -338,7 +466,7 @@ namespace PdfMakeNet
         /// Adds an image to the footer section
         /// </summary>
         /// <param name="pdfMakeImage"></param>
-        public void AddFooterImage(PdfMakeImage pdfMakeImage)
+        public void AddFooterImage(IPdfMakeImage pdfMakeImage)
         {
             Footer.Add(pdfMakeImage);
         }
@@ -346,10 +474,9 @@ namespace PdfMakeNet
         /// Adds a link to the footer section
         /// </summary>
         /// <param name="pdfMakeLink"></param>
-        public void AddFooterLink(PdfMakeLink pdfMakeLink)
+        public void AddFooterLink(IPdfMakeLink pdfMakeLink)
         {
             Footer.Add(pdfMakeLink);
         }
-        #endregion 
     }
 }

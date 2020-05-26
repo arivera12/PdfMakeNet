@@ -1,35 +1,50 @@
 ﻿@page "/"
-@using PdfMakeNet 
+@using PdfMakeNet
+@using Newtonsoft.Json
 
-<button @onclick=@OpenInNewTab>Open in new tab</button>
-<p>@GetDocumentDefinition()</p>
+<h2>PdfMakeNet Demo - Basic</h2>
+<button @onclick=@OpenInNewTab>Run sample in new tab</button>
+<p>Basic sample using: PdfMakeNet</p>
+<pre class="preformatted">
+[Inject] IPdfMake pdfmake { get; set; } 
+//Or IPdfMake pdfmake = new PdfMake();
+pdfmake.AddBodyText(new PdfMakeText()
+{
+    Text = "First paragraph"
+});
+pdfmake.AddBodyText(new PdfMakeText()
+{
+    Text = "Another paragraph, this time a little bit longer to make sure, this line will be divided into at least two lines"
+});
+//Get document definition
+pdfmake.GetDocumentDefinition(Formatting.Indented);
+//Button event code executing
+pdfmake.GetOpenInBrowser(false)
+</pre>
+<p>PdfMake Document Definition Output From PdfMakeNet</p>
+<pre class="preformatted">@GetDocumentDefinition()</pre>
 
 @functions{
-    PdfMake pdfmake = new PdfMake();
+    [Inject] IPdfMake pdfmake { get; set; }
     [Inject] IJSRuntime JSRuntime { get; set; }
     protected override void OnAfterRender(bool firstRender)
     {
         if (firstRender)
         {
-            pdfmake.AddText(new PdfMakeText()
+            pdfmake.AddBodyText(new PdfMakeText()
             {
-                Alignment = Alingment.Center,
-                BackgroundColor = "red",
-                Bold = true,
-                Color = "white",
-                FontSize = 18,
-                Italics = true,
-                Text = "Hello World!",
-                Width = 0,
-                Height = 0
+                Text = "First paragraph"
+            });
+            pdfmake.AddBodyText(new PdfMakeText()
+            {
+                Text = "Another paragraph, this time a little bit longer to make sure, this line will be divided into at least two lines"
             });
             StateHasChanged();
         }
     }
-    //Gets the document definition in a json string
     public string GetDocumentDefinition()
     {
-        return pdfmake.GetDocumentDefinition();
+        return pdfmake.GetDocumentDefinition(Formatting.Indented);
     }
     public async Task OpenInNewTab()
     {

@@ -2,12 +2,12 @@
 
 namespace PdfMakeNet
 {
-    public class PdfMakeTableOfContent
+    public interface IPdfMakeTableOfContent
     {
         /// <summary>
         /// Adds a table of content
         /// </summary>
         [JsonProperty("toc")]
-        public PdfMakeToc Toc { get; set; }
+        PdfMakeToc Toc { get; set; }
     }
 }

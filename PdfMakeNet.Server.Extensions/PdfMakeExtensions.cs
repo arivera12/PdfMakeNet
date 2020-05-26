@@ -8,7 +8,7 @@ namespace PdfMakeNet.Server.Extensions
         /// Sends a json result with the pdf document definition
         /// </summary>
         /// <returns></returns>
-        public static ContentResult DocumentDefinitionInBrowser(this PdfMake pdfMake)
+        public static IActionResult DocumentDefinitionInBrowser(this IPdfMake pdfMake)
         {
             return new ContentResult()
             {
@@ -22,7 +22,7 @@ namespace PdfMakeNet.Server.Extensions
         /// </summary>
         /// <param name="Filename"></param>
         /// <returns></returns>
-        public static ContentResult DownloadInBrowser(this PdfMake pdfMake, string Filename)
+        public static IActionResult DownloadInBrowser(this IPdfMake pdfMake, string Filename)
         {
             return new ContentResult()
             {
@@ -37,7 +37,7 @@ namespace PdfMakeNet.Server.Extensions
         /// </summary>
         /// <param name="IFrameQuerySelector"></param>
         /// <returns></returns>
-        public static ContentResult EmbedInBrowserIframe(this PdfMake pdfMake, string IFrameQuerySelector)
+        public static IActionResult EmbedInBrowserIframe(this IPdfMake pdfMake, string IFrameQuerySelector)
         {
             return new ContentResult()
             {
@@ -52,7 +52,7 @@ namespace PdfMakeNet.Server.Extensions
         /// </summary>
         /// <param name="SameWindow"></param>
         /// <returns></returns>
-        public static ContentResult OpenInBrowser(this PdfMake pdfMake, bool SameWindow)
+        public static IActionResult OpenInBrowser(this IPdfMake pdfMake, bool SameWindow)
         {
             return new ContentResult()
             {
@@ -67,7 +67,7 @@ namespace PdfMakeNet.Server.Extensions
         /// </summary>
         /// <param name="SameWindow"></param>
         /// <returns></returns>
-        public static ContentResult PrintInBrowser(this PdfMake pdfMake, bool SameWindow)
+        public static IActionResult PrintInBrowser(this IPdfMake pdfMake, bool SameWindow)
         {
             return new ContentResult()
             {

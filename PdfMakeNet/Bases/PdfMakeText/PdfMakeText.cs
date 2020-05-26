@@ -2,7 +2,7 @@
 
 namespace PdfMakeNet
 {
-    public class PdfMakeText : PdfMakeStyle
+    public class PdfMakeText : PdfMakeStyle, IPdfMakeStyle, IPdfMakeText
     {
         /// <summary>
         /// Adds text
