@@ -52,6 +52,10 @@ This wrapper implements the same methods and options as pdfmake and will help yo
 
 Take note that this library as no server side render capabilities yet (Unless integration with NodeJs or any lib on c# that parses and executes javascript, if any one want these feature please file an issue with any recommendation or pull request).
 
+Maybe is some near future PdfMakeNet and others js libs may be posible to execute over c# using [Jint](https://github.com/sebastienros/jint) after they complete the implementations of ES5 and ES6 features.
+
+I opened this issue on Jint repository to keep track of this. [Run PdfMake on Jint](https://github.com/sebastienros/jint/issues/609)
+
 So based on the last sentence you still need to reference pdfmake.js and vfs_fonts.js files on your client or create your own pdfmake viewer for flawless integration.
 
 ## Documentation
