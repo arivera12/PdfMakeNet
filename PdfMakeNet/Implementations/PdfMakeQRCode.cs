@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using PdfMakeNet.Extensions;
 
 namespace PdfMakeNet
 {
@@ -28,11 +29,13 @@ namespace PdfMakeNet
         /// Add the Ecc Level
         /// </summary>
         [JsonProperty("eccLevel")]
+        [JsonConverter(typeof(ToStringJsonConverter))]
         public EccLevel EccLevel { get; set; }
         /// <summary>
         /// Add the mode
         /// </summary>
         [JsonProperty("mode")]
+        [JsonConverter(typeof(ToStringJsonConverter))]
         public Mode Mode { get; set; }
         /// <summary>
         /// Add the mask

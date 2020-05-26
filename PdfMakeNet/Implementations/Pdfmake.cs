@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using PdfMakeNet.Extensions;
 using System.Collections.Generic;
 
 namespace PdfMakeNet
@@ -45,6 +46,7 @@ namespace PdfMakeNet
         /// The page size option
         /// </summary>
         [JsonProperty("pageSize")]
+        [JsonConverter(typeof(ToStringJsonConverter))]
         public PageSize PageSize { get; set; }
         /// <summary>
         /// The page margins option
@@ -55,6 +57,7 @@ namespace PdfMakeNet
         /// The page orientation option
         /// </summary>
         [JsonProperty("pageOrientation")]
+        [JsonConverter(typeof(ToStringJsonConverter))]
         public PageOrientation PageOrientation { get; set; }
         /// <summary>
         /// The compression option
@@ -75,6 +78,7 @@ namespace PdfMakeNet
         /// The permissions section
         /// </summary>
         [JsonProperty("permissions")]
+        [JsonConverter(typeof(ToStringJsonConverter))]
         public PdfMakePermissions Permissions { get; set; }
         #endregion
 

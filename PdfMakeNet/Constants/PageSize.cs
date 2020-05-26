@@ -86,6 +86,5 @@ namespace PdfMakeNet
         public static readonly PageSize LEGAL = new PageSize("LEGAL");
         public static readonly PageSize LETTER = new PageSize("LETTER");
         public static readonly PageSize TABLOID = new PageSize("TABLOID");
-
     }
 }

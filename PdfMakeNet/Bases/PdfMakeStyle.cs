@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using PdfMakeNet.Extensions;
 using System.Collections.Generic;
 
 namespace PdfMakeNet
@@ -74,16 +75,19 @@ namespace PdfMakeNet
         /// Page break option
         /// </summary>
         [JsonProperty("pageBreak")]
+        [JsonConverter(typeof(ToStringJsonConverter))]
         public PageBreak PageBreak { get; set; }
         /// <summary>
         /// Alignment option
         /// </summary>
         [JsonProperty("alignment")]
+        [JsonConverter(typeof(ToStringJsonConverter))]
         public Alingment Alignment { get; set; }
         /// <summary>
         /// Page orientation option
         /// </summary>
         [JsonProperty("pageOrientation")]
+        [JsonConverter(typeof(ToStringJsonConverter))]
         public PageOrientation PageOrientation { get; set; }
         /// <summary>
         /// Style option

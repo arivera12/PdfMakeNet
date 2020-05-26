@@ -29,11 +29,10 @@
     //Gets the document definition in a json string
     public string GetDocumentDefinition()
     {
-
         return pdfmake.GetDocumentDefinition();
     }
     public async Task OpenInNewTab()
     {
-       await JSRuntime.InvokeVoidAsync("eval", pdfmake.GetOpenInBrowser(false));
+        await JSRuntime.InvokeVoidAsync("eval", pdfmake.GetOpenInBrowser(false));
     }
 }
