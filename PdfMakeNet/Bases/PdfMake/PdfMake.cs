@@ -77,8 +77,12 @@ namespace PdfMakeNet
         /// The permissions section
         /// </summary>
         [JsonProperty("permissions")]
-        [JsonConverter(typeof(ToStringJsonConverter))]
-        public PdfMakePermissions Permissions { get; set; }
+        public IPdfMakePermissions Permissions { get; set; }
+        /// <summary>
+        /// Adds water mark to the pdf document
+        /// </summary>
+        [JsonProperty("watermark")]
+        public IPdfMakeWaterMark PdfMakeWaterMark { get; set; }
         /// <summary>
         /// Default constuctor
         /// </summary>
@@ -127,12 +131,23 @@ namespace PdfMakeNet
         /// Overload constructor
         /// </summary>
         /// <param name="permissions"></param>
-        public PdfMake(PdfMakePermissions permissions)
+        public PdfMake(IPdfMakePermissions permissions)
         {
             Body = new List<object>();
             Header = new List<object>();
             Footer = new List<object>();
             Permissions = permissions;
+        }
+        /// <summary>
+        /// Overload constructor
+        /// </summary>
+        /// <param name="pdfMakeWaterMark"></param>
+        public PdfMake(IPdfMakeWaterMark pdfMakeWaterMark)
+        {
+            Body = new List<object>();
+            Header = new List<object>();
+            Footer = new List<object>();
+            PdfMakeWaterMark = pdfMakeWaterMark;
         }
         /// <summary>
         /// Overload constructor
@@ -146,6 +161,34 @@ namespace PdfMakeNet
             Footer = new List<object>();
             PageSize = pageSize;
             Compress = compress;
+        }
+        /// <summary>
+        /// Overload constructor
+        /// </summary>
+        /// <param name="pageSize"></param>
+        /// <param name="pdfMakeWaterMark"></param>
+        public PdfMake(PageSize pageSize, IPdfMakeWaterMark pdfMakeWaterMark)
+        {
+            Body = new List<object>();
+            Header = new List<object>();
+            Footer = new List<object>();
+            PageSize = pageSize;
+            PdfMakeWaterMark = pdfMakeWaterMark;
+        }
+        /// <summary>
+        /// Overload constructor
+        /// </summary>
+        /// <param name="pageSize"></param>
+        /// <param name="compress"></param>
+        /// <param name="pdfMakeWaterMark"></param>
+        public PdfMake(PageSize pageSize, bool compress, IPdfMakeWaterMark pdfMakeWaterMark)
+        {
+            Body = new List<object>();
+            Header = new List<object>();
+            Footer = new List<object>();
+            PageSize = pageSize;
+            Compress = compress;
+            PdfMakeWaterMark = pdfMakeWaterMark;
         }
         /// <summary>
         /// Overload constructor
@@ -171,8 +214,27 @@ namespace PdfMakeNet
         /// <param name="compress"></param>
         /// <param name="userPassword"></param>
         /// <param name="ownerPassword"></param>
+        /// <param name="pdfMakeWaterMark"></param>
+        public PdfMake(PageSize pageSize, bool compress, string userPassword, string ownerPassword, IPdfMakeWaterMark pdfMakeWaterMark)
+        {
+            Body = new List<object>();
+            Header = new List<object>();
+            Footer = new List<object>();
+            PageSize = pageSize;
+            Compress = compress;
+            UserPassword = userPassword;
+            OwnerPassword = ownerPassword;
+            PdfMakeWaterMark = pdfMakeWaterMark;
+        }
+        /// <summary>
+        /// Overload constructor
+        /// </summary>
+        /// <param name="pageSize"></param>
+        /// <param name="compress"></param>
+        /// <param name="userPassword"></param>
+        /// <param name="ownerPassword"></param>
         /// <param name="permissions"></param>
-        public PdfMake(PageSize pageSize, bool compress, string userPassword, string ownerPassword, PdfMakePermissions permissions)
+        public PdfMake(PageSize pageSize, bool compress, string userPassword, string ownerPassword, IPdfMakePermissions permissions)
         {
             Body = new List<object>();
             Header = new List<object>();
@@ -182,6 +244,27 @@ namespace PdfMakeNet
             UserPassword = userPassword;
             OwnerPassword = ownerPassword;
             Permissions = permissions;
+        }
+        /// <summary>
+        /// Overload constructor
+        /// </summary>
+        /// <param name="pageSize"></param>
+        /// <param name="compress"></param>
+        /// <param name="userPassword"></param>
+        /// <param name="ownerPassword"></param>
+        /// <param name="permissions"></param>
+        /// <param name="pdfMakeWaterMark"></param>
+        public PdfMake(PageSize pageSize, bool compress, string userPassword, string ownerPassword, IPdfMakePermissions permissions, IPdfMakeWaterMark pdfMakeWaterMark)
+        {
+            Body = new List<object>();
+            Header = new List<object>();
+            Footer = new List<object>();
+            PageSize = pageSize;
+            Compress = compress;
+            UserPassword = userPassword;
+            OwnerPassword = ownerPassword;
+            Permissions = permissions;
+            PdfMakeWaterMark = pdfMakeWaterMark;
         }
         /// <summary>
         /// Overload constructor
@@ -204,8 +287,25 @@ namespace PdfMakeNet
         /// <param name="compress"></param>
         /// <param name="userPassword"></param>
         /// <param name="ownerPassword"></param>
+        /// <param name="pdfMakeWaterMark"></param>
+        public PdfMake(bool compress, string userPassword, string ownerPassword, IPdfMakeWaterMark pdfMakeWaterMark)
+        {
+            Body = new List<object>();
+            Header = new List<object>();
+            Footer = new List<object>();
+            Compress = compress;
+            UserPassword = userPassword;
+            OwnerPassword = ownerPassword;
+            PdfMakeWaterMark = pdfMakeWaterMark;
+        }
+        /// <summary>
+        /// Overload constructor
+        /// </summary>
+        /// <param name="compress"></param>
+        /// <param name="userPassword"></param>
+        /// <param name="ownerPassword"></param>
         /// <param name="permissions"></param>
-        public PdfMake(bool compress, string userPassword, string ownerPassword, PdfMakePermissions permissions)
+        public PdfMake(bool compress, string userPassword, string ownerPassword, IPdfMakePermissions permissions)
         {
             Body = new List<object>();
             Header = new List<object>();
@@ -221,7 +321,7 @@ namespace PdfMakeNet
         /// <param name="userPassword"></param>
         /// <param name="ownerPassword"></param>
         /// <param name="permissions"></param>
-        public PdfMake(string userPassword, string ownerPassword, PdfMakePermissions permissions)
+        public PdfMake(string userPassword, string ownerPassword, IPdfMakePermissions permissions)
         {
             Body = new List<object>();
             Header = new List<object>();
@@ -229,6 +329,38 @@ namespace PdfMakeNet
             UserPassword = userPassword;
             OwnerPassword = ownerPassword;
             Permissions = permissions;
+        }
+        /// <summary>
+        /// Overload constructor
+        /// </summary>
+        /// <param name="userPassword"></param>
+        /// <param name="ownerPassword"></param>
+        /// <param name="pdfMakeWaterMark"></param>
+        public PdfMake(string userPassword, string ownerPassword, IPdfMakeWaterMark pdfMakeWaterMark)
+        {
+            Body = new List<object>();
+            Header = new List<object>();
+            Footer = new List<object>();
+            UserPassword = userPassword;
+            OwnerPassword = ownerPassword;
+            PdfMakeWaterMark = pdfMakeWaterMark;
+        }
+        /// <summary>
+        /// Overload constructor
+        /// </summary>
+        /// <param name="userPassword"></param>
+        /// <param name="ownerPassword"></param>
+        /// <param name="permissions"></param>
+        /// <param name="pdfMakeWaterMark"></param>
+        public PdfMake(string userPassword, string ownerPassword, IPdfMakePermissions permissions, IPdfMakeWaterMark pdfMakeWaterMark)
+        {
+            Body = new List<object>();
+            Header = new List<object>();
+            Footer = new List<object>();
+            UserPassword = userPassword;
+            OwnerPassword = ownerPassword;
+            Permissions = permissions;
+            PdfMakeWaterMark = pdfMakeWaterMark;
         }
         /// <summary>
         /// Adds a qr code to the body section
@@ -301,6 +433,14 @@ namespace PdfMakeNet
         public void AddBodyImage(IPdfMakeImage pdfMakeImage)
         {
             Body.Add(pdfMakeImage);
+        }
+        /// <summary>
+        /// Adds an Svg to the body section
+        /// </summary>
+        /// <param name="pdfMakeSvg"></param>
+        public void AddBodySvg(IPdfMakeSvg pdfMakeSvg)
+        {
+            Body.Add(pdfMakeSvg);
         }
         /// <summary>
         /// Adds a link to the body section
@@ -391,6 +531,14 @@ namespace PdfMakeNet
             Header.Add(pdfMakeImage);
         }
         /// <summary>
+        /// Adds an Svg to the body header
+        /// </summary>
+        /// <param name="pdfMakeSvg"></param>
+        public void AddHeaderSvg(IPdfMakeSvg pdfMakeSvg)
+        {
+            Header.Add(pdfMakeSvg);
+        }
+        /// <summary>
         /// Adds a link to the header section
         /// </summary>
         /// <param name="pdfMakeLink"></param>
@@ -469,6 +617,14 @@ namespace PdfMakeNet
         public void AddFooterImage(IPdfMakeImage pdfMakeImage)
         {
             Footer.Add(pdfMakeImage);
+        }
+        /// <summary>
+        /// Adds an Svg to the body footer
+        /// </summary>
+        /// <param name="pdfMakeSvg"></param>
+        public void AddFooterSvg(IPdfMakeSvg pdfMakeSvg)
+        {
+            Footer.Add(pdfMakeSvg);
         }
         /// <summary>
         /// Adds a link to the footer section

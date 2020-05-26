@@ -77,8 +77,12 @@ namespace PdfMakeNet
         /// The permissions section
         /// </summary>
         [JsonProperty("permissions")]
-        [JsonConverter(typeof(ToStringJsonConverter))]
-        PdfMakePermissions Permissions { get; set; }
+        IPdfMakePermissions Permissions { get; set; }
+        /// <summary>
+        /// Adds water mark to the pdf document
+        /// </summary>
+        [JsonProperty("watermark")]
+        IPdfMakeWaterMark PdfMakeWaterMark { get; set; }
         /// <summary>
         /// Adds a qr code to the body section
         /// </summary>
@@ -124,6 +128,11 @@ namespace PdfMakeNet
         /// </summary>
         /// <param name="pdfMakeImage"></param>
         void AddBodyImage(IPdfMakeImage pdfMakeImage);
+        /// <summary>
+        /// Adds an Svg to the body section
+        /// </summary>
+        /// <param name="pdfMakeSvg"></param>
+        void AddBodySvg(IPdfMakeSvg pdfMakeSvg);
         /// <summary>
         /// Adds a link to the body section
         /// </summary>
@@ -180,6 +189,11 @@ namespace PdfMakeNet
         /// <param name="pdfMakeImage"></param>
         void AddHeaderImage(IPdfMakeImage pdfMakeImage);
         /// <summary>
+        /// Adds an Svg to the body header
+        /// </summary>
+        /// <param name="pdfMakeSvg"></param>
+        void AddHeaderSvg(IPdfMakeSvg pdfMakeSvg);
+        /// <summary>
         /// Adds a link to the header section
         /// </summary>
         /// <param name="pdfMakeLink"></param>
@@ -229,6 +243,11 @@ namespace PdfMakeNet
         /// </summary>
         /// <param name="pdfMakeImage"></param>
         void AddFooterImage(IPdfMakeImage pdfMakeImage);
+        /// <summary>
+        /// Adds an Svg to the body footer
+        /// </summary>
+        /// <param name="pdfMakeSvg"></param>
+        void AddFooterSvg(IPdfMakeSvg pdfMakeSvg);
         /// <summary>
         /// Adds a link to the footer section
         /// </summary>
