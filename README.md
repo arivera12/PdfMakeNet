@@ -16,7 +16,7 @@ c# wrapper for [PdfMake](http://pdfmake.org/#/).
   *  [x] col-spans and row-spans
   *  [x] headers automatically repeated in case of a page-break
 * [x] images
-* [ ] SVGs
+* [x] SVGs
 * [ ] vector graphics
 * [x] convenient styling and style inheritance
 * [x] page headers and footers
@@ -29,7 +29,7 @@ c# wrapper for [PdfMake](http://pdfmake.org/#/).
 * [ ] font embedding (default at the moment)
 * [x] support for complex, multi-level (nested) structures
 * [x] table of contents
-* [ ] Watermark
+* [x] Watermark
 * [x] Extension methods for opening/printing/downloading the generated PDF
 * [x] setting of PDF metadata (e.g. author, subject)
 * [x] compression
