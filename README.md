@@ -56,6 +56,8 @@ Maybe is some near future PdfMakeNet and others js libs may be posible to execut
 
 I opened this issue on Jint repository to keep track of this. [Run PdfMake on Jint](https://github.com/sebastienros/jint/issues/609)
 
+Another library that maybe another alternative [ChakraCore](https://github.com/microsoft/ChakraCore)
+
 So based on the last sentence you still need to reference pdfmake.js and vfs_fonts.js files on your client or create your own pdfmake viewer for flawless integration.
 
 ## Documentation
