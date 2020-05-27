@@ -15,7 +15,8 @@ c# wrapper for [PdfMake](http://pdfmake.org/#/).
   *  [x] auto/fixed/star-sized widths
   *  [x] col-spans and row-spans
   *  [x] headers automatically repeated in case of a page-break
-* [x] images 
+* [x] images
+* [x] SVGs
 * [ ] vector graphics
 * [x] convenient styling and style inheritance
 * [x] page headers and footers
@@ -28,6 +29,7 @@ c# wrapper for [PdfMake](http://pdfmake.org/#/).
 * [ ] font embedding (default at the moment)
 * [x] support for complex, multi-level (nested) structures
 * [x] table of contents
+* [x] Watermark
 * [x] Extension methods for opening/printing/downloading the generated PDF
 * [x] setting of PDF metadata (e.g. author, subject)
 * [x] compression
@@ -51,6 +53,12 @@ c# wrapper for [PdfMake](http://pdfmake.org/#/).
 This wrapper implements the same methods and options as pdfmake and will help you build pdfmake object structure more faster and easier using strong datatypes and some extension methods using c#.
 
 Take note that this library as no server side render capabilities yet (Unless integration with NodeJs or any lib on c# that parses and executes javascript, if any one want these feature please file an issue with any recommendation or pull request).
+
+Maybe is some near future PdfMakeNet and others js libs may be posible to execute over c# using [Jint](https://github.com/sebastienros/jint) after they complete the implementations of ES5 and ES6 features.
+
+I opened this issue on Jint repository to keep track of this. [Run PdfMake on Jint](https://github.com/sebastienros/jint/issues/609)
+
+Another library that maybe another alternative [ChakraCore](https://github.com/microsoft/ChakraCore)
 
 So based on the last sentence you still need to reference pdfmake.js and vfs_fonts.js files on your client or create your own pdfmake viewer for flawless integration.
 
