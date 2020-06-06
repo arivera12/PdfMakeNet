@@ -11,7 +11,7 @@ namespace PdfMakeNet
         /// <returns></returns>
         public static IServiceCollection AddPdfMakeNet(this IServiceCollection services)
         {
-            return services.AddScoped<IPdfMake, PdfMake>();
+            return services.AddTransient<IPdfMake, PdfMake>();
         }
     }
 }

@@ -13,7 +13,11 @@ namespace PdfMakeNet
         /// <returns></returns>
         public static string GetDocumentDefinition(this IPdfMake pdfMake, Formatting formatting = Formatting.None)
         {
-            return JsonConvert.SerializeObject(pdfMake, formatting);
+            return JsonConvert.SerializeObject(pdfMake, formatting, new JsonSerializerSettings
+            {
+                NullValueHandling = NullValueHandling.Ignore,
+                DefaultValueHandling = DefaultValueHandling.Ignore
+            });
         }
         /// <summary>
         /// Gets the javascript script to dowload the pdf document
