@@ -136,6 +136,8 @@ public string GetDocumentDefinition()
 }
 ```
 
+## Fully PdfMakeNet Blazor Demo is on the way!!!
+
 ## Issues
 
 If you find any bug or issue please file an issue I will fix it as soon as posible.
