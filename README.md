@@ -1,7 +1,7 @@
 # PdfMakeNet
 <p>
-    	<a href="https://www.nuget.org/packages/PdfMakeNet">
-         <img src="https://buildstats.info/nuget/PdfMakeNet?v=1.0.4" />
+    <a href="https://www.nuget.org/packages/PdfMakeNet">
+         <img src="https://buildstats.info/nuget/PdfMakeNet?v=1.0.5" />
      </a>
      <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=RSE2NMEG3F7QU&source=url">
          <img src="https://img.shields.io/badge/Donate-PayPal-green.svg" />
@@ -83,7 +83,10 @@ https://pdfmake.github.io/docs/getting-started/client-side/supported-browsers/
 ### Install Nuget Package 
 
 ```
-Install-Package PdfMakeNet -Version 1.0.4
+Install-Package PdfMakeNet -Version 1.0.5
+```
+```
+Install-Package PdfMakeNet.Server.Extensions -Version 1.0.5
 ```
 
 ### Include the pdfmake script and font
