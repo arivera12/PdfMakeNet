@@ -25,12 +25,12 @@ namespace PdfMakeNet
         /// bold option
         /// </summary>
         [JsonProperty("bold")]
-        public bool Bold { get; set; }
+        public bool? Bold { get; set; }
         /// <summary>
         /// italics style
         /// </summary>
         [JsonProperty("italics")]
-        public bool Italics { get; set; }
+        public bool? Italics { get; set; }
         /// <summary>
         /// Color option
         /// </summary>

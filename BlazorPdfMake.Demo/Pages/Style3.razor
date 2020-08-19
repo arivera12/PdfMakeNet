@@ -1,0 +1,73 @@
+﻿@page "/style3"
+@using PdfMakeNet
+@using Newtonsoft.Json
+
+<h2>PdfMakeNet Demo - style3</h2>
+<button @onclick=@OpenInNewTab>Run sample in new tab</button>
+<p>Basic sample using: PdfMakeNet</p>
+<pre class="preformatted">
+[Inject] IPdfMake pdfmake { get; set; } 
+//Or IPdfMake pdfmake = new PdfMake();
+pdfmake.AddBodyText(new PdfMakeText()
+{
+    Text = "This paragraph uses header style and extends the alignment property",
+    Style = new List&lt;string&gt;() { "header" },
+    Alignment = Alingment.Center
+});
+pdfmake.AddBodyText(new PdfMakeText()
+{
+    Text = "This paragraph uses header style and overrides bold value setting it back to false.\n"
+           + "Header style in this example sets alignment to justify, so this paragraph should be rendered \n"
+           + "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit, officiis viveremus aeternum superstitio suspicor alia nostram, quando nostros congressus susceperant concederetur leguntur iam, vigiliae democritea tantopere causae, atilii plerumque ipsas potitur pertineant multis rem quaeri pro, legendum didicisse credere ex maluisset per videtis. Cur discordans praetereat aliae ruinae dirigentur orestem eodem, praetermittenda divinum. Collegisti, deteriora malint loquuntur officii cotidie finitas referri doleamus ambigua acute. Adhaesiones ratione beate arbitraretur detractis perdiscere, constituant hostis polyaeno. Diu concederetur.",
+    Style = new List&lt;string&gt;() { "header" },
+    Bold = false
+});
+pdfmake.Styles = new
+{
+    header = new PdfMakeStyle() { FontSize = 18, Bold = true, Alignment = Alingment.Justify },
+};
+//Get document definition
+pdfmake.GetDocumentDefinition(Formatting.Indented);
+//Button event code executing
+pdfmake.GetOpenInBrowser(false)
+</pre>
+<p>PdfMake Document Definition Output From PdfMakeNet</p>
+<pre class="preformatted">@GetDocumentDefinition()</pre>
+
+@functions{
+    [Inject] IPdfMake pdfmake { get; set; }
+    [Inject] IJSRuntime JSRuntime { get; set; }
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender)
+        {
+            pdfmake.AddBodyText(new PdfMakeText()
+            {
+                Text = "This paragraph uses header style and extends the alignment property",
+                Style = new List<string>() { "header" },
+                Alignment = Alingment.Center
+            });
+            pdfmake.AddBodyText(new PdfMakeText()
+            {
+                Text = "This paragraph uses header style and overrides bold value setting it back to false.\n"
+                       + "Header style in this example sets alignment to justify, so this paragraph should be rendered \n"
+                       + "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit, officiis viveremus aeternum superstitio suspicor alia nostram, quando nostros congressus susceperant concederetur leguntur iam, vigiliae democritea tantopere causae, atilii plerumque ipsas potitur pertineant multis rem quaeri pro, legendum didicisse credere ex maluisset per videtis. Cur discordans praetereat aliae ruinae dirigentur orestem eodem, praetermittenda divinum. Collegisti, deteriora malint loquuntur officii cotidie finitas referri doleamus ambigua acute. Adhaesiones ratione beate arbitraretur detractis perdiscere, constituant hostis polyaeno. Diu concederetur.",
+                Style = new List<string>() { "header" },
+                Bold = false
+            });
+            pdfmake.Styles = new
+            {
+                header = new PdfMakeStyle() { FontSize = 18, Bold = true, Alignment = Alingment.Justify },
+            };
+            StateHasChanged();
+        }
+    }
+    public string GetDocumentDefinition()
+    {
+        return pdfmake.GetDocumentDefinition(Formatting.Indented);
+    }
+    public async Task OpenInNewTab()
+    {
+        await JSRuntime.InvokeVoidAsync("eval", pdfmake.GetOpenInBrowser(false));
+    }
+}
