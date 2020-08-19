@@ -5,9 +5,9 @@ VisualStudioVersion = 16.0.28621.142
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PdfMakeNet", "PdfMakeNet\PdfMakeNet.csproj", "{FA9AA6F6-DC13-4418-8B99-062C70CC7E45}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorPdfMake.Demo", "BlazorPdfMake.Demo\BlazorPdfMake.Demo.csproj", "{292A0F07-828E-4CAC-B826-5A761BAA5D1F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorPdfMake.Demo", "BlazorPdfMake.Demo\BlazorPdfMake.Demo.csproj", "{292A0F07-828E-4CAC-B826-5A761BAA5D1F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PdfMakeNet.Server.Extensions", "PdfMakeNet.Server.Extensions\PdfMakeNet.Server.Extensions.csproj", "{6AAE48EB-6891-4E15-AB4C-A72E2FB1BCCF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PdfMakeNet.Server.Extensions", "PdfMakeNet.Server.Extensions\PdfMakeNet.Server.Extensions.csproj", "{6AAE48EB-6891-4E15-AB4C-A72E2FB1BCCF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
