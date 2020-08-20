@@ -371,6 +371,22 @@ namespace PdfMakeNet
             Body.Add(qRCode);
         }
         /// <summary>
+        /// Adds a string to the body section
+        /// </summary>
+        /// <param name="text"></param>
+        public void AddBodyText(string text)
+        {
+            Body.Add(text);
+        }
+        /// <summary>
+        /// Adds a IList of string to the body section
+        /// </summary>
+        /// <param name="texts"></param>
+        public void AddBodyText(IEnumerable<string> texts)
+        {
+            Body.Add(texts);
+        }
+        /// <summary>
         /// Adds a text to the body section
         /// </summary>
         /// <param name="PdfMakeText"></param>

@@ -89,6 +89,16 @@ namespace PdfMakeNet
         /// <param name="qRCode"></param>
         void AddBodyQRCode(IPdfMakeQRCode qRCode);
         /// <summary>
+        /// Adds a string to the body section
+        /// </summary>
+        /// <param name="text"></param>
+        void AddBodyText(string text);
+        /// <summary>
+        /// Adds a IList of string to the body section
+        /// </summary>
+        /// <param name="text"></param>
+        void AddBodyText(IEnumerable<string> texts);
+        /// <summary>
         /// Adds a text to the body section
         /// </summary>
         /// <param name="PdfMakeText"></param>

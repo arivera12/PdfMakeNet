@@ -6,7 +6,7 @@ namespace PdfMakeNet
     public interface IPdfMakeColumns<T> : IPdfMakeStyle
     {
         /// <summary>
-        /// Lis of columns
+        /// List of columns
         /// </summary>
         [JsonProperty("columns")]
         IList<T> Columns { get; set; }

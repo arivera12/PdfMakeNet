@@ -1,0 +1,269 @@
+﻿@page "/columns"
+@using PdfMakeNet
+@using Newtonsoft.Json
+
+<h2>PdfMakeNet Demo - columns</h2>
+<button @onclick=@OpenInNewTab>Run sample in new tab</button>
+<p>Basic sample using: PdfMakeNet</p>
+<pre class="preformatted">
+[Inject] IPdfMake pdfmake { get; set; } 
+//Or IPdfMake pdfmake = new PdfMake();
+pdfmake.AddBodyText(new List&lt;string&gt;()
+{
+    "By default paragraphs are stacked one on top of (or actually - below) another. ",
+    "It\'s possible however to split any paragraph (or even the whole document) into columns.\n\n",
+    "Here we go with 2 star-sized columns, with justified text and gap set to 20:\n\n"
+});
+pdfmake.AddBodyColumns(new PdfMakeColumns&lt;PdfMakeText&gt;
+{
+    Alignment = Alingment.Justify,
+    Columns = new List&lt;PdfMakeText&gt;()
+    {
+        new PdfMakeText() { Text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit, officiis viveremus aeternum superstitio suspicor alia nostram, quando nostros congressus susceperant concederetur leguntur iam, vigiliae democritea tantopere causae, atilii plerumque ipsas potitur pertineant multis rem quaeri pro, legendum didicisse credere ex maluisset per videtis. Cur discordans praetereat aliae ruinae dirigentur orestem eodem, praetermittenda divinum. Collegisti, deteriora malint loquuntur officii cotidie finitas referri doleamus ambigua acute. Adhaesiones ratione beate arbitraretur detractis perdiscere, constituant hostis polyaeno. Diu concederetur." },
+        new PdfMakeText() { Text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit, officiis viveremus aeternum superstitio suspicor alia nostram, quando nostros congressus susceperant concederetur leguntur iam, vigiliae democritea tantopere causae, atilii plerumque ipsas potitur pertineant multis rem quaeri pro, legendum didicisse credere ex maluisset per videtis. Cur discordans praetereat aliae ruinae dirigentur orestem eodem, praetermittenda divinum. Collegisti, deteriora malint loquuntur officii cotidie finitas referri doleamus ambigua acute. Adhaesiones ratione beate arbitraretur detractis perdiscere, constituant hostis polyaeno. Diu concederetur." },
+    }
+});
+pdfmake.AddBodyText("\nStar-sized columns have always equal widths, so if we define 3 of those, it\'ll look like this (make sure to scroll to the next page, as we have a couple of more examples):\n\n");
+pdfmake.AddBodyColumns(new PdfMakeColumns&lt;PdfMakeText&gt;
+{
+    Columns = new List&lt;PdfMakeText&gt;()
+    {
+        new PdfMakeText() { Text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit, officiis viveremus aeternum superstitio suspicor alia nostram, quando nostros congressus susceperant concederetur leguntur iam, vigiliae democritea tantopere causae, atilii plerumque ipsas potitur pertineant multis rem quaeri pro, legendum didicisse credere ex maluisset per videtis. Cur discordans praetereat aliae ruinae dirigentur orestem eodem, praetermittenda divinum. Collegisti, deteriora malint loquuntur officii cotidie finitas referri doleamus ambigua acute. Adhaesiones ratione beate arbitraretur detractis perdiscere, constituant hostis polyaeno. Diu concederetur." },
+        new PdfMakeText() { Text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit, officiis viveremus aeternum superstitio suspicor alia nostram, quando nostros congressus susceperant concederetur leguntur iam, vigiliae democritea tantopere causae, atilii plerumque ipsas potitur pertineant multis rem quaeri pro, legendum didicisse credere ex maluisset per videtis. Cur discordans praetereat aliae ruinae dirigentur orestem eodem, praetermittenda divinum. Collegisti, deteriora malint loquuntur officii cotidie finitas referri doleamus ambigua acute. Adhaesiones ratione beate arbitraretur detractis perdiscere, constituant hostis polyaeno. Diu concederetur." },
+        new PdfMakeText() { Text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit, officiis viveremus aeternum superstitio suspicor alia nostram, quando nostros congressus susceperant concederetur leguntur iam, vigiliae democritea tantopere causae, atilii plerumque ipsas potitur pertineant multis rem quaeri pro, legendum didicisse credere ex maluisset per videtis. Cur discordans praetereat aliae ruinae dirigentur orestem eodem, praetermittenda divinum. Collegisti, deteriora malint loquuntur officii cotidie finitas referri doleamus ambigua acute. Adhaesiones ratione beate arbitraretur detractis perdiscere, constituant hostis polyaeno. Diu concederetur." },
+    }
+});
+pdfmake.AddBodyText("\nYou can also specify accurate widths for some (or all columns). Let\'s make the first column and the last one narrow and let the layout engine divide remaining space equally between other star-columns:\n\n");
+pdfmake.AddBodyColumns(new PdfMakeColumns&lt;PdfMakeText&gt;
+{
+    Columns = new List&lt;PdfMakeText&gt;()
+    {
+        new PdfMakeText() { Width = 90, Text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit, officiis viveremus aeternum superstitio suspicor alia nostram, quando nostros congressus susceperant concederetur leguntur iam, vigiliae democritea tantopere causae, atilii plerumque ipsas potitur pertineant multis rem quaeri pro, legendum didicisse credere ex maluisset per videtis. Cur discordans praetereat aliae ruinae dirigentur orestem eodem, praetermittenda divinum. Collegisti, deteriora malint loquuntur officii cotidie finitas referri doleamus ambigua acute. Adhaesiones ratione beate arbitraretur detractis perdiscere, constituant hostis polyaeno. Diu concederetur." },
+        new PdfMakeText() { Width = "*", Text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit, officiis viveremus aeternum superstitio suspicor alia nostram, quando nostros congressus susceperant concederetur leguntur iam, vigiliae democritea tantopere causae, atilii plerumque ipsas potitur pertineant multis rem quaeri pro, legendum didicisse credere ex maluisset per videtis. Cur discordans praetereat aliae ruinae dirigentur orestem eodem, praetermittenda divinum. Collegisti, deteriora malint loquuntur officii cotidie finitas referri doleamus ambigua acute. Adhaesiones ratione beate arbitraretur detractis perdiscere, constituant hostis polyaeno. Diu concederetur." },
+        new PdfMakeText() { Width = "*", Text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit, officiis viveremus aeternum superstitio suspicor alia nostram, quando nostros congressus susceperant concederetur leguntur iam, vigiliae democritea tantopere causae, atilii plerumque ipsas potitur pertineant multis rem quaeri pro, legendum didicisse credere ex maluisset per videtis. Cur discordans praetereat aliae ruinae dirigentur orestem eodem, praetermittenda divinum. Collegisti, deteriora malint loquuntur officii cotidie finitas referri doleamus ambigua acute. Adhaesiones ratione beate arbitraretur detractis perdiscere, constituant hostis polyaeno. Diu concederetur." },
+        new PdfMakeText() { Width = 90, Text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit, officiis viveremus aeternum superstitio suspicor alia nostram, quando nostros congressus susceperant concederetur leguntur iam, vigiliae democritea tantopere causae, atilii plerumque ipsas potitur pertineant multis rem quaeri pro, legendum didicisse credere ex maluisset per videtis. Cur discordans praetereat aliae ruinae dirigentur orestem eodem, praetermittenda divinum. Collegisti, deteriora malint loquuntur officii cotidie finitas referri doleamus ambigua acute. Adhaesiones ratione beate arbitraretur detractis perdiscere, constituant hostis polyaeno. Diu concederetur." },
+    }
+});
+pdfmake.AddBodyText("\nWe also support auto columns. They set their widths based on the content:\n\n");
+pdfmake.AddBodyColumns(new PdfMakeColumns&lt;PdfMakeText&gt;
+{
+    Columns = new List&lt;PdfMakeText&gt;()
+    {
+        new PdfMakeText() { Width = "auto", Text = "auto column" },
+        new PdfMakeText() { Width = "*", Text = "This is a star-sized column. It should get the remaining space divided by the number of all star-sized columns." },
+        new PdfMakeText() { Width = 50, Text = "this one has specific width set to 50" },
+        new PdfMakeText() { Width = "auto", Text = "another auto column" },
+        new PdfMakeText() { Width = "*", Text = "This is a star-sized column. It should get the remaining space divided by the number of all star-sized columns." },
+    }
+});
+pdfmake.AddBodyText("\nIf all auto columns fit within available width, the table does not occupy whole space:\n\n");
+pdfmake.AddBodyColumns(new PdfMakeColumns&lt;PdfMakeText&gt;
+{
+    Columns = new List&lt;PdfMakeText&gt;()
+    {
+        new PdfMakeText() { Width = "auto", Text = "val1" },
+        new PdfMakeText() { Width = "auto", Text = "val2" },
+        new PdfMakeText() { Width = "auto", Text = "value3" },
+        new PdfMakeText() { Width = "auto", Text = "value 4" },
+    }
+});
+pdfmake.AddBodyText("\nAnother cool feature of pdfmake is the ability to have nested elements. Each column is actually quite similar to the whole document, so we can have inner paragraphs and further divisions, like in the following example:\n\n");
+pdfmake.AddBodyColumns(new PdfMakeColumns&lt;object&gt;
+{
+    Columns = new List&lt;object&gt;()
+    {
+        new PdfMakeText() 
+        { 
+            Width = 100,
+            FontSize = 9,
+            Text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Conveniunt quieti extremum severitatem disseretur virtute locum virtus declarant. Greges telos detrimenti persius possint eripuit appellat democrito suscipere existimant. Facere usus levitatibus confirmavit, provincia rutilius libris accommodare valetudinis ignota fugienda arbitramur falsarum commodius. Voluptas summis arbitrarer cognitio temperantiamque, fuit posidonium pro assueverit animos inferiorem, affecti honestum ferreum cum tot nemo ius partes dissensio opinor, tuum intellegunt numeris ignorant, odia diligenter licet, sublatum repellere, maior ficta severa quantum mortem. Aut evertitur impediri vivamus."
+        },
+        new List&lt;object&gt;()
+        {
+            "As you can see in the document definition - this column is not defined with an object, but an array, which means it\'s treated as an array of paragraphs rendered one below another.",
+            "Just like on the top-level of the document. Let\'s try to divide the remaing space into 3 star-sized columns:\n\n",
+            new PdfMakeColumns&lt;PdfMakeText&gt;()
+            {
+                Columns = new List&lt;PdfMakeText&gt;()
+                {
+                    new PdfMakeText() { Text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit, officiis viveremus aeternum superstitio suspicor alia nostram, quando nostros congressus susceperant concederetur leguntur iam, vigiliae democritea tantopere causae, atilii plerumque ipsas potitur pertineant multis rem quaeri pro, legendum didicisse credere ex maluisset per videtis. Cur discordans praetereat aliae ruinae dirigentur orestem eodem, praetermittenda divinum. Collegisti, deteriora malint loquuntur officii cotidie finitas referri doleamus ambigua acute. Adhaesiones ratione beate arbitraretur detractis perdiscere, constituant hostis polyaeno. Diu concederetur." },
+                    new PdfMakeText() { Text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit, officiis viveremus aeternum superstitio suspicor alia nostram, quando nostros congressus susceperant concederetur leguntur iam, vigiliae democritea tantopere causae, atilii plerumque ipsas potitur pertineant multis rem quaeri pro, legendum didicisse credere ex maluisset per videtis. Cur discordans praetereat aliae ruinae dirigentur orestem eodem, praetermittenda divinum. Collegisti, deteriora malint loquuntur officii cotidie finitas referri doleamus ambigua acute. Adhaesiones ratione beate arbitraretur detractis perdiscere, constituant hostis polyaeno. Diu concederetur." },
+                    new PdfMakeText() { Text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit, officiis viveremus aeternum superstitio suspicor alia nostram, quando nostros congressus susceperant concederetur leguntur iam, vigiliae democritea tantopere causae, atilii plerumque ipsas potitur pertineant multis rem quaeri pro, legendum didicisse credere ex maluisset per videtis. Cur discordans praetereat aliae ruinae dirigentur orestem eodem, praetermittenda divinum. Collegisti, deteriora malint loquuntur officii cotidie finitas referri doleamus ambigua acute. Adhaesiones ratione beate arbitraretur detractis perdiscere, constituant hostis polyaeno. Diu concederetur." },
+                }   
+            }
+        }
+    }
+});
+pdfmake.AddBodyText(new List&lt;string&gt;()
+{
+    "\n\nOh, don\'t forget, we can use everything from styling examples (named styles, custom overrides) here as well.\n\n",
+    "For instance - our next paragraph will use the \'bigger\' style (with fontSize set to 15 and italics - true). We\'ll split it into three columns and make sure they inherit the style:\n\n",
+});
+pdfmake.AddBodyColumns( new PdfMakeColumns&lt;object&gt;()
+{
+    Style = new List&lt;string&gt;() { "bigger" },
+    Columns = new List&lt;object&gt;()
+    {
+        "First column (BTW - it\'s defined as a single string value. pdfmake will turn it into appropriate structure automatically and make sure it inherits the styles",
+        new PdfMakeText()
+        {
+            FontSize = 20,
+            Text = "In this column, we\'ve overriden fontSize to 20. It means the content should have italics=true (inherited from the style) and be a little bit bigger"
+        },
+        new PdfMakeText()
+        {
+            Style = new List&lt;string&gt;() { "header" },
+            Text = "Last column does not override any styling properties, but applies a new style (header) to itself. Eventually - texts here have italics=true (from bigger) and derive fontSize from the style. OK, but which one? Both styles define it. As we already know from our styling examples, multiple styles can be applied to the element and their order is important. Because \'header\' style has been set after \'bigger\' its fontSize takes precedence over the fontSize from \'bigger\'. This is how it works. You will find more examples in the unit tests."
+        },
+    }
+});
+pdfmake.AddBodyText("\n\nWow, you\'ve read the whole document! Congratulations :D");
+pdfmake.Styles = new
+{
+    header = new PdfMakeStyle() { FontSize = 18, Bold = true },
+    bigger = new PdfMakeStyle() { FontSize = 15, Italics = true },
+};
+pdfmake.DefaultStyle = new PdfMakeStyle() { ColumnGap = 20 };
+//Get document definition
+pdfmake.GetDocumentDefinition(Formatting.Indented);
+//Button event code executing
+pdfmake.GetOpenInBrowser(false)
+</pre>
+<p>PdfMake Document Definition Output From PdfMakeNet</p>
+<pre class="preformatted">@GetDocumentDefinition()</pre>
+
+@functions{
+    [Inject] IPdfMake pdfmake { get; set; }
+    [Inject] IJSRuntime JSRuntime { get; set; }
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender)
+        {
+            pdfmake.AddBodyText(new List<string>()
+            {
+                "By default paragraphs are stacked one on top of (or actually - below) another. ",
+                "It\'s possible however to split any paragraph (or even the whole document) into columns.\n\n",
+                "Here we go with 2 star-sized columns, with justified text and gap set to 20:\n\n"
+            });
+            pdfmake.AddBodyColumns(new PdfMakeColumns<PdfMakeText>
+            {
+                Alignment = Alingment.Justify,
+                Columns = new List<PdfMakeText>()
+                {
+                    new PdfMakeText() { Text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit, officiis viveremus aeternum superstitio suspicor alia nostram, quando nostros congressus susceperant concederetur leguntur iam, vigiliae democritea tantopere causae, atilii plerumque ipsas potitur pertineant multis rem quaeri pro, legendum didicisse credere ex maluisset per videtis. Cur discordans praetereat aliae ruinae dirigentur orestem eodem, praetermittenda divinum. Collegisti, deteriora malint loquuntur officii cotidie finitas referri doleamus ambigua acute. Adhaesiones ratione beate arbitraretur detractis perdiscere, constituant hostis polyaeno. Diu concederetur." },
+                    new PdfMakeText() { Text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit, officiis viveremus aeternum superstitio suspicor alia nostram, quando nostros congressus susceperant concederetur leguntur iam, vigiliae democritea tantopere causae, atilii plerumque ipsas potitur pertineant multis rem quaeri pro, legendum didicisse credere ex maluisset per videtis. Cur discordans praetereat aliae ruinae dirigentur orestem eodem, praetermittenda divinum. Collegisti, deteriora malint loquuntur officii cotidie finitas referri doleamus ambigua acute. Adhaesiones ratione beate arbitraretur detractis perdiscere, constituant hostis polyaeno. Diu concederetur." },
+                }
+            });
+            pdfmake.AddBodyText("\nStar-sized columns have always equal widths, so if we define 3 of those, it\'ll look like this (make sure to scroll to the next page, as we have a couple of more examples):\n\n");
+            pdfmake.AddBodyColumns(new PdfMakeColumns<PdfMakeText>
+            {
+                Columns = new List<PdfMakeText>()
+                {
+                    new PdfMakeText() { Text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit, officiis viveremus aeternum superstitio suspicor alia nostram, quando nostros congressus susceperant concederetur leguntur iam, vigiliae democritea tantopere causae, atilii plerumque ipsas potitur pertineant multis rem quaeri pro, legendum didicisse credere ex maluisset per videtis. Cur discordans praetereat aliae ruinae dirigentur orestem eodem, praetermittenda divinum. Collegisti, deteriora malint loquuntur officii cotidie finitas referri doleamus ambigua acute. Adhaesiones ratione beate arbitraretur detractis perdiscere, constituant hostis polyaeno. Diu concederetur." },
+                    new PdfMakeText() { Text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit, officiis viveremus aeternum superstitio suspicor alia nostram, quando nostros congressus susceperant concederetur leguntur iam, vigiliae democritea tantopere causae, atilii plerumque ipsas potitur pertineant multis rem quaeri pro, legendum didicisse credere ex maluisset per videtis. Cur discordans praetereat aliae ruinae dirigentur orestem eodem, praetermittenda divinum. Collegisti, deteriora malint loquuntur officii cotidie finitas referri doleamus ambigua acute. Adhaesiones ratione beate arbitraretur detractis perdiscere, constituant hostis polyaeno. Diu concederetur." },
+                    new PdfMakeText() { Text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit, officiis viveremus aeternum superstitio suspicor alia nostram, quando nostros congressus susceperant concederetur leguntur iam, vigiliae democritea tantopere causae, atilii plerumque ipsas potitur pertineant multis rem quaeri pro, legendum didicisse credere ex maluisset per videtis. Cur discordans praetereat aliae ruinae dirigentur orestem eodem, praetermittenda divinum. Collegisti, deteriora malint loquuntur officii cotidie finitas referri doleamus ambigua acute. Adhaesiones ratione beate arbitraretur detractis perdiscere, constituant hostis polyaeno. Diu concederetur." },
+                }
+            });
+            pdfmake.AddBodyText("\nYou can also specify accurate widths for some (or all columns). Let\'s make the first column and the last one narrow and let the layout engine divide remaining space equally between other star-columns:\n\n");
+            pdfmake.AddBodyColumns(new PdfMakeColumns<PdfMakeText>
+            {
+                Columns = new List<PdfMakeText>()
+                {
+                    new PdfMakeText() { Width = 90, Text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit, officiis viveremus aeternum superstitio suspicor alia nostram, quando nostros congressus susceperant concederetur leguntur iam, vigiliae democritea tantopere causae, atilii plerumque ipsas potitur pertineant multis rem quaeri pro, legendum didicisse credere ex maluisset per videtis. Cur discordans praetereat aliae ruinae dirigentur orestem eodem, praetermittenda divinum. Collegisti, deteriora malint loquuntur officii cotidie finitas referri doleamus ambigua acute. Adhaesiones ratione beate arbitraretur detractis perdiscere, constituant hostis polyaeno. Diu concederetur." },
+                    new PdfMakeText() { Width = "*", Text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit, officiis viveremus aeternum superstitio suspicor alia nostram, quando nostros congressus susceperant concederetur leguntur iam, vigiliae democritea tantopere causae, atilii plerumque ipsas potitur pertineant multis rem quaeri pro, legendum didicisse credere ex maluisset per videtis. Cur discordans praetereat aliae ruinae dirigentur orestem eodem, praetermittenda divinum. Collegisti, deteriora malint loquuntur officii cotidie finitas referri doleamus ambigua acute. Adhaesiones ratione beate arbitraretur detractis perdiscere, constituant hostis polyaeno. Diu concederetur." },
+                    new PdfMakeText() { Width = "*", Text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit, officiis viveremus aeternum superstitio suspicor alia nostram, quando nostros congressus susceperant concederetur leguntur iam, vigiliae democritea tantopere causae, atilii plerumque ipsas potitur pertineant multis rem quaeri pro, legendum didicisse credere ex maluisset per videtis. Cur discordans praetereat aliae ruinae dirigentur orestem eodem, praetermittenda divinum. Collegisti, deteriora malint loquuntur officii cotidie finitas referri doleamus ambigua acute. Adhaesiones ratione beate arbitraretur detractis perdiscere, constituant hostis polyaeno. Diu concederetur." },
+                    new PdfMakeText() { Width = 90, Text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit, officiis viveremus aeternum superstitio suspicor alia nostram, quando nostros congressus susceperant concederetur leguntur iam, vigiliae democritea tantopere causae, atilii plerumque ipsas potitur pertineant multis rem quaeri pro, legendum didicisse credere ex maluisset per videtis. Cur discordans praetereat aliae ruinae dirigentur orestem eodem, praetermittenda divinum. Collegisti, deteriora malint loquuntur officii cotidie finitas referri doleamus ambigua acute. Adhaesiones ratione beate arbitraretur detractis perdiscere, constituant hostis polyaeno. Diu concederetur." },
+                }
+            });
+            pdfmake.AddBodyText("\nWe also support auto columns. They set their widths based on the content:\n\n");
+            pdfmake.AddBodyColumns(new PdfMakeColumns<PdfMakeText>
+            {
+                Columns = new List<PdfMakeText>()
+                {
+                    new PdfMakeText() { Width = "auto", Text = "auto column" },
+                    new PdfMakeText() { Width = "*", Text = "This is a star-sized column. It should get the remaining space divided by the number of all star-sized columns." },
+                    new PdfMakeText() { Width = 50, Text = "this one has specific width set to 50" },
+                    new PdfMakeText() { Width = "auto", Text = "another auto column" },
+                    new PdfMakeText() { Width = "*", Text = "This is a star-sized column. It should get the remaining space divided by the number of all star-sized columns." },
+                }
+            });
+            pdfmake.AddBodyText("\nIf all auto columns fit within available width, the table does not occupy whole space:\n\n");
+            pdfmake.AddBodyColumns(new PdfMakeColumns<PdfMakeText>
+            {
+                Columns = new List<PdfMakeText>()
+                {
+                    new PdfMakeText() { Width = "auto", Text = "val1" },
+                    new PdfMakeText() { Width = "auto", Text = "val2" },
+                    new PdfMakeText() { Width = "auto", Text = "value3" },
+                    new PdfMakeText() { Width = "auto", Text = "value 4" },
+                }
+            });
+            pdfmake.AddBodyText("\nAnother cool feature of pdfmake is the ability to have nested elements. Each column is actually quite similar to the whole document, so we can have inner paragraphs and further divisions, like in the following example:\n\n");
+            pdfmake.AddBodyColumns(new PdfMakeColumns<object>
+            {
+                Columns = new List<object>()
+                {
+                    new PdfMakeText() 
+                    { 
+                        Width = 100,
+                        FontSize = 9,
+                        Text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Conveniunt quieti extremum severitatem disseretur virtute locum virtus declarant. Greges telos detrimenti persius possint eripuit appellat democrito suscipere existimant. Facere usus levitatibus confirmavit, provincia rutilius libris accommodare valetudinis ignota fugienda arbitramur falsarum commodius. Voluptas summis arbitrarer cognitio temperantiamque, fuit posidonium pro assueverit animos inferiorem, affecti honestum ferreum cum tot nemo ius partes dissensio opinor, tuum intellegunt numeris ignorant, odia diligenter licet, sublatum repellere, maior ficta severa quantum mortem. Aut evertitur impediri vivamus."
+                    },
+                    new List<object>()
+                    {
+                        "As you can see in the document definition - this column is not defined with an object, but an array, which means it\'s treated as an array of paragraphs rendered one below another.",
+                        "Just like on the top-level of the document. Let\'s try to divide the remaing space into 3 star-sized columns:\n\n",
+                        new PdfMakeColumns<PdfMakeText>()
+                        {
+                            Columns = new List<PdfMakeText>()
+                            {
+                                new PdfMakeText() { Text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit, officiis viveremus aeternum superstitio suspicor alia nostram, quando nostros congressus susceperant concederetur leguntur iam, vigiliae democritea tantopere causae, atilii plerumque ipsas potitur pertineant multis rem quaeri pro, legendum didicisse credere ex maluisset per videtis. Cur discordans praetereat aliae ruinae dirigentur orestem eodem, praetermittenda divinum. Collegisti, deteriora malint loquuntur officii cotidie finitas referri doleamus ambigua acute. Adhaesiones ratione beate arbitraretur detractis perdiscere, constituant hostis polyaeno. Diu concederetur." },
+                                new PdfMakeText() { Text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit, officiis viveremus aeternum superstitio suspicor alia nostram, quando nostros congressus susceperant concederetur leguntur iam, vigiliae democritea tantopere causae, atilii plerumque ipsas potitur pertineant multis rem quaeri pro, legendum didicisse credere ex maluisset per videtis. Cur discordans praetereat aliae ruinae dirigentur orestem eodem, praetermittenda divinum. Collegisti, deteriora malint loquuntur officii cotidie finitas referri doleamus ambigua acute. Adhaesiones ratione beate arbitraretur detractis perdiscere, constituant hostis polyaeno. Diu concederetur." },
+                                new PdfMakeText() { Text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit, officiis viveremus aeternum superstitio suspicor alia nostram, quando nostros congressus susceperant concederetur leguntur iam, vigiliae democritea tantopere causae, atilii plerumque ipsas potitur pertineant multis rem quaeri pro, legendum didicisse credere ex maluisset per videtis. Cur discordans praetereat aliae ruinae dirigentur orestem eodem, praetermittenda divinum. Collegisti, deteriora malint loquuntur officii cotidie finitas referri doleamus ambigua acute. Adhaesiones ratione beate arbitraretur detractis perdiscere, constituant hostis polyaeno. Diu concederetur." },
+                            }   
+                        }
+                    }
+                }
+            });
+            pdfmake.AddBodyText(new List<string>()
+            {
+                "\n\nOh, don\'t forget, we can use everything from styling examples (named styles, custom overrides) here as well.\n\n",
+		        "For instance - our next paragraph will use the \'bigger\' style (with fontSize set to 15 and italics - true). We\'ll split it into three columns and make sure they inherit the style:\n\n",
+            });
+            pdfmake.AddBodyColumns( new PdfMakeColumns<object>()
+            {
+                Style = new List<string>() { "bigger" },
+                Columns = new List<object>()
+                {
+                    "First column (BTW - it\'s defined as a single string value. pdfmake will turn it into appropriate structure automatically and make sure it inherits the styles",
+                    new PdfMakeText()
+                    {
+                        FontSize = 20,
+                        Text = "In this column, we\'ve overriden fontSize to 20. It means the content should have italics=true (inherited from the style) and be a little bit bigger"
+                    },
+                    new PdfMakeText()
+                    {
+                        Style = new List<string>() { "header" },
+                        Text = "Last column does not override any styling properties, but applies a new style (header) to itself. Eventually - texts here have italics=true (from bigger) and derive fontSize from the style. OK, but which one? Both styles define it. As we already know from our styling examples, multiple styles can be applied to the element and their order is important. Because \'header\' style has been set after \'bigger\' its fontSize takes precedence over the fontSize from \'bigger\'. This is how it works. You will find more examples in the unit tests."
+                    },
+                }
+            });
+            pdfmake.AddBodyText("\n\nWow, you\'ve read the whole document! Congratulations :D");
+            pdfmake.Styles = new
+            {
+                header = new PdfMakeStyle() { FontSize = 18, Bold = true },
+                bigger = new PdfMakeStyle() { FontSize = 15, Italics = true },
+            };
+            pdfmake.DefaultStyle = new PdfMakeStyle() { ColumnGap = 20 };
+            StateHasChanged();
+        }
+    }
+    public string GetDocumentDefinition()
+    {
+        return pdfmake.GetDocumentDefinition(Formatting.Indented);
+    }
+    public async Task OpenInNewTab()
+    {
+        await JSRuntime.InvokeVoidAsync("eval", pdfmake.GetOpenInBrowser(false));
+    }
+}
