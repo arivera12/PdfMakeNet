@@ -398,9 +398,9 @@ namespace PdfMakeNet
         /// Add a IList of texts to the body section
         /// </summary>
         /// <param name="PdfMakeTexts"></param>
-        public void AddBodyText(IEnumerable<IPdfMakeText> PdfMakeTexts)
+        public void AddBodyText<T>(IPdfMakeTexts<T> PdfMakeTexts)
         {
-            Body.Add(new { text = PdfMakeTexts });
+            Body.Add(PdfMakeTexts);
         }
         /// <summary>
         /// Adds columns to the body section
@@ -440,7 +440,7 @@ namespace PdfMakeNet
         /// <param name="pdfMakeStacks"></param>
         public void AddBodyStack<T>(IPdfMakeStack<T> pdfMakeStacks)
         {
-            Body.Add(new { pdfMakeStacks });
+            Body.Add(pdfMakeStacks);
         }
         /// <summary>
         /// Adds an image to the body section

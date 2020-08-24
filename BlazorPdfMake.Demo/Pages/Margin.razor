@@ -1,0 +1,229 @@
+@page "/margin"
+@using PdfMakeNet
+@using Newtonsoft.Json
+
+<h2>PdfMakeNet Demo - margin</h2>
+<button @onclick=@OpenInNewTab>Run sample in new tab</button>
+<p>Basic sample using: PdfMakeNet</p>
+<pre class="preformatted">
+[Inject] IPdfMake pdfmake { get; set; } 
+//Or IPdfMake pdfmake = new PdfMake();
+pdfmake.AddBodyStack(new PdfMakeStack&lt;object&gt;()
+{
+    Stack = new List&lt;object&gt;()
+    {
+        "This header has both top and bottom margins defined",
+        new PdfMakeText()
+        {
+            Text = "This is a subheader",
+            Style = new List&lt;string&gt;() { "subheader" }
+        }
+    },
+    Style = new List&lt;string&gt;() { "header" }
+});
+pdfmake.AddBodyText(new PdfMakeTexts&lt;string&gt;()
+{
+    Text = new List&lt;string&gt;
+    {
+        "Margins have slightly different behavior than other layout properties. They are not inherited, unlike anything else. They\'re applied only to those nodes which explicitly ",
+        "set margin or style property.\n"
+    }
+});
+pdfmake.AddBodyText(new PdfMakeText()
+{
+    Text = "This paragraph (consisting of a single line) directly sets top and bottom margin to 20",
+    Margin = new List&lt;int&gt;() { 0, 20 }
+});
+pdfmake.AddBodyStack(new PdfMakeStack&lt;object&gt;()
+{
+    Stack = new List&lt;object&gt;()
+    {
+        new PdfMakeTexts&lt;object&gt;()
+        {
+            Text = new List&lt;object&gt;()
+            {
+                "This line begins a stack of paragraphs. The whole stack uses a ",
+                new PdfMakeText() { Text = "superMargin", Italics = true },
+                " style (with margin and fontSize properties)."
+            }
+        },
+        new PdfMakeTexts&lt;object&gt;()
+        {
+            Text = new List&lt;object&gt;()
+            {
+                "When you look at the",
+                new PdfMakeText() { Text = "document definition", Italics = true },
+                ", you will notice that fontSize is inherited by all paragraphs inside the stack."
+            }
+        },
+        "Margin however is only applied once (to the whole stack)."
+    },
+    Style = new List&lt;string&gt;() { "superMargin" }
+});
+pdfmake.AddBodyStack(new PdfMakeStack&lt;object&gt;()
+{
+    Stack = new List&lt;object&gt;()
+    {
+        "I\'m not sure yet if this is the desired behavior. I find it a better approach however. One thing to be considered in the future is an explicit layout property called inheritMargin which could opt-in the inheritance.\n\n",
+
+        new PdfMakeTexts&lt;object&gt;()
+        {
+            Text = new List&lt;object&gt;()
+            {
+                "Currently margins for ",
+                /* the following margin definition doesn't change anything */
+                new PdfMakeText() { Text = "inlines", Margin = 20 },
+                " are ignored\n\n"
+            },
+            FontSize = 15
+        },
+        "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit, officiis viveremus aeternum superstitio suspicor alia nostram, quando nostros congressus susceperant concederetur leguntur iam, vigiliae democritea tantopere causae, atilii plerumque ipsas potitur pertineant multis rem quaeri pro, legendum didicisse credere ex maluisset per videtis. Cur discordans praetereat aliae ruinae dirigentur orestem eodem, praetermittenda divinum. Collegisti, deteriora malint loquuntur officii cotidie finitas referri doleamus ambigua acute. Adhaesiones ratione beate arbitraretur detractis perdiscere, constituant hostis polyaeno. Diu concederetur.\n",
+        "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit, officiis viveremus aeternum superstitio suspicor alia nostram, quando nostros congressus susceperant concederetur leguntur iam, vigiliae democritea tantopere causae, atilii plerumque ipsas potitur pertineant multis rem quaeri pro, legendum didicisse credere ex maluisset per videtis. Cur discordans praetereat aliae ruinae dirigentur orestem eodem, praetermittenda divinum. Collegisti, deteriora malint loquuntur officii cotidie finitas referri doleamus ambigua acute. Adhaesiones ratione beate arbitraretur detractis perdiscere, constituant hostis polyaeno. Diu concederetur.\n",
+        "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit, officiis viveremus aeternum superstitio suspicor alia nostram, quando nostros congressus susceperant concederetur leguntur iam, vigiliae democritea tantopere causae, atilii plerumque ipsas potitur pertineant multis rem quaeri pro, legendum didicisse credere ex maluisset per videtis. Cur discordans praetereat aliae ruinae dirigentur orestem eodem, praetermittenda divinum. Collegisti, deteriora malint loquuntur officii cotidie finitas referri doleamus ambigua acute. Adhaesiones ratione beate arbitraretur detractis perdiscere, constituant hostis polyaeno. Diu concederetur.\n",
+        "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit, officiis viveremus aeternum superstitio suspicor alia nostram, quando nostros congressus susceperant concederetur leguntur iam, vigiliae democritea tantopere causae, atilii plerumque ipsas potitur pertineant multis rem quaeri pro, legendum didicisse credere ex maluisset per videtis. Cur discordans praetereat aliae ruinae dirigentur orestem eodem, praetermittenda divinum. Collegisti, deteriora malint loquuntur officii cotidie finitas referri doleamus ambigua acute. Adhaesiones ratione beate arbitraretur detractis perdiscere, constituant hostis polyaeno. Diu concederetur.\n",
+        "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit, officiis viveremus aeternum superstitio suspicor alia nostram, quando nostros congressus susceperant concederetur leguntur iam, vigiliae democritea tantopere causae, atilii plerumque ipsas potitur pertineant multis rem quaeri pro, legendum didicisse credere ex maluisset per videtis. Cur discordans praetereat aliae ruinae dirigentur orestem eodem, praetermittenda divinum. Collegisti, deteriora malint loquuntur officii cotidie finitas referri doleamus ambigua acute. Adhaesiones ratione beate arbitraretur detractis perdiscere, constituant hostis polyaeno. Diu concederetur.\n",
+        "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit, officiis viveremus aeternum superstitio suspicor alia nostram, quando nostros congressus susceperant concederetur leguntur iam, vigiliae democritea tantopere causae, atilii plerumque ipsas potitur pertineant multis rem quaeri pro, legendum didicisse credere ex maluisset per videtis. Cur discordans praetereat aliae ruinae dirigentur orestem eodem, praetermittenda divinum. Collegisti, deteriora malint loquuntur officii cotidie finitas referri doleamus ambigua acute. Adhaesiones ratione beate arbitraretur detractis perdiscere, constituant hostis polyaeno. Diu concederetur.\n",
+        "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit, officiis viveremus aeternum superstitio suspicor alia nostram, quando nostros congressus susceperant concederetur leguntur iam, vigiliae democritea tantopere causae, atilii plerumque ipsas potitur pertineant multis rem quaeri pro, legendum didicisse credere ex maluisset per videtis. Cur discordans praetereat aliae ruinae dirigentur orestem eodem, praetermittenda divinum. Collegisti, deteriora malint loquuntur officii cotidie finitas referri doleamus ambigua acute. Adhaesiones ratione beate arbitraretur detractis perdiscere, constituant hostis polyaeno. Diu concederetur.\n",
+    },
+    Margin = new List&lt;int&gt;() { 0, 20, 0, 0},
+    Alignment = Alingment.Justify
+});
+pdfmake.Styles = new
+{
+    header = new PdfMakeStyle()
+    {
+        FontSize = 18,
+        Bold = true,
+        Alignment = Alingment.Right,
+        Margin = new List&lt;int&gt;() { 0, 190, 0, 80 }
+    },
+    subheader = new PdfMakeStyle() { FontSize = 14 },
+    superMargin = new PdfMakeStyle()
+    {
+        Margin = new List&lt;int&gt;() { 20, 0, 40, 0 },
+        FontSize = 15
+    },
+};
+//Get document definition
+pdfmake.GetDocumentDefinition(Formatting.Indented);
+//Button event code executing
+pdfmake.GetOpenInBrowser(false)
+</pre>
+<p>PdfMake Document Definition Output From PdfMakeNet</p>
+<pre class="preformatted">@GetDocumentDefinition()</pre>
+
+@functions{
+    [Inject] IPdfMake pdfmake { get; set; }
+    [Inject] IJSRuntime JSRuntime { get; set; }
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender)
+        {
+            pdfmake.AddBodyStack(new PdfMakeStack<object>()
+            {
+                Stack = new List<object>()
+                {
+                    "This header has both top and bottom margins defined",
+                    new PdfMakeText()
+                    {
+                        Text = "This is a subheader",
+                        Style = new List<string>() { "subheader" }
+                    }
+                },
+                Style = new List<string>() { "header" }
+            });
+            pdfmake.AddBodyText(new PdfMakeTexts<string>()
+            {
+                Text = new List<string>
+                {
+                    "Margins have slightly different behavior than other layout properties. They are not inherited, unlike anything else. They\'re applied only to those nodes which explicitly ",
+                    "set margin or style property.\n"
+                }
+            });
+            pdfmake.AddBodyText(new PdfMakeText()
+            {
+                Text = "This paragraph (consisting of a single line) directly sets top and bottom margin to 20",
+                Margin = new List<int>() { 0, 20 }
+            });
+            pdfmake.AddBodyStack(new PdfMakeStack<object>()
+            {
+                Stack = new List<object>()
+                {
+                    new PdfMakeTexts<object>()
+                    {
+                        Text = new List<object>()
+                        {
+                            "This line begins a stack of paragraphs. The whole stack uses a ",
+                            new PdfMakeText() { Text = "superMargin", Italics = true },
+                            " style (with margin and fontSize properties)."
+                        }
+                    },
+                    new PdfMakeTexts<object>()
+                    {
+                        Text = new List<object>()
+                        {
+                            "When you look at the",
+                            new PdfMakeText() { Text = "document definition", Italics = true },
+                            ", you will notice that fontSize is inherited by all paragraphs inside the stack."
+                        }
+                    },
+                    "Margin however is only applied once (to the whole stack)."
+                },
+                Style = new List<string>() { "superMargin" }
+            });
+            pdfmake.AddBodyStack(new PdfMakeStack<object>()
+            {
+                Stack = new List<object>()
+                {
+                    "I\'m not sure yet if this is the desired behavior. I find it a better approach however. One thing to be considered in the future is an explicit layout property called inheritMargin which could opt-in the inheritance.\n\n",
+
+                    new PdfMakeTexts<object>()
+                    {
+                        Text = new List<object>()
+                        {
+                            "Currently margins for ",
+                            /* the following margin definition doesn't change anything */
+                            new PdfMakeText() { Text = "inlines", Margin = 20 },
+                            " are ignored\n\n"
+                        },
+                        FontSize = 15
+                    },
+                    "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit, officiis viveremus aeternum superstitio suspicor alia nostram, quando nostros congressus susceperant concederetur leguntur iam, vigiliae democritea tantopere causae, atilii plerumque ipsas potitur pertineant multis rem quaeri pro, legendum didicisse credere ex maluisset per videtis. Cur discordans praetereat aliae ruinae dirigentur orestem eodem, praetermittenda divinum. Collegisti, deteriora malint loquuntur officii cotidie finitas referri doleamus ambigua acute. Adhaesiones ratione beate arbitraretur detractis perdiscere, constituant hostis polyaeno. Diu concederetur.\n",
+                    "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit, officiis viveremus aeternum superstitio suspicor alia nostram, quando nostros congressus susceperant concederetur leguntur iam, vigiliae democritea tantopere causae, atilii plerumque ipsas potitur pertineant multis rem quaeri pro, legendum didicisse credere ex maluisset per videtis. Cur discordans praetereat aliae ruinae dirigentur orestem eodem, praetermittenda divinum. Collegisti, deteriora malint loquuntur officii cotidie finitas referri doleamus ambigua acute. Adhaesiones ratione beate arbitraretur detractis perdiscere, constituant hostis polyaeno. Diu concederetur.\n",
+                    "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit, officiis viveremus aeternum superstitio suspicor alia nostram, quando nostros congressus susceperant concederetur leguntur iam, vigiliae democritea tantopere causae, atilii plerumque ipsas potitur pertineant multis rem quaeri pro, legendum didicisse credere ex maluisset per videtis. Cur discordans praetereat aliae ruinae dirigentur orestem eodem, praetermittenda divinum. Collegisti, deteriora malint loquuntur officii cotidie finitas referri doleamus ambigua acute. Adhaesiones ratione beate arbitraretur detractis perdiscere, constituant hostis polyaeno. Diu concederetur.\n",
+                    "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit, officiis viveremus aeternum superstitio suspicor alia nostram, quando nostros congressus susceperant concederetur leguntur iam, vigiliae democritea tantopere causae, atilii plerumque ipsas potitur pertineant multis rem quaeri pro, legendum didicisse credere ex maluisset per videtis. Cur discordans praetereat aliae ruinae dirigentur orestem eodem, praetermittenda divinum. Collegisti, deteriora malint loquuntur officii cotidie finitas referri doleamus ambigua acute. Adhaesiones ratione beate arbitraretur detractis perdiscere, constituant hostis polyaeno. Diu concederetur.\n",
+                    "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit, officiis viveremus aeternum superstitio suspicor alia nostram, quando nostros congressus susceperant concederetur leguntur iam, vigiliae democritea tantopere causae, atilii plerumque ipsas potitur pertineant multis rem quaeri pro, legendum didicisse credere ex maluisset per videtis. Cur discordans praetereat aliae ruinae dirigentur orestem eodem, praetermittenda divinum. Collegisti, deteriora malint loquuntur officii cotidie finitas referri doleamus ambigua acute. Adhaesiones ratione beate arbitraretur detractis perdiscere, constituant hostis polyaeno. Diu concederetur.\n",
+                    "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit, officiis viveremus aeternum superstitio suspicor alia nostram, quando nostros congressus susceperant concederetur leguntur iam, vigiliae democritea tantopere causae, atilii plerumque ipsas potitur pertineant multis rem quaeri pro, legendum didicisse credere ex maluisset per videtis. Cur discordans praetereat aliae ruinae dirigentur orestem eodem, praetermittenda divinum. Collegisti, deteriora malint loquuntur officii cotidie finitas referri doleamus ambigua acute. Adhaesiones ratione beate arbitraretur detractis perdiscere, constituant hostis polyaeno. Diu concederetur.\n",
+                    "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit, officiis viveremus aeternum superstitio suspicor alia nostram, quando nostros congressus susceperant concederetur leguntur iam, vigiliae democritea tantopere causae, atilii plerumque ipsas potitur pertineant multis rem quaeri pro, legendum didicisse credere ex maluisset per videtis. Cur discordans praetereat aliae ruinae dirigentur orestem eodem, praetermittenda divinum. Collegisti, deteriora malint loquuntur officii cotidie finitas referri doleamus ambigua acute. Adhaesiones ratione beate arbitraretur detractis perdiscere, constituant hostis polyaeno. Diu concederetur.\n",
+                },
+                Margin = new List<int>() { 0, 20, 0, 0},
+                Alignment = Alingment.Justify
+            });
+            pdfmake.Styles = new
+            {
+                header = new PdfMakeStyle()
+                {
+                    FontSize = 18,
+                    Bold = true,
+                    Alignment = Alingment.Right,
+                    Margin = new List<int>() { 0, 190, 0, 80 }
+                },
+                subheader = new PdfMakeStyle() { FontSize = 14 },
+                superMargin = new PdfMakeStyle()
+                {
+                    Margin = new List<int>() { 20, 0, 40, 0 },
+                    FontSize = 15
+                },
+            };
+            StateHasChanged();
+        }
+    }
+    public string GetDocumentDefinition()
+    {
+        return pdfmake.GetDocumentDefinition(Formatting.Indented);
+    }
+    public async Task OpenInNewTab()
+    {
+        await JSRuntime.InvokeVoidAsync("eval", pdfmake.GetOpenInBrowser(false));
+    }
+}

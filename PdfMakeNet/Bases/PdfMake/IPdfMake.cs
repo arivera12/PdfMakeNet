@@ -107,7 +107,7 @@ namespace PdfMakeNet
         /// Add a IList of texts to the body section
         /// </summary>
         /// <param name="PdfMakeTexts"></param>
-        void AddBodyText(IEnumerable<IPdfMakeText> PdfMakeTexts);
+        void AddBodyText<T>(IPdfMakeTexts<T> PdfMakeTexts);
         /// <summary>
         /// Adds columns to the body section
         /// </summary>
