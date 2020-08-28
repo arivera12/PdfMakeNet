@@ -89,6 +89,11 @@ namespace PdfMakeNet
         /// <param name="qRCode"></param>
         void AddBodyQRCode(IPdfMakeQRCode qRCode);
         /// <summary>
+        /// Add a PdfMake element the body section
+        /// </summary>
+        /// <param name="pdfmakeObject"></param>
+        void AddBody<T>(T pdfmakeObject);
+        /// <summary>
         /// Adds a string to the body section
         /// </summary>
         /// <param name="text"></param>
@@ -154,20 +159,35 @@ namespace PdfMakeNet
         /// <param name="pdfMakeTableOfContent"></param>
         void AddTableOfContent(IPdfMakeTableOfContent pdfMakeTableOfContent);
         /// <summary>
+        /// Add a PdfMake element the header section
+        /// </summary>
+        /// <param name="pdfmakeObject"></param>
+        void AddHeader<T>(T pdfmakeObject);
+        /// <summary>
         /// Adds a qr code to the header section
         /// </summary>
         /// <param name="qRCode"></param>
         void AddHeaderQRCode(IPdfMakeQRCode qRCode);
+        /// <summary>
+        /// Adds a string to the header section
+        /// </summary>
+        /// <param name="text"></param>
+        void AddHeaderText(string text);
+        /// <summary>
+        /// Adds a IList of string to the header section
+        /// </summary>
+        /// <param name="text"></param>
+        void AddHeaderText(IEnumerable<string> texts);
         /// <summary>
         /// Adds a text to the header section
         /// </summary>
         /// <param name="PdfMakeText"></param>
         void AddHeaderText(IPdfMakeText PdfMakeText);
         /// <summary>
-        /// Adds IList of texts to the header section
+        /// Add a IList of texts to the header section
         /// </summary>
-        /// <param name="PdfMakeText"></param>
-        void AddHeaderText(IEnumerable<IPdfMakeText> PdfMakeTexts);
+        /// <param name="PdfMakeTexts"></param>
+        void AddHeaderText<T>(IPdfMakeTexts<T> PdfMakeTexts);
         /// <summary>
         ///  Adds text to the header section
         /// </summary>
@@ -209,20 +229,35 @@ namespace PdfMakeNet
         /// <param name="pdfMakeLink"></param>
         void AddHeaderLink(IPdfMakeLink pdfMakeLink);
         /// <summary>
+        /// Add a PdfMake element the footer section
+        /// </summary>
+        /// <param name="pdfmakeObject"></param>
+        void AddFooter<T>(T pdfmakeObject);
+        /// <summary>
         /// Adds a qr code to the footer section
         /// </summary>
         /// <param name="qRCode"></param>
         void AddFooterQRCode(IPdfMakeQRCode qRCode);
+        /// <summary>
+        /// Adds a string to the footer section
+        /// </summary>
+        /// <param name="text"></param>
+        void AddFooterText(string text);
+        /// <summary>
+        /// Adds a IList of string to the footer section
+        /// </summary>
+        /// <param name="text"></param>
+        void AddFooterText(IEnumerable<string> texts);
         /// <summary>
         /// Adds a text to the footer section
         /// </summary>
         /// <param name="PdfMakeText"></param>
         void AddFooterText(IPdfMakeText PdfMakeText);
         /// <summary>
-        /// Adds a IList of texts to the footer section
+        /// Add a IList of texts to the footer section
         /// </summary>
         /// <param name="PdfMakeTexts"></param>
-        void AddFooterText(IEnumerable<IPdfMakeText> PdfMakeTexts);
+        void AddFooterText<T>(IPdfMakeTexts<T> PdfMakeTexts);
         /// <summary>
         /// Adds a columns to the footer section
         /// </summary>
