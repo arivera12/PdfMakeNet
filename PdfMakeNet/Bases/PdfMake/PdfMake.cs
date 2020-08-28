@@ -363,12 +363,36 @@ namespace PdfMakeNet
             PdfMakeWaterMark = pdfMakeWaterMark;
         }
         /// <summary>
+        /// Add a PdfMake element the body section
+        /// </summary>
+        /// <param name="pdfmakeObject"></param>
+        public void AddBody<T>(T pdfmakeObject)
+        {
+            Body.Add(pdfmakeObject);
+        }
+        /// <summary>
         /// Adds a qr code to the body section
         /// </summary>
         /// <param name="qRCode"></param>
         public void AddBodyQRCode(IPdfMakeQRCode qRCode)
         {
             Body.Add(qRCode);
+        }
+        /// <summary>
+        /// Adds a string to the body section
+        /// </summary>
+        /// <param name="text"></param>
+        public void AddBodyText(string text)
+        {
+            Body.Add(text);
+        }
+        /// <summary>
+        /// Adds a IList of string to the body section
+        /// </summary>
+        /// <param name="texts"></param>
+        public void AddBodyText(IEnumerable<string> texts)
+        {
+            Body.Add(texts);
         }
         /// <summary>
         /// Adds a text to the body section
@@ -382,9 +406,9 @@ namespace PdfMakeNet
         /// Add a IList of texts to the body section
         /// </summary>
         /// <param name="PdfMakeTexts"></param>
-        public void AddBodyText(IEnumerable<IPdfMakeText> PdfMakeTexts)
+        public void AddBodyText<T>(IPdfMakeTexts<T> PdfMakeTexts)
         {
-            Body.Add(new { text = PdfMakeTexts });
+            Body.Add(PdfMakeTexts);
         }
         /// <summary>
         /// Adds columns to the body section
@@ -424,7 +448,7 @@ namespace PdfMakeNet
         /// <param name="pdfMakeStacks"></param>
         public void AddBodyStack<T>(IPdfMakeStack<T> pdfMakeStacks)
         {
-            Body.Add(new { pdfMakeStacks });
+            Body.Add(pdfMakeStacks);
         }
         /// <summary>
         /// Adds an image to the body section
@@ -459,12 +483,36 @@ namespace PdfMakeNet
             Body.Add(pdfMakeTableOfContent);
         }
         /// <summary>
+        /// Add a PdfMake element the header section
+        /// </summary>
+        /// <param name="pdfmakeObject"></param>
+        public void AddHeader<T>(T pdfmakeObject)
+        {
+            Header.Add(pdfmakeObject);
+        }
+        /// <summary>
         /// Adds a qr code to the header section
         /// </summary>
         /// <param name="qRCode"></param>
         public void AddHeaderQRCode(IPdfMakeQRCode qRCode)
         {
             Header.Add(qRCode);
+        }
+        /// <summary>
+        /// Adds a string to the header section
+        /// </summary>
+        /// <param name="text"></param>
+        public void AddHeaderText(string text)
+        {
+            Header.Add(text);
+        }
+        /// <summary>
+        /// Adds a IList of string to the header section
+        /// </summary>
+        /// <param name="text"></param>
+        public void AddHeaderText(IEnumerable<string> texts)
+        {
+            Header.Add(texts);
         }
         /// <summary>
         /// Adds a text to the header section
@@ -475,12 +523,12 @@ namespace PdfMakeNet
             Header.Add(PdfMakeText);
         }
         /// <summary>
-        /// Adds IList of texts to the header section
+        /// Add a IList of texts to the header section
         /// </summary>
-        /// <param name="PdfMakeText"></param>
-        public void AddHeaderText(IEnumerable<IPdfMakeText> PdfMakeTexts)
+        /// <param name="PdfMakeTexts"></param>
+        public void AddHeaderText<T>(IPdfMakeTexts<T> PdfMakeTexts)
         {
-            Header.Add(new { text = PdfMakeTexts });
+            Header.Add(PdfMakeTexts);
         }
         /// <summary>
         ///  Adds text to the header section
@@ -547,12 +595,36 @@ namespace PdfMakeNet
             Header.Add(pdfMakeLink);
         }
         /// <summary>
+        /// Add a PdfMake element the footer section
+        /// </summary>
+        /// <param name="pdfmakeObject"></param>
+        public void AddFooter<T>(T pdfmakeObject)
+        {
+            Footer.Add(pdfmakeObject);
+        }
+        /// <summary>
         /// Adds a qr code to the footer section
         /// </summary>
         /// <param name="qRCode"></param>
         public void AddFooterQRCode(IPdfMakeQRCode qRCode)
         {
             Footer.Add(qRCode);
+        }
+        /// <summary>
+        /// Adds a string to the footer section
+        /// </summary>
+        /// <param name="text"></param>
+        public void AddFooterText(string text)
+        {
+            Footer.Add(text);
+        }
+        /// <summary>
+        /// Adds a IList of string to the footer section
+        /// </summary>
+        /// <param name="text"></param>
+        public void AddFooterText(IEnumerable<string> texts)
+        {
+            Footer.Add(texts);
         }
         /// <summary>
         /// Adds a text to the footer section
@@ -563,12 +635,12 @@ namespace PdfMakeNet
             Footer.Add(PdfMakeText);
         }
         /// <summary>
-        /// Adds a IList of texts to the footer section
+        /// Add a IList of texts to the footer section
         /// </summary>
         /// <param name="PdfMakeTexts"></param>
-        public void AddFooterText(IEnumerable<IPdfMakeText> PdfMakeTexts)
+        public void AddFooterText<T>(IPdfMakeTexts<T> PdfMakeTexts)
         {
-            Footer.Add(new { text = PdfMakeTexts });
+            Footer.Add(PdfMakeTexts);
         }
         /// <summary>
         /// Adds a columns to the footer section

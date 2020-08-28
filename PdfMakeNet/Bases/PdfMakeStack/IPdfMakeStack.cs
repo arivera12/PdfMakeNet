@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace PdfMakeNet
 {
-    public interface IPdfMakeStack<T>
+    public interface IPdfMakeStack<T>: IPdfMakeStyle
     {
         /// <summary>
         /// Adds a stack

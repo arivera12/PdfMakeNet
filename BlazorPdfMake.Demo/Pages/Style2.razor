@@ -1,0 +1,133 @@
+@page "/style2"
+@using PdfMakeNet
+@using Newtonsoft.Json
+
+<h2>PdfMakeNet Demo - style2</h2>
+<button @onclick=@OpenInNewTab>Run sample in new tab</button>
+<p>Basic sample using: PdfMakeNet</p>
+<pre class="preformatted">
+[Inject] IPdfMake pdfmake { get; set; } 
+//Or IPdfMake pdfmake = new PdfMake();
+pdfmake.AddBodyText(new PdfMakeText()
+{
+    Text = "This is a header (whole paragraph uses the same header style)\n\n",
+    Style = new List&lt;string&gt;() { "header" }
+});
+pdfmake.AddBodyText(new PdfMakeTexts&lt;object&gt;()
+{
+    Text = new List&lt;object&gt;()
+    {
+        "It is however possible to provide an array of texts ",
+        "to the paragraph (instead of a single string) and have ",
+        new PdfMakeText() { Text = "a better ", FontSize = 15, Bold = true },
+        "control over it. \nEach inline can be ",
+        new PdfMakeText() { Text = "styled ", FontSize = 20 },
+        new PdfMakeText() { Text = "independently ", Italics = true, FontSize = 40 },
+        "then.\n\n"
+    }
+});
+pdfmake.AddBodyText(new PdfMakeText()
+{
+    Text = "Mixing named styles and style-overrides",
+    Style = new List&lt;string&gt;() { "header" }
+});
+pdfmake.AddBodyText(new PdfMakeTexts&lt;object&gt;()
+{
+    Style = new List&lt;string&gt;() { "bigger" },
+    Italics = false,
+    Text = new List&lt;object&gt;()
+    {
+        "We can also mix named-styles and style-overrides at both paragraph and inline level. ",
+        "For example, this paragraph uses the \"bigger\" style, which changes fontSize to 15 and sets italics to true. ",
+        "Texts are not italics though. It\'s because we\'ve overriden italics back to false at ",
+        "the paragraph level. \n\n",
+        "We can also change the style of a single inline. Let\'s use a named style called header: ",
+        new PdfMakeText() { Text = "like here.\n", Style = new List&lt;string&gt;() { "header" } },
+        "It got bigger and bold.\n\n",
+        "OK, now we\'re going to mix named styles and style-overrides at the inline level. ",
+        "We\'ll use header style (it makes texts bigger and bold), but we\'ll override ",
+        "bold back to false: ",
+        new PdfMakeText() { Text = "wow! it works!", Style = new List&lt;string&gt;() { "header" } , Bold = false },
+        "\n\nMake sure to take a look into the sources to understand what\'s going on here."
+    }
+});
+pdfmake.Styles = new
+{
+    header = new PdfMakeStyle() { FontSize = 18, Bold = true },
+    bigger = new PdfMakeStyle() { FontSize = 15, Italics = true },
+};
+//Get document definition
+pdfmake.GetDocumentDefinition(Formatting.Indented);
+//Button event code executing
+pdfmake.GetOpenInBrowser(false)
+</pre>
+<p>PdfMake Document Definition Output From PdfMakeNet</p>
+<pre class="preformatted">@GetDocumentDefinition()</pre>
+
+@functions{
+    [Inject] IPdfMake pdfmake { get; set; }
+    [Inject] IJSRuntime JSRuntime { get; set; }
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender)
+        {
+            pdfmake.AddBodyText(new PdfMakeText()
+            {
+                Text = "This is a header (whole paragraph uses the same header style)\n\n",
+                Style = new List<string>() { "header" }
+            });
+            pdfmake.AddBodyText(new PdfMakeTexts<object>()
+            {
+                Text = new List<object>()
+                {
+                    "It is however possible to provide an array of texts ",
+                    "to the paragraph (instead of a single string) and have ",
+                    new PdfMakeText() { Text = "a better ", FontSize = 15, Bold = true },
+                    "control over it. \nEach inline can be ",
+                    new PdfMakeText() { Text = "styled ", FontSize = 20 },
+                    new PdfMakeText() { Text = "independently ", Italics = true, FontSize = 40 },
+                    "then.\n\n"
+                }
+            });
+            pdfmake.AddBodyText(new PdfMakeText()
+            {
+                Text = "Mixing named styles and style-overrides",
+                Style = new List<string>() { "header" }
+            });
+            pdfmake.AddBodyText(new PdfMakeTexts<object>()
+            {
+                Style = new List<string>() { "bigger" },
+                Italics = false,
+                Text = new List<object>()
+                {
+                    "We can also mix named-styles and style-overrides at both paragraph and inline level. ",
+                    "For example, this paragraph uses the \"bigger\" style, which changes fontSize to 15 and sets italics to true. ",
+                    "Texts are not italics though. It\'s because we\'ve overriden italics back to false at ",
+                    "the paragraph level. \n\n",
+                    "We can also change the style of a single inline. Let\'s use a named style called header: ",
+                    new PdfMakeText() { Text = "like here.\n", Style = new List<string>() { "header" } },
+                    "It got bigger and bold.\n\n",
+                    "OK, now we\'re going to mix named styles and style-overrides at the inline level. ",
+                    "We\'ll use header style (it makes texts bigger and bold), but we\'ll override ",
+                    "bold back to false: ",
+                    new PdfMakeText() { Text = "wow! it works!", Style = new List<string>() { "header" } , Bold = false },
+                    "\n\nMake sure to take a look into the sources to understand what\'s going on here."
+                }
+            });
+            pdfmake.Styles = new
+            {
+                header = new PdfMakeStyle() { FontSize = 18, Bold = true },
+                bigger = new PdfMakeStyle() { FontSize = 15, Italics = true },
+            };
+            StateHasChanged();
+        }
+    }
+    public string GetDocumentDefinition()
+    {
+        return pdfmake.GetDocumentDefinition(Formatting.Indented);
+    }
+    public async Task OpenInNewTab()
+    {
+        await JSRuntime.InvokeVoidAsync("eval", pdfmake.GetOpenInBrowser(false));
+    }
+}
