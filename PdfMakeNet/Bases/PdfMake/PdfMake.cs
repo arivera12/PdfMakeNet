@@ -1,6 +1,11 @@
 ﻿using Newtonsoft.Json;
 using PdfMakeNet.Extensions;
+using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Net.Http;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace PdfMakeNet
 {
@@ -705,6 +710,70 @@ namespace PdfMakeNet
         public void AddFooterLink(IPdfMakeLink pdfMakeLink)
         {
             Footer.Add(pdfMakeLink);
+        }
+        /// <summary>
+        /// Reads an Image from an http request and converts it to its base 64 representation with its data uri format ready to be embed. 
+        /// This method specs that the resource is an image type compatible with pdfmake.
+        /// JPEG and PNG formats are supported.
+        /// </summary>
+        /// <param name="httpClient"></param>
+        /// <param name="httpMethod"></param>
+        /// <param name="requestUri"></param>
+        /// <returns></returns>
+        public static async Task<string> LoadImageFromUrlAsync(HttpClient httpClient, string httpMethod, string requestUri, SourceImageFormat sourceImageFormat)
+        {
+            var request = new HttpRequestMessage(new HttpMethod(httpMethod), requestUri);
+            var response = await httpClient.SendAsync(request);
+            var stream = await response.Content.ReadAsStreamAsync();
+            var byteArray = await stream.ToByteArrayAsync();
+            var base64StringImage = Convert.ToBase64String(byteArray);
+            return $"data:{sourceImageFormat.GetMimeType()};base64,{base64StringImage}";
+        }
+        /// <summary>
+        /// Reads an Image from an http request and converts it to its base 64 representation with its data uri format ready to be embed. 
+        /// This method specs that the resource is an image type compatible with pdfmake.
+        /// JPEG and PNG formats are supported.
+        /// </summary>
+        /// <param name="httpClient"></param>
+        /// <param name="httpMethod"></param>
+        /// <param name="requestUri"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public static async Task<string> LoadImageFromUrlAsync(HttpClient httpClient, string httpMethod, string requestUri, SourceImageFormat sourceImageFormat, CancellationToken cancellationToken)
+        {
+            var request = new HttpRequestMessage(new HttpMethod(httpMethod), requestUri);
+            var response = await httpClient.SendAsync(request);
+            var stream = await response.Content.ReadAsStreamAsync();
+            var byteArray = await stream.ToByteArrayAsync(cancellationToken);
+            var base64StringImage = Convert.ToBase64String(byteArray);
+            return $"data:{sourceImageFormat.GetMimeType()};base64,{base64StringImage}";
+        }
+        /// <summary>
+        /// Reads an svg text from an http request.
+        /// </summary>
+        /// <param name="httpClient"></param>
+        /// <param name="httpMethod"></param>
+        /// <param name="requestUri"></param>
+        /// <returns></returns>
+        public static async Task<string> LoadSvgFromUrlAsync(HttpClient httpClient, string httpMethod, string requestUri)
+        {
+            var request = new HttpRequestMessage(new HttpMethod(httpMethod), requestUri);
+            var response = await httpClient.SendAsync(request);
+            return await response.Content.ReadAsStringAsync();
+        }
+        /// <summary>
+        /// Reads an image from the system file and converts it to its base 64 representation with its data uri format ready to be embed.
+        /// This method specs that the resource is an image type compatible with pdfmake.
+        /// JPEG and PNG formats are supported.
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="sourceImageFormat"></param>
+        /// <returns></returns>
+        public static string LoadImageFromPath(string path, SourceImageFormat sourceImageFormat)
+        {
+            var byteArray = File.ReadAllBytes(path);
+            var base64StringImage = Convert.ToBase64String(byteArray);
+            return $"data:{sourceImageFormat.GetMimeType()};base64,{base64StringImage}";
         }
     }
 }

@@ -2,6 +2,18 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageReleaseNotes>Implemented SVG's and WaterMark. Removed Microsoft.AspNetCore.Mvc dependency to another project as server side only extensions.</PackageReleaseNotes>
+    <AssemblyVersion>0.1.0.5</AssemblyVersion>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <Authors>Anthony G. Rivera Cosme</Authors>
+    <Description>PdfMakeNet.Server.Extension is a PdfMakeNet helper extensions for server side only.</Description>
+    <Copyright>Anthony G. Rivera Cosme</Copyright>
+    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+    <PackageProjectUrl>https://github.com/arivera12/PdfMakeNet</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/arivera12/PdfMakeNet</RepositoryUrl>
+    <Version>1.0.5</Version>
+    <FileVersion>0.1.0.5</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -10,6 +22,13 @@
 
   <ItemGroup>
     <ProjectReference Include="..\PdfMakeNet\PdfMakeNet.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\PdfMakeNet\LICENSE.txt">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>
