@@ -23,6 +23,7 @@ c# wrapper for [PdfMake](http://pdfmake.org/#/).
   *  [x] auto/fixed/star-sized widths
   *  [x] col-spans and row-spans
   *  [x] headers automatically repeated in case of a page-break
+  *  [ ] access to row number of table
 * [x] images
 * [x] SVGs
 * [ ] vector graphics
