@@ -1,0 +1,1233 @@
+@page "/lists"
+@using PdfMakeNet
+@using Newtonsoft.Json
+
+<h2>PdfMakeNet Demo - lists</h2>
+<button @onclick=@OpenInNewTab>Run sample in new tab</button>
+<p>Basic sample using: PdfMakeNet</p>
+<pre class="preformatted">
+[Inject] IPdfMake pdfmake { get; set; } 
+//Or IPdfMake pdfmake = new PdfMake();
+pdfmake.AddBodyText(new PdfMakeText()
+{
+    Text = "Unordered list",
+    Style = new List&lt;string&gt;() { "header" }
+});
+pdfmake.AddBodyUnorderedList(new PdfMakeUnorderedList&lt;string&gt;()
+{
+    Ul = new List&lt;string&gt;()
+        {
+            "item 1",
+            "item 2",
+            "item 3"
+        }
+});
+pdfmake.AddBodyText(new PdfMakeText()
+{
+    Text = "\n\nUnordered list with longer lines",
+    Style = new List&lt;string&gt;() { "header" }
+});
+pdfmake.AddBodyUnorderedList(new PdfMakeUnorderedList&lt;string&gt;()
+{
+    Ul = new List&lt;string&gt;()
+        {
+            "item 1",
+            "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+            "item 3"
+        }
+});
+pdfmake.AddBodyText(new PdfMakeText()
+{
+    Text = "\n\nOrdered list",
+    Style = new List&lt;string&gt;() { "header" }
+});
+pdfmake.AddBodyOrderedList(new PdfMakeOrderedList&lt;string&gt;()
+{
+    Ol = new List&lt;string&gt;()
+        {
+            "item 1",
+            "item 2",
+            "item 3"
+        }
+});
+pdfmake.AddBodyText(new PdfMakeText()
+{
+    Text = "\n\nOrdered list with longer lines",
+    Style = new List&lt;string&gt;() { "header" }
+});
+pdfmake.AddBodyOrderedList(new PdfMakeOrderedList&lt;string&gt;()
+{
+    Ol = new List&lt;string&gt;()
+        {
+            "item 1",
+            "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+            "item 3"
+        }
+});
+pdfmake.AddBodyText(new PdfMakeText()
+{
+    Text = "\n\nOrdered list should be descending",
+    Style = new List&lt;string&gt;() { "header" }
+});
+pdfmake.AddBodyOrderedList(new PdfMakeOrderedList&lt;string&gt;()
+{
+    Reversed = true,
+    Ol = new List&lt;string&gt;()
+        {
+            "item 1",
+            "item 2",
+            "item 3"
+        }
+});
+pdfmake.AddBodyText(new PdfMakeText()
+{
+    Text = "\n\nOrdered list with start value",
+    Style = new List&lt;string&gt;() { "header" }
+});
+pdfmake.AddBodyOrderedList(new PdfMakeOrderedList&lt;string&gt;()
+{
+    Start = 50,
+    Ol = new List&lt;string&gt;()
+        {
+            "item 1",
+            "item 2",
+            "item 3"
+        }
+});
+pdfmake.AddBodyText(new PdfMakeText()
+{
+    Text = "\n\nOrdered list with own values",
+    Style = new List&lt;string&gt;() { "header" }
+});
+pdfmake.AddBodyOrderedList(new PdfMakeOrderedList&lt;object&gt;()
+{
+    Ol = new List&lt;object&gt;()
+        {
+            new { text = "item 1", counter = 10 },
+            new { text = "item 2", counter = 20 },
+            new { text = "item 3", counter = 30 },
+            new PdfMakeText() { Text = "item 4 without own value" },
+        }
+});
+pdfmake.AddBodyText(new PdfMakeText()
+{
+    Text = "\n\nNested lists (ordered)",
+    Style = new List&lt;string&gt;() { "header" }
+});
+pdfmake.AddBodyOrderedList(new PdfMakeOrderedList&lt;object&gt;()
+{
+    Ol = new List&lt;object&gt;()
+        {
+            "item 1",
+            new List&lt;object&gt;()
+            {
+                "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+                new PdfMakeOrderedList&lt;object&gt;()
+                {
+                    Ol = new List&lt;object&gt;()
+                        {
+                            "subitem 1",
+                            "subitem 2",
+                            "subitem 3 - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+                            "subitem 3 - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+                            "subitem 3 - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+                            new PdfMakeTexts&lt;string&gt;()
+                            {
+                                Text = new List&lt;string&gt;()
+                                    {
+                                        "subitem 3 - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+                                        "subitem 3 - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+                                        "subitem 3 - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+                                        "subitem 3 - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+                                        "subitem 3 - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+                                        "subitem 3 - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+                                        "subitem 3 - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+                                        "subitem 3 - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+                                    }
+                            },
+                            "subitem 3 - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+                            "subitem 3 - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+                            "subitem 3 - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+                            "subitem 3 - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+                            "subitem 4",
+                            "subitem 5",
+                        }
+                }
+            },
+            "item 3\nsecond line of item3"
+        }
+});
+pdfmake.AddBodyText(new PdfMakeText()
+{
+    Text = "\n\nNested lists (unordered)",
+    Style = new List&lt;string&gt;() { "header" }
+});
+pdfmake.AddBodyOrderedList&lt;object&gt;(new PdfMakeOrderedList&lt;object&gt;()
+{
+    Ol = new List&lt;object&gt;()
+        {
+            "item 1",
+            new List&lt;object&gt;()
+            {
+                "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+                new PdfMakeUnorderedList&lt;object&gt;()
+                {
+                    Ul = new List&lt;object&gt;()
+                        {
+                            "subitem 1",
+                            "subitem 2",
+                            "subitem 3 - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+                            "subitem 3 - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+                            "subitem 3 - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+                            new PdfMakeTexts&lt;string&gt;()
+                            {
+                                Text = new List&lt;string&gt;()
+                                    {
+                                        "subitem 3 - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+                                        "subitem 3 - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+                                        "subitem 3 - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+                                        "subitem 3 - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+                                        "subitem 3 - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+                                        "subitem 3 - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+                                        "subitem 3 - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+                                        "subitem 3 - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+                                    }
+                            },
+                            "subitem 3 - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+                            "subitem 3 - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+                            "subitem 3 - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+                            "subitem 3 - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+                            "subitem 4",
+                            "subitem 5",
+                        }
+                }
+            },
+            "item 3\nsecond line of item3"
+        }
+});
+pdfmake.AddBodyText(new PdfMakeText()
+{
+    Text = "\n\nUnordered lists inside columns",
+    Style = new List&lt;string&gt;() { "header" }
+});
+pdfmake.AddBodyColumns(new PdfMakeColumns&lt;PdfMakeUnorderedList&lt;string&gt;&gt;()
+{
+    Columns = new List&lt;PdfMakeUnorderedList&lt;string&gt;&gt;()
+        {
+            new PdfMakeUnorderedList&lt;string&gt;()
+            {
+                Ul = new List&lt;string&gt;()
+                    {
+                        "item 1",
+                        "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+                    }
+            },
+            new PdfMakeUnorderedList&lt;string&gt;()
+            {
+                Ul = new List&lt;string&gt;()
+                    {
+                        "item 1",
+                        "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+                    }
+            }
+        }
+});
+pdfmake.AddBodyText(new PdfMakeText()
+{
+    Text = "\n\nOrdered lists inside columns",
+    Style = new List&lt;string&gt;() { "header" }
+});
+pdfmake.AddBodyColumns(new PdfMakeColumns&lt;PdfMakeOrderedList&lt;string&gt;&gt;()
+{
+    Columns = new List&lt;PdfMakeOrderedList&lt;string&gt;&gt;()
+        {
+            new PdfMakeOrderedList&lt;string&gt;()
+            {
+                Ol = new List&lt;string&gt;()
+                    {
+                        "item 1",
+                        "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+                    }
+            },
+            new PdfMakeOrderedList&lt;string&gt;()
+            {
+                Ol = new List&lt;string&gt;()
+                    {
+                        "item 1",
+                        "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+                    }
+            }
+        }
+});
+pdfmake.AddBodyText(new PdfMakeText()
+{
+    Text = "\n\nNested lists width columns",
+    Style = new List&lt;string&gt;() { "header" }
+});
+pdfmake.AddBodyUnorderedList(new PdfMakeUnorderedList&lt;object&gt;()
+{
+    Ul = new List&lt;object&gt;()
+        {
+            "item 1",
+            "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+            new PdfMakeOrderedList&lt;object&gt;()
+            {
+                Ol = new List&lt;object&gt;()
+                    {
+                        new List&lt;object&gt;()
+                        {
+                            new PdfMakeColumns&lt;object&gt;()
+                            {
+                                Columns = new List&lt;object&gt;()
+                                    {
+                                        "column 1",
+                                        new PdfMakeStack&lt;object&gt;()
+                                        {
+                                            Stack = new List&lt;object&gt;()
+                                                {
+                                                    "column 2",
+                                                    new PdfMakeUnorderedList&lt;object&gt;()
+                                                    {
+                                                        Ul = new List&lt;object&gt;()
+                                                            {
+                                                                "item 1",
+                                                                "item 2",
+                                                                new PdfMakeUnorderedList&lt;string&gt;()
+                                                                {
+                                                                    Ul = new List&lt;string&gt;()
+                                                                        {
+                                                                            "item",
+                                                                            "item",
+                                                                            "item",
+                                                                        }
+                                                                },
+                                                                "item 4",
+                                                            }   
+                                                    }
+                                                }
+                                        },
+                                        "column 3",
+                                        "column 4"
+                                    }
+                            },
+                            "subitem 1 in a vertical container",
+                            "subitem 2 in a vertical container"   
+                        },
+                        "subitem 2",
+                        "subitem 3 - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+                        "subitem 3 - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+                        "subitem 3 - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+                        new PdfMakeTexts&lt;string&gt;()
+                        {
+                            Text = new List&lt;string&gt;()
+                                {
+                                    "subitem 3 - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+                                    "subitem 3 - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+                                    "subitem 3 - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+                                    "subitem 3 - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+                                    "subitem 3 - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+                                    "subitem 3 - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+                                    "subitem 3 - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+                                    "subitem 3 - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+                                }
+                        },
+                        "subitem 3 - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+                        "subitem 3 - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+                        "subitem 3 - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+                        "subitem 3 - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+                        "subitem 4",
+                        "subitem 5",
+                    }
+            },
+            "item 3\nsecond line of item3"
+        }
+});
+pdfmake.Styles = new
+{
+    header = new PdfMakeStyle() { FontSize = 15, Bold = true }
+};
+pdfmake.AddBodyText(new PdfMakeText()
+{
+    Text = "\n\nUnordered list with square marker type",
+    Style = new List&lt;string&gt;() { "header" }
+});
+pdfmake.AddBodyUnorderedList(new PdfMakeUnorderedList&lt;string&gt;()
+{
+    UnorderedListType = UnorderedListType.Square,
+    Ul = new List&lt;string&gt;()
+        {
+            "item 1",
+            "item 2",
+            "item 3",
+        }
+});
+pdfmake.AddBodyText(new PdfMakeText()
+{
+    Text = "\n\nUnordered list with circle marker type",
+    Style = new List&lt;string&gt;() { "header" }
+});
+pdfmake.AddBodyUnorderedList(new PdfMakeUnorderedList&lt;string&gt;()
+{
+    UnorderedListType = UnorderedListType.Circle,
+    Ul = new List&lt;string&gt;()
+        {
+            "item 1",
+            "item 2",
+            "item 3",
+        }
+});
+pdfmake.AddBodyText(new PdfMakeText()
+{
+    Text = "\n\nColored unordered list",
+    Style = new List&lt;string&gt;() { "header" }
+});
+pdfmake.AddBodyUnorderedList(new PdfMakeUnorderedList&lt;string&gt;()
+{
+    Color = "blue",
+    Ul = new List&lt;string&gt;()
+        {
+            "item 1",
+            "item 2",
+            "item 3",
+        }
+});
+pdfmake.AddBodyText(new PdfMakeText()
+{
+    Text = "\n\nColored unordered list with own marker color",
+    Style = new List&lt;string&gt;() { "header" }
+});
+pdfmake.AddBodyUnorderedList(new PdfMakeUnorderedList&lt;string&gt;()
+{
+    Color = "blue",
+    MarkerColor = "red",
+    Ul = new List&lt;string&gt;()
+        {
+            "item 1",
+            "item 2",
+            "item 3",
+        }
+});
+pdfmake.AddBodyText(new PdfMakeText()
+{
+    Text = "\n\nColored ordered list",
+    Style = new List&lt;string&gt;() { "header" }
+});
+pdfmake.AddBodyOrderedList(new PdfMakeOrderedList&lt;string&gt;()
+{
+    Color = "blue",
+    Ol = new List&lt;string&gt;()
+        {
+            "item 1",
+            "item 2",
+            "item 3",
+        }
+});
+pdfmake.AddBodyText(new PdfMakeText()
+{
+    Text = "\n\nColored ordered list with own marker color",
+    Style = new List&lt;string&gt;() { "header" }
+});
+pdfmake.AddBodyOrderedList(new PdfMakeOrderedList&lt;string&gt;()
+{
+    Color = "blue",
+    MarkerColor = "red",
+    Ol = new List&lt;string&gt;()
+        {
+            "item 1",
+            "item 2",
+            "item 3",
+        }
+});
+pdfmake.AddBodyText(new PdfMakeText()
+{
+    Text = "\n\nOrdered list - type: lower-alpha",
+    Style = new List&lt;string&gt;() { "header" }
+});
+pdfmake.AddBodyOrderedList(new PdfMakeOrderedList&lt;string&gt;()
+{
+    OrderedListType = OrderedListType.LowerAlpha,
+    Ol = new List&lt;string&gt;()
+        {
+            "item 1",
+            "item 2",
+            "item 3",
+        }
+});
+pdfmake.AddBodyText(new PdfMakeText()
+{
+    Text = "\n\nOrdered list - type: lower-alpha",
+    Style = new List&lt;string&gt;() { "header" }
+});
+pdfmake.AddBodyOrderedList(new PdfMakeOrderedList&lt;string&gt;()
+{
+    OrderedListType = OrderedListType.LowerAlpha,
+    Ol = new List&lt;string&gt;()
+        {
+            "item 1",
+            "item 2",
+            "item 3",
+        }
+});
+pdfmake.AddBodyText(new PdfMakeText()
+{
+    Text = "\n\nOrdered list - type: upper-alpha",
+    Style = new List&lt;string&gt;() { "header" }
+});
+pdfmake.AddBodyOrderedList(new PdfMakeOrderedList&lt;string&gt;()
+{
+    OrderedListType = OrderedListType.UpperAlpha,
+    Ol = new List&lt;string&gt;()
+        {
+            "item 1",
+            "item 2",
+            "item 3",
+        }
+});
+pdfmake.AddBodyText(new PdfMakeText()
+{
+    Text = "\n\nOrdered list - type: upper-roman",
+    Style = new List&lt;string&gt;() { "header" }
+});
+pdfmake.AddBodyOrderedList(new PdfMakeOrderedList&lt;string&gt;()
+{
+    OrderedListType = OrderedListType.UpperRoman,
+    Ol = new List&lt;string&gt;()
+        {
+            "item 1",
+            "item 2",
+            "item 3",
+            "item 4",
+            "item 5",
+        }
+});
+pdfmake.AddBodyText(new PdfMakeText()
+{
+    Text = "\n\nOrdered list - type: lower-roman",
+    Style = new List&lt;string&gt;() { "header" }
+});
+pdfmake.AddBodyOrderedList(new PdfMakeOrderedList&lt;string&gt;()
+{
+    OrderedListType = OrderedListType.LowerRoman,
+    Ol = new List&lt;string&gt;()
+        {
+            "item 1",
+            "item 2",
+            "item 3",
+            "item 4",
+            "item 5",
+        }
+});
+pdfmake.AddBodyText(new PdfMakeText()
+{
+    Text = "\n\nOrdered list - type: none",
+    Style = new List&lt;string&gt;() { "header" }
+});
+pdfmake.AddBodyOrderedList(new PdfMakeOrderedList&lt;string&gt;()
+{
+    OrderedListType = OrderedListType.None,
+    Ol = new List&lt;string&gt;()
+        {
+            "item 1",
+            "item 2",
+            "item 3",
+        }
+});
+pdfmake.AddBodyText(new PdfMakeText()
+{
+    Text = "\n\nOrdered list - type: none",
+    Style = new List&lt;string&gt;() { "header" }
+});
+pdfmake.AddBodyUnorderedList(new PdfMakeUnorderedList&lt;string&gt;()
+{
+    UnorderedListType = UnorderedListType.None,
+    Ul = new List&lt;string&gt;()
+        {
+            "item 1",
+            "item 2",
+            "item 3",
+        }
+});
+pdfmake.AddBodyText(new PdfMakeText()
+{
+    Text = "\n\nOrdered list with own separator",
+    Style = new List&lt;string&gt;() { "header" }
+});
+pdfmake.AddBodyOrderedList(new PdfMakeOrderedList&lt;string&gt;()
+{
+    Separator = ")",
+    Ol = new List&lt;string&gt;()
+        {
+            "item 1",
+            "item 2",
+            "item 3",
+        }
+});
+pdfmake.AddBodyText(new PdfMakeText()
+{
+    Text = "\n\nOrdered list with own complex separator",
+    Style = new List&lt;string&gt;() { "header" }
+});
+pdfmake.AddBodyOrderedList(new PdfMakeOrderedList&lt;string&gt;()
+{
+    Separator = new List&lt;string&gt;() { "(", ")"},
+    Ol = new List&lt;string&gt;()
+        {
+            "item 1",
+            "item 2",
+            "item 3",
+        }
+});
+pdfmake.AddBodyText(new PdfMakeText()
+{
+    Text = "\n\nOrdered list with own items type",
+    Style = new List&lt;string&gt;() { "header" }
+});
+pdfmake.AddBodyOrderedList(new PdfMakeOrderedList&lt;object&gt;()
+{
+    Ol = new List&lt;object&gt;()
+        {
+            "item 1",
+            new { text = "item 2", listType = "none"},
+            new { text = "item 3", listType = "upper-roman"},
+        }
+});
+pdfmake.AddBodyText(new PdfMakeText()
+{
+    Text = "\n\nUnordered list with own items type",
+    Style = new List&lt;string&gt;() { "header" }
+});
+pdfmake.AddBodyUnorderedList(new PdfMakeUnorderedList&lt;object&gt;()
+{
+    Ul = new List&lt;object&gt;()
+        {
+            "item 1",
+            new { text = "item 2", listType = "none"},
+            new { text = "item 3", listType = "circle"},
+        }
+});
+pdfmake.DefaultStyle = new PdfMakeStyle() { FontSize = 12 };
+//Get document definition
+pdfmake.GetDocumentDefinition(Formatting.Indented);
+//Button event code executing
+pdfmake.GetOpenInBrowser(false)
+</pre>
+<p>PdfMake Document Definition Output From PdfMakeNet</p>
+<pre class="preformatted">@GetDocumentDefinition()</pre>
+
+@functions{
+    [Inject] IPdfMake pdfmake { get; set; }
+    [Inject] IJSRuntime JSRuntime { get; set; }
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender)
+        {
+            pdfmake.AddBodyText(new PdfMakeText()
+            {
+                Text = "Unordered list",
+                Style = new List<string>() { "header" }
+            });
+            pdfmake.AddBodyUnorderedList(new PdfMakeUnorderedList<string>()
+            {
+                Ul = new List<string>()
+                    {
+                        "item 1",
+                        "item 2",
+                        "item 3"
+                    }
+            });
+            pdfmake.AddBodyText(new PdfMakeText()
+            {
+                Text = "\n\nUnordered list with longer lines",
+                Style = new List<string>() { "header" }
+            });
+            pdfmake.AddBodyUnorderedList(new PdfMakeUnorderedList<string>()
+            {
+                Ul = new List<string>()
+                    {
+                        "item 1",
+                        "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+                        "item 3"
+                    }
+            });
+            pdfmake.AddBodyText(new PdfMakeText()
+            {
+                Text = "\n\nOrdered list",
+                Style = new List<string>() { "header" }
+            });
+            pdfmake.AddBodyOrderedList(new PdfMakeOrderedList<string>()
+            {
+                Ol = new List<string>()
+                    {
+                        "item 1",
+                        "item 2",
+                        "item 3"
+                    }
+            });
+            pdfmake.AddBodyText(new PdfMakeText()
+            {
+                Text = "\n\nOrdered list with longer lines",
+                Style = new List<string>() { "header" }
+            });
+            pdfmake.AddBodyOrderedList(new PdfMakeOrderedList<string>()
+            {
+                Ol = new List<string>()
+                    {
+                        "item 1",
+                        "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+                        "item 3"
+                    }
+            });
+            pdfmake.AddBodyText(new PdfMakeText()
+            {
+                Text = "\n\nOrdered list should be descending",
+                Style = new List<string>() { "header" }
+            });
+            pdfmake.AddBodyOrderedList(new PdfMakeOrderedList<string>()
+            {
+                Reversed = true,
+                Ol = new List<string>()
+                    {
+                        "item 1",
+                        "item 2",
+                        "item 3"
+                    }
+            });
+            pdfmake.AddBodyText(new PdfMakeText()
+            {
+                Text = "\n\nOrdered list with start value",
+                Style = new List<string>() { "header" }
+            });
+            pdfmake.AddBodyOrderedList(new PdfMakeOrderedList<string>()
+            {
+                Start = 50,
+                Ol = new List<string>()
+                    {
+                        "item 1",
+                        "item 2",
+                        "item 3"
+                    }
+            });
+            pdfmake.AddBodyText(new PdfMakeText()
+            {
+                Text = "\n\nOrdered list with own values",
+                Style = new List<string>() { "header" }
+            });
+            pdfmake.AddBodyOrderedList(new PdfMakeOrderedList<object>()
+            {
+                Ol = new List<object>()
+                    {
+                        new { text = "item 1", counter = 10 },
+                        new { text = "item 2", counter = 20 },
+                        new { text = "item 3", counter = 30 },
+                        new PdfMakeText() { Text = "item 4 without own value" },
+                    }
+            });
+            pdfmake.AddBodyText(new PdfMakeText()
+            {
+                Text = "\n\nNested lists (ordered)",
+                Style = new List<string>() { "header" }
+            });
+            pdfmake.AddBodyOrderedList(new PdfMakeOrderedList<object>()
+            {
+                Ol = new List<object>()
+                    {
+                        "item 1",
+                        new List<object>()
+                        {
+                            "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+                            new PdfMakeOrderedList<object>()
+                            {
+                                Ol = new List<object>()
+                                    {
+                                        "subitem 1",
+                                        "subitem 2",
+                                        "subitem 3 - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+                                        "subitem 3 - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+                                        "subitem 3 - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+                                        new PdfMakeTexts<string>()
+                                        {
+                                            Text = new List<string>()
+                                                {
+                                                    "subitem 3 - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+                                                    "subitem 3 - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+                                                    "subitem 3 - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+                                                    "subitem 3 - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+                                                    "subitem 3 - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+                                                    "subitem 3 - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+                                                    "subitem 3 - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+                                                    "subitem 3 - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+                                                }
+                                        },
+                                        "subitem 3 - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+                                        "subitem 3 - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+                                        "subitem 3 - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+                                        "subitem 3 - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+                                        "subitem 4",
+                                        "subitem 5",
+                                    }
+                            }
+                        },
+                        "item 3\nsecond line of item3"
+                    }
+            });
+            pdfmake.AddBodyText(new PdfMakeText()
+            {
+                Text = "\n\nNested lists (unordered)",
+                Style = new List<string>() { "header" }
+            });
+            pdfmake.AddBodyOrderedList<object>(new PdfMakeOrderedList<object>()
+            {
+                Ol = new List<object>()
+                    {
+                        "item 1",
+                        new List<object>()
+                        {
+                            "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+                            new PdfMakeUnorderedList<object>()
+                            {
+                                Ul = new List<object>()
+                                    {
+                                        "subitem 1",
+                                        "subitem 2",
+                                        "subitem 3 - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+                                        "subitem 3 - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+                                        "subitem 3 - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+                                        new PdfMakeTexts<string>()
+                                        {
+                                            Text = new List<string>()
+                                                {
+                                                    "subitem 3 - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+                                                    "subitem 3 - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+                                                    "subitem 3 - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+                                                    "subitem 3 - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+                                                    "subitem 3 - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+                                                    "subitem 3 - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+                                                    "subitem 3 - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+                                                    "subitem 3 - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+                                                }
+                                        },
+                                        "subitem 3 - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+                                        "subitem 3 - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+                                        "subitem 3 - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+                                        "subitem 3 - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+                                        "subitem 4",
+                                        "subitem 5",
+                                    }
+                            }
+                        },
+                        "item 3\nsecond line of item3"
+                    }
+            });
+            pdfmake.AddBodyText(new PdfMakeText()
+            {
+                Text = "\n\nUnordered lists inside columns",
+                Style = new List<string>() { "header" }
+            });
+            pdfmake.AddBodyColumns(new PdfMakeColumns<PdfMakeUnorderedList<string>>()
+            {
+                Columns = new List<PdfMakeUnorderedList<string>>()
+                    {
+                        new PdfMakeUnorderedList<string>()
+                        {
+                            Ul = new List<string>()
+                                {
+                                    "item 1",
+                                    "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+                                }
+                        },
+                        new PdfMakeUnorderedList<string>()
+                        {
+                            Ul = new List<string>()
+                                {
+                                    "item 1",
+                                    "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+                                }
+                        }
+                    }
+            });
+            pdfmake.AddBodyText(new PdfMakeText()
+            {
+                Text = "\n\nOrdered lists inside columns",
+                Style = new List<string>() { "header" }
+            });
+            pdfmake.AddBodyColumns(new PdfMakeColumns<PdfMakeOrderedList<string>>()
+            {
+                Columns = new List<PdfMakeOrderedList<string>>()
+                    {
+                        new PdfMakeOrderedList<string>()
+                        {
+                            Ol = new List<string>()
+                                {
+                                    "item 1",
+                                    "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+                                }
+                        },
+                        new PdfMakeOrderedList<string>()
+                        {
+                            Ol = new List<string>()
+                                {
+                                    "item 1",
+                                    "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+                                }
+                        }
+                    }
+            });
+            pdfmake.AddBodyText(new PdfMakeText()
+            {
+                Text = "\n\nNested lists width columns",
+                Style = new List<string>() { "header" }
+            });
+            pdfmake.AddBodyUnorderedList(new PdfMakeUnorderedList<object>()
+            {
+                Ul = new List<object>()
+                    {
+                        "item 1",
+        				"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+                        new PdfMakeOrderedList<object>()
+                        {
+                            Ol = new List<object>()
+                                {
+                                    new List<object>()
+                                    {
+                                        new PdfMakeColumns<object>()
+                                        {
+                                            Columns = new List<object>()
+                                                {
+                                                    "column 1",
+                                                    new PdfMakeStack<object>()
+                                                    {
+                                                        Stack = new List<object>()
+                                                            {
+                                                                "column 2",
+                                                                new PdfMakeUnorderedList<object>()
+                                                                {
+                                                                    Ul = new List<object>()
+                                                                        {
+                                                                            "item 1",
+                                                                            "item 2",
+                                                                            new PdfMakeUnorderedList<string>()
+                                                                            {
+                                                                                Ul = new List<string>()
+                                                                                    {
+                                                                                        "item",
+                                                                                        "item",
+                                                                                        "item",
+                                                                                    }
+                                                                            },
+                                                                            "item 4",
+                                                                        }   
+                                                                }
+                                                            }
+                                                    },
+                                                    "column 3",
+                                                    "column 4"
+                                                }
+                                        },
+                                        "subitem 1 in a vertical container",
+                                        "subitem 2 in a vertical container"   
+                                    },
+                                    "subitem 2",
+                                    "subitem 3 - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+                                    "subitem 3 - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+                                    "subitem 3 - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+                                    new PdfMakeTexts<string>()
+                                    {
+                                        Text = new List<string>()
+                                            {
+                                                "subitem 3 - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+                                                "subitem 3 - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+                                                "subitem 3 - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+                                                "subitem 3 - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+                                                "subitem 3 - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+                                                "subitem 3 - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+                                                "subitem 3 - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+                                                "subitem 3 - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+                                            }
+                                    },
+                                    "subitem 3 - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+                                    "subitem 3 - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+                                    "subitem 3 - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+                                    "subitem 3 - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Malit profecta versatur nomine ocurreret multavit",
+                                    "subitem 4",
+                                    "subitem 5",
+                                }
+                        },
+                        "item 3\nsecond line of item3"
+                    }
+            });
+            pdfmake.Styles = new
+            {
+                header = new PdfMakeStyle() { FontSize = 15, Bold = true }
+            };
+            pdfmake.AddBodyText(new PdfMakeText()
+            {
+                Text = "\n\nUnordered list with square marker type",
+                Style = new List<string>() { "header" }
+            });
+            pdfmake.AddBodyUnorderedList(new PdfMakeUnorderedList<string>()
+            {
+                UnorderedListType = UnorderedListType.Square,
+                Ul = new List<string>()
+                    {
+                        "item 1",
+                        "item 2",
+                        "item 3",
+                    }
+            });
+            pdfmake.AddBodyText(new PdfMakeText()
+            {
+                Text = "\n\nUnordered list with circle marker type",
+                Style = new List<string>() { "header" }
+            });
+            pdfmake.AddBodyUnorderedList(new PdfMakeUnorderedList<string>()
+            {
+                UnorderedListType = UnorderedListType.Circle,
+                Ul = new List<string>()
+                    {
+                        "item 1",
+                        "item 2",
+                        "item 3",
+                    }
+            });
+            pdfmake.AddBodyText(new PdfMakeText()
+            {
+                Text = "\n\nColored unordered list",
+                Style = new List<string>() { "header" }
+            });
+            pdfmake.AddBodyUnorderedList(new PdfMakeUnorderedList<string>()
+            {
+                Color = "blue",
+                Ul = new List<string>()
+                    {
+                        "item 1",
+                        "item 2",
+                        "item 3",
+                    }
+            });
+            pdfmake.AddBodyText(new PdfMakeText()
+            {
+                Text = "\n\nColored unordered list with own marker color",
+                Style = new List<string>() { "header" }
+            });
+            pdfmake.AddBodyUnorderedList(new PdfMakeUnorderedList<string>()
+            {
+                Color = "blue",
+                MarkerColor = "red",
+                Ul = new List<string>()
+                    {
+                        "item 1",
+                        "item 2",
+                        "item 3",
+                    }
+            });
+            pdfmake.AddBodyText(new PdfMakeText()
+            {
+                Text = "\n\nColored ordered list",
+                Style = new List<string>() { "header" }
+            });
+            pdfmake.AddBodyOrderedList(new PdfMakeOrderedList<string>()
+            {
+                Color = "blue",
+                Ol = new List<string>()
+                    {
+                        "item 1",
+                        "item 2",
+                        "item 3",
+                    }
+            });
+            pdfmake.AddBodyText(new PdfMakeText()
+            {
+                Text = "\n\nColored ordered list with own marker color",
+                Style = new List<string>() { "header" }
+            });
+            pdfmake.AddBodyOrderedList(new PdfMakeOrderedList<string>()
+            {
+                Color = "blue",
+                MarkerColor = "red",
+                Ol = new List<string>()
+                    {
+                        "item 1",
+                        "item 2",
+                        "item 3",
+                    }
+            });
+            pdfmake.AddBodyText(new PdfMakeText()
+            {
+                Text = "\n\nOrdered list - type: lower-alpha",
+                Style = new List<string>() { "header" }
+            });
+            pdfmake.AddBodyOrderedList(new PdfMakeOrderedList<string>()
+            {
+                OrderedListType = OrderedListType.LowerAlpha,
+                Ol = new List<string>()
+                    {
+                        "item 1",
+                        "item 2",
+                        "item 3",
+                    }
+            });
+            pdfmake.AddBodyText(new PdfMakeText()
+            {
+                Text = "\n\nOrdered list - type: lower-alpha",
+                Style = new List<string>() { "header" }
+            });
+            pdfmake.AddBodyOrderedList(new PdfMakeOrderedList<string>()
+            {
+                OrderedListType = OrderedListType.LowerAlpha,
+                Ol = new List<string>()
+                    {
+                        "item 1",
+                        "item 2",
+                        "item 3",
+                    }
+            });
+            pdfmake.AddBodyText(new PdfMakeText()
+            {
+                Text = "\n\nOrdered list - type: upper-alpha",
+                Style = new List<string>() { "header" }
+            });
+            pdfmake.AddBodyOrderedList(new PdfMakeOrderedList<string>()
+            {
+                OrderedListType = OrderedListType.UpperAlpha,
+                Ol = new List<string>()
+                    {
+                        "item 1",
+                        "item 2",
+                        "item 3",
+                    }
+            });
+            pdfmake.AddBodyText(new PdfMakeText()
+            {
+                Text = "\n\nOrdered list - type: upper-roman",
+                Style = new List<string>() { "header" }
+            });
+            pdfmake.AddBodyOrderedList(new PdfMakeOrderedList<string>()
+            {
+                OrderedListType = OrderedListType.UpperRoman,
+                Ol = new List<string>()
+                    {
+                        "item 1",
+                        "item 2",
+                        "item 3",
+                        "item 4",
+                        "item 5",
+                    }
+            });
+            pdfmake.AddBodyText(new PdfMakeText()
+            {
+                Text = "\n\nOrdered list - type: lower-roman",
+                Style = new List<string>() { "header" }
+            });
+            pdfmake.AddBodyOrderedList(new PdfMakeOrderedList<string>()
+            {
+                OrderedListType = OrderedListType.LowerRoman,
+                Ol = new List<string>()
+                    {
+                        "item 1",
+                        "item 2",
+                        "item 3",
+                        "item 4",
+                        "item 5",
+                    }
+            });
+            pdfmake.AddBodyText(new PdfMakeText()
+            {
+                Text = "\n\nOrdered list - type: none",
+                Style = new List<string>() { "header" }
+            });
+            pdfmake.AddBodyOrderedList(new PdfMakeOrderedList<string>()
+            {
+                OrderedListType = OrderedListType.None,
+                Ol = new List<string>()
+                    {
+                        "item 1",
+                        "item 2",
+                        "item 3",
+                    }
+            });
+            pdfmake.AddBodyText(new PdfMakeText()
+            {
+                Text = "\n\nOrdered list - type: none",
+                Style = new List<string>() { "header" }
+            });
+            pdfmake.AddBodyUnorderedList(new PdfMakeUnorderedList<string>()
+            {
+                UnorderedListType = UnorderedListType.None,
+                Ul = new List<string>()
+                    {
+                        "item 1",
+                        "item 2",
+                        "item 3",
+                    }
+            });
+            pdfmake.AddBodyText(new PdfMakeText()
+            {
+                Text = "\n\nOrdered list with own separator",
+                Style = new List<string>() { "header" }
+            });
+            pdfmake.AddBodyOrderedList(new PdfMakeOrderedList<string>()
+            {
+                Separator = ")",
+                Ol = new List<string>()
+                    {
+                        "item 1",
+                        "item 2",
+                        "item 3",
+                    }
+            });
+            pdfmake.AddBodyText(new PdfMakeText()
+            {
+                Text = "\n\nOrdered list with own complex separator",
+                Style = new List<string>() { "header" }
+            });
+            pdfmake.AddBodyOrderedList(new PdfMakeOrderedList<string>()
+            {
+                Separator = new List<string>() { "(", ")"},
+                Ol = new List<string>()
+                    {
+                        "item 1",
+                        "item 2",
+                        "item 3",
+                    }
+            });
+            pdfmake.AddBodyText(new PdfMakeText()
+            {
+                Text = "\n\nOrdered list with own items type",
+                Style = new List<string>() { "header" }
+            });
+            pdfmake.AddBodyOrderedList(new PdfMakeOrderedList<object>()
+            {
+                Ol = new List<object>()
+                    {
+                        "item 1",
+                        new { text = "item 2", listType = "none"},
+                        new { text = "item 3", listType = "upper-roman"},
+                    }
+            });
+            pdfmake.AddBodyText(new PdfMakeText()
+            {
+                Text = "\n\nUnordered list with own items type",
+                Style = new List<string>() { "header" }
+            });
+            pdfmake.AddBodyUnorderedList(new PdfMakeUnorderedList<object>()
+            {
+                Ul = new List<object>()
+                    {
+                        "item 1",
+                        new { text = "item 2", listType = "none"},
+                        new { text = "item 3", listType = "circle"},
+                    }
+            });
+            pdfmake.DefaultStyle = new PdfMakeStyle() { FontSize = 12 };
+            StateHasChanged();
+        }
+    }
+    public string GetDocumentDefinition()
+    {
+        return pdfmake.GetDocumentDefinition(Formatting.Indented);
+    }
+    public async Task OpenInNewTab()
+    {
+        await JSRuntime.InvokeVoidAsync("eval", pdfmake.GetOpenInBrowser(false));
+    }
+}

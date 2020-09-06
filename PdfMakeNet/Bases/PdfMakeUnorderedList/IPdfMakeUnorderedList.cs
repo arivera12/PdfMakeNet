@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System.Collections.Generic;
+using PdfMakeNet.Extensions;
 
 namespace PdfMakeNet
 {
@@ -10,5 +11,16 @@ namespace PdfMakeNet
         /// </summary>
         [JsonProperty("ul")]
         IList<T> Ul { get; set; }
+        /// <summary>
+        /// UnorderedListType option
+        /// </summary>
+        [JsonProperty("type")]
+        [JsonConverter(typeof(ToStringJsonConverter))]
+        UnorderedListType UnorderedListType { get; set; }
+        /// <summary>
+        /// Marker color
+        /// </summary>
+        [JsonProperty("markerColor")]
+        string MarkerColor { get; set; }
     }
 }
