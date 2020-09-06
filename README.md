@@ -30,6 +30,7 @@ Demo live site credits to [sc231997](https://github.com/sc231997).
   *  [x] col-spans and row-spans
   *  [x] headers automatically repeated in case of a page-break
   *  [ ] access to row number of table
+  *  [ ] access to layout functions
 * [x] images
 * [x] SVGs
 * [ ] vector graphics
