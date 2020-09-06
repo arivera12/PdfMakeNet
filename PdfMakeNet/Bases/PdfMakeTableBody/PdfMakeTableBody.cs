@@ -22,5 +22,11 @@ namespace PdfMakeNet
         /// </summary>
         [JsonProperty("body")]
         public IList<T> Body { get; set; }
+        /// <summary>
+        /// Add Heights to each table rows using list of int i.e [10, 20]
+        /// Add Height to all the table rows using int i.e 10
+        /// </summary>
+        [JsonProperty("heights")]
+        public object Heights { get; set; }
     }
 }

@@ -10,7 +10,7 @@ namespace PdfMakeNet
         /// <see cref="https://pdfmake.github.io/docs/document-definition-object/tables/"/>
         /// </summary>
         [JsonProperty("layout")]
-        string Layout { get; set; }
+        object Layout { get; set; }
         /// <summary>
         /// Adds a table
         /// </summary>

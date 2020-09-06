@@ -94,5 +94,20 @@ namespace PdfMakeNet
         /// </summary>
         [JsonProperty("style")]
         public IList<string> Style { get; set; }
+        /// <summary>
+        /// Colspan option
+        /// </summary>
+        [JsonProperty("colSpan")]
+        public int ColSpan { get; set; }
+        /// <summary>
+        /// Rowspan option
+        /// </summary>
+        [JsonProperty("rowSpan")]
+        public int RowSpan { get; set; }
+        /// <summary>
+        /// Border option
+        /// </summary>
+        [JsonProperty("border")]
+        public IList<bool> Border { get; set; }
     }
 }

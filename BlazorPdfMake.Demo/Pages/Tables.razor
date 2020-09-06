@@ -1,0 +1,1759 @@
+@page "/tables"
+@using PdfMakeNet
+@using Newtonsoft.Json
+
+<h2>PdfMakeNet Demo - tables</h2>
+<button @onclick=@OpenInNewTab>Run sample in new tab</button>
+<p>Basic sample using: PdfMakeNet</p>
+<pre class="preformatted">
+[Inject] IPdfMake pdfmake { get; set; } 
+//Or IPdfMake pdfmake = new PdfMake();
+pdfmake.AddBodyText(new PdfMakeText()
+{
+    Text = "Tables",
+    Style = new List&lt;string&gt;() { "header" }
+});
+pdfmake.AddBodyText("Official documentation is in progress, this document is just a glimpse of what is possible with pdfmake and its layout engine.");
+pdfmake.AddBodyText(new PdfMakeText()
+{
+    Text = "A simple table (no headers, no width specified, no spans, no styling)",
+    Style = new List&lt;string&gt;() { "subheader" }
+});
+pdfmake.AddBodyText("The following table has nothing more than a body array");
+pdfmake.AddBodyTable(new PdfMakeTable&lt;List&lt;string&gt;&gt;()
+{
+    Style = new List&lt;string&gt;() { "tableExample" },
+    TableBody = new PdfMakeTableBody&lt;List&lt;string&gt;&gt;()
+        {
+            Body = new List&lt;List&lt;string&gt;&gt;()
+                {
+                    new List&lt;string&gt;() { "Column 1", "Column 2", "Column 3" },
+                    new List&lt;string&gt;() { "One value goes here", "Another one here", "OK?"},
+                }
+        }
+});
+pdfmake.AddBodyText(new PdfMakeText()
+{
+    Text = "A simple table with nested elements",
+    Style = new List&lt;string&gt;() { "subheader" }
+});
+pdfmake.AddBodyText("It is of course possible to nest any other type of nodes available in pdfmake inside table cells");
+pdfmake.AddBodyTable(new PdfMakeTable&lt;object&gt;()
+{
+    Style = new List&lt;string&gt;() { "tableExample" },
+    TableBody = new PdfMakeTableBody&lt;object&gt;()
+    {
+        Body = new List&lt;object&gt;()
+            {
+                new List&lt;string&gt;() { "Column 1", "Column 2", "Column 3" },
+                new List&lt;object&gt;() 
+                { 
+                    new PdfMakeStack&lt;object&gt;()
+                    {
+                        Stack = new List&lt;object&gt;()
+                            {
+                                "Let\'s try an unordered list",
+                                new PdfMakeUnorderedList&lt;string&gt;()
+                                    {
+                                        Ul = new List&lt;string&gt;() { "item 1", "item 2" }
+                                    }
+                            }
+                    },
+                    new List&lt;object&gt;()
+                    {
+                        "or a nested table",
+                        new PdfMakeTable&lt;List&lt;string&gt;&gt;()
+                        {
+                            TableBody = new PdfMakeTableBody&lt;List&lt;string&gt;&gt;()
+                                {
+                                    Body = new List&lt;List&lt;string&gt;&gt;()
+                                        {
+                                            new List&lt;string&gt;() { "Col 1", "Col 2", "Col 3"},
+                                            new List&lt;string&gt;() { "1", "2", "3" },
+                                            new List&lt;string&gt;() { "1", "2", "3" }
+                                        }
+                                }
+                        }
+                    },
+                    new PdfMakeTexts&lt;object&gt;()
+                    {
+                        Text = new List&lt;object&gt;()
+                            {
+                                "Inlines can be ",
+                                new PdfMakeText() { Text = "styled\n", Italics = true },
+                                new PdfMakeText() { Text = "easily as everywhere else", FontSize = 10 }
+                            }
+                    }
+                },
+            }
+    }
+});
+pdfmake.AddBodyText(new PdfMakeText()
+{
+    Text = "Defining column widths",
+    Style = new List&lt;string&gt;() { "subheader" }
+});
+pdfmake.AddBodyText("Tables support the same width definitions as standard columns:");
+pdfmake.AddBodyUnorderedList(new PdfMakeUnorderedList&lt;string&gt;()
+{
+    Bold = true,
+    Ul = new List&lt;string&gt;() 
+        { 
+            "auto", 
+            "star", 
+            "fixed value" 
+        }
+});
+pdfmake.AddBodyTable(new PdfMakeTable&lt;List&lt;object&gt;&gt;()
+{
+    Style = new List&lt;string&gt;() { "tableExample" },
+    TableBody = new PdfMakeTableBody&lt;List&lt;object&gt;&gt;()
+        {
+            Widths = new List&lt;object&gt;() { 100, "*", 200, "*" },
+            Body = new List&lt;List&lt;object&gt;&gt;()
+                {
+                    new List&lt;object&gt;() 
+                        { 
+                            "width=100", 
+                            "star-sized", 
+                            "width=200", 
+                            "star-sized" 
+                        },
+                    new List&lt;object&gt;() 
+                        { 
+                            "fixed-width cells have exactly the specified width", 
+                            new PdfMakeText()
+                            { 
+                                Text= "nothing interesting here",
+                                Italics = true ,
+                                Color = "gray"
+                            },
+                            new PdfMakeText()
+                            { 
+                                Text= "nothing interesting here",
+                                Italics = true ,
+                                Color = "gray"
+                            },
+                            new PdfMakeText()
+                            { 
+                                Text= "nothing interesting here",
+                                Italics = true ,
+                                Color = "gray"
+                            },
+                        },
+                }
+        }
+});
+pdfmake.AddBodyTable(new PdfMakeTable&lt;List&lt;string&gt;&gt;()
+{
+    Style = new List&lt;string&gt;() { "tableExample" },
+    TableBody = new PdfMakeTableBody&lt;List&lt;string&gt;&gt;()
+        {
+            Widths = new List&lt;object&gt;() { "*", "auto" },
+            Body = new List&lt;List&lt;string&gt;&gt;()
+                {
+                    new List&lt;string&gt;() 
+                    { 
+                        "This is a star-sized column. The next column over, an auto-sized column, will wrap to accomodate all the text in this cell.",
+                        "I am auto sized."
+                    },
+                }
+        }
+});
+pdfmake.AddBodyTable(new PdfMakeTable&lt;List&lt;object&gt;&gt;()
+{
+    Style = new List&lt;string&gt;() { "tableExample" },
+    TableBody = new PdfMakeTableBody&lt;List&lt;object&gt;&gt;()
+        {
+            Widths = new List&lt;object&gt;() { "*", "auto" },
+            Body = new List&lt;List&lt;object&gt;&gt;()
+                {
+                    new List&lt;object&gt;() 
+                    { 
+                        "This is a star-sized column. The next column over, an auto-sized column, will not wrap to accomodate all the text in this cell, because it has been given the noWrap style.",
+                        new { text = "I am auto sized.", noWrap = true } 
+                    },
+                },
+        }
+});
+pdfmake.AddBodyText(new PdfMakeText()
+{
+    Text = "Defining row heights",
+    Style = new List&lt;string&gt;() { "subheader" }
+});
+pdfmake.AddBodyTable(new PdfMakeTable&lt;List&lt;string&gt;&gt;()
+{
+    Style = new List&lt;string&gt;() { "tableExample" },
+    TableBody = new PdfMakeTableBody&lt;List&lt;string&gt;&gt;()
+        {
+            Heights = new List&lt;int&gt;() { 20, 50 , 70 },
+            Body = new List&lt;List&lt;string&gt;&gt;()
+                {
+                    new List&lt;string&gt;() 
+                    { 
+                        "row 1 with height 20",
+                        "column B"
+                    },
+                    new List&lt;string&gt;() 
+                    { 
+                        "row 2 with height 50",
+                        "column B"
+                    },
+                    new List&lt;string&gt;() 
+                    { 
+                        "row 3 with height 70",
+                        "column B"
+                    },
+                }
+        }
+});
+pdfmake.AddBodyText("With same height:");
+pdfmake.AddBodyTable(new PdfMakeTable&lt;List&lt;string&gt;&gt;()
+{
+    Style = new List&lt;string&gt;() { "tableExample" },
+    TableBody = new PdfMakeTableBody&lt;List&lt;string&gt;&gt;()
+        {
+            Heights = 40,
+            Body = new List&lt;List&lt;string&gt;&gt;()
+                {
+                    new List&lt;string&gt;() 
+                    { 
+                        "row 1",
+                        "column B"
+                    },
+                    new List&lt;string&gt;() 
+                    { 
+                        "row 2",
+                        "column B"
+                    },
+                    new List&lt;string&gt;() 
+                    { 
+                        "row 3",
+                        "column B"
+                    },
+                }
+        }
+});
+pdfmake.AddBodyText(new PdfMakeText()
+{
+    Text = "Column/row spans",
+    PageBreak = PageBreak.Before,
+    Style = new List&lt;string&gt;() { "subheader" }
+});
+pdfmake.AddBodyText(new PdfMakeText()
+{
+    Text = "Each cell-element can set a rowSpan or colSpan"
+});
+pdfmake.AddBodyTable(new PdfMakeTable&lt;List&lt;object&gt;&gt;()
+{
+    Style = new List&lt;string&gt;() { "tableExample" },
+    Color = "#444",
+    TableBody = new PdfMakeTableBody&lt;List&lt;object&gt;&gt;()
+        {
+            Widths = new List&lt;object&gt;() { 200, "auto", "auto" },
+            HeaderRows = 2,
+            Body = new List&lt;List&lt;object&gt;&gt;()
+                {
+                    new List&lt;object&gt;()
+                    {
+                        new PdfMakeText()
+                        {
+                            Text = "Header with Colspan = 2",
+                            Style = new List&lt;string&gt;() { "tableHeader" },
+                            Alignment = Alingment.Center,
+                            ColSpan = 2
+                        },
+                        new {},
+                        new PdfMakeText()
+                        {
+                            Text = "Header 3",
+                            Style = new List&lt;string&gt;() { "tableHeader" },
+                            Alignment = Alingment.Center
+                        }
+                    },
+                    new List&lt;object&gt;() 
+                    { 
+                        new PdfMakeText()
+                        {
+                            Text = "Header 1",
+                            Style = new List&lt;string&gt;() { "tableHeader" },
+                            Alignment = Alingment.Center
+                        },
+                        new PdfMakeText()
+                        {
+                            Text = "Header 2",
+                            Style = new List&lt;string&gt;() { "tableHeader" },
+                            Alignment = Alingment.Center
+                        },
+                        new PdfMakeText()
+                        {
+                            Text = "Header 3",
+                            Style = new List&lt;string&gt;() { "tableHeader" },
+                            Alignment = Alingment.Center
+                        },
+                    },
+                    new List&lt;object&gt;() 
+                    { 
+                        "Sample value 1",
+                        "Sample value 2",
+                        "Sample value 3",
+                    },
+                    new List&lt;object&gt;() 
+                    { 
+                        new PdfMakeText()
+                        {
+                            RowSpan = 3,
+                            Text = "rowSpan set to 3\nLorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor"
+                        },
+                        "Sample value 2",
+                        "Sample value 3",
+                    },
+                    new List&lt;object&gt;() 
+                    { 
+                        "",
+                        "Sample value 2",
+                        "Sample value 3",
+                    },
+                    new List&lt;object&gt;() 
+                    { 
+                        "Sample value 1",
+                        "Sample value 2",
+                        "Sample value 3",
+                    },
+                    new List&lt;object&gt;() 
+                    { 
+                        "Sample value 1",
+                        new PdfMakeText()
+                        {
+                            ColSpan = 2,
+                            RowSpan = 2,
+                            Text = "Both:\nrowSpan and colSpan\ncan be defined at the same time"
+                        },
+                        "",
+                    },
+                    new List&lt;object&gt;() 
+                    { 
+                        "Sample value 1",
+                        "",
+                        "",
+                    },
+                }
+        }
+});
+pdfmake.AddBodyText(new PdfMakeText()
+{
+    Text = "Headers",
+    PageBreak = PageBreak.Before,
+    Style = new List&lt;string&gt;() { "subheader" }
+});
+pdfmake.AddBodyText("You can declare how many rows should be treated as a header. Headers are automatically repeated on the following pages");
+pdfmake.AddBodyText(new PdfMakeTexts&lt;string&gt;()
+{
+    Text = new List&lt;string&gt;()
+        {
+            "It is also possible to set keepWithHeaderRows to make sure there will be no page-break between the header and these rows. Take a look at the document-definition and play with it. If you set it to one, the following table will automatically start on the next page, since there\'s not enough space for the first row to be rendered here"
+        },
+    Color = "gray",
+    Italics = true
+});
+pdfmake.AddBodyTable(new PdfMakeTable&lt;List&lt;object&gt;&gt;()
+{
+    Style = new List&lt;string&gt;() { "tableExample" },
+    TableBody = new PdfMakeTableBody&lt;List&lt;object&gt;&gt;()
+        {
+            HeaderRows = 1,
+            Body = new List&lt;List&lt;object&gt;&gt;()
+                {
+                    new List&lt;object&gt;() 
+                    { 
+                        new PdfMakeText()
+                        {
+                            Text = "Header 1",
+                            Style = new List&lt;string&gt;() { "tableHeader" },
+                        },
+                        new PdfMakeText()
+                        {
+                            Text = "Header 2",
+                            Style = new List&lt;string&gt;() { "tableHeader" },
+                        },
+                        new PdfMakeText()
+                        {
+                            Text = "Header 3",
+                            Style = new List&lt;string&gt;() { "tableHeader" },
+                        }
+                    },
+                    new List&lt;object&gt;() 
+                    { 
+                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                    }
+                }
+        }
+});
+pdfmake.AddBodyText(new PdfMakeText()
+{
+    Text = "Styling tables",
+    Style = new List&lt;string&gt;() { "subheader" }
+});
+pdfmake.AddBodyText("You can provide a custom styler for the table. Currently it supports:");
+pdfmake.AddBodyUnorderedList(new PdfMakeUnorderedList&lt;string&gt;()
+{
+    Ul = new List&lt;string&gt;()
+        {
+            "line widths",
+            "line colors",
+            "cell paddings",
+        },
+});
+pdfmake.AddBodyText("with more options coming soon...\n\npdfmake currently has a few predefined styles (see them on the next page)");
+pdfmake.AddBodyText(new PdfMakeText()
+{
+    Text = "noBorders",
+    FontSize = 14,
+    Bold = true,
+    PageBreak = PageBreak.Before,
+    Margin = new List&lt;int&gt;(){ 0, 0, 0, 0}
+});
+pdfmake.AddBodyTable(new PdfMakeTable&lt;List&lt;object&gt;&gt;()
+{
+    Style = new List&lt;string&gt;() { "tableExample" },
+    TableBody = new PdfMakeTableBody&lt;List&lt;object&gt;&gt;()
+        {
+            HeaderRows = 1,
+            Body = new List&lt;List&lt;object&gt;&gt;()
+                {
+                    new List&lt;object&gt;() 
+                    { 
+                        new PdfMakeText()
+                        {
+                            Text = "Header 1",
+                            Style = new List&lt;string&gt;() { "tableHeader" },
+                        },
+                        new PdfMakeText()
+                        {
+                            Text = "Header 2",
+                            Style = new List&lt;string&gt;() { "tableHeader" },
+                        },
+                        new PdfMakeText()
+                        {
+                            Text = "Header 3",
+                            Style = new List&lt;string&gt;() { "tableHeader" },
+                        }
+                    },
+                    new List&lt;object&gt;() 
+                    { 
+                        "Sample value 1",
+                        "Sample value 2",
+                        "Sample value 3",
+                    },
+                    new List&lt;object&gt;() 
+                    { 
+                        "Sample value 1",
+                        "Sample value 2",
+                        "Sample value 3",
+                    },
+                    new List&lt;object&gt;() 
+                    { 
+                        "Sample value 1",
+                        "Sample value 2",
+                        "Sample value 3",
+                    },
+                    new List&lt;object&gt;() 
+                    { 
+                        "Sample value 1",
+                        "Sample value 2",
+                        "Sample value 3",
+                    },
+                    new List&lt;object&gt;() 
+                    { 
+                        "Sample value 1",
+                        "Sample value 2",
+                        "Sample value 3",
+                    },
+                }
+        },
+    Layout = "noBorders"
+});
+pdfmake.AddBodyText(new PdfMakeText()
+{
+    Text = "headerLineOnly",
+    FontSize = 14,
+    Bold = true,
+    Margin = new List&lt;int&gt;(){ 0, 20, 0, 0}
+});
+pdfmake.AddBodyTable(new PdfMakeTable&lt;List&lt;object&gt;&gt;()
+{
+    Style = new List&lt;string&gt;() { "tableExample" },
+    TableBody = new PdfMakeTableBody&lt;List&lt;object&gt;&gt;()
+        {
+            HeaderRows = 1,
+            Body = new List&lt;List&lt;object&gt;&gt;()
+                {
+                    new List&lt;object&gt;() 
+                    { 
+                        new PdfMakeText()
+                        {
+                            Text = "Header 1",
+                            Style = new List&lt;string&gt;() { "tableHeader" },
+                        },
+                        new PdfMakeText()
+                        {
+                            Text = "Header 2",
+                            Style = new List&lt;string&gt;() { "tableHeader" },
+                        },
+                        new PdfMakeText()
+                        {
+                            Text = "Header 3",
+                            Style = new List&lt;string&gt;() { "tableHeader" },
+                        }
+                    },
+                    new List&lt;object&gt;() 
+                    { 
+                        "Sample value 1",
+                        "Sample value 2",
+                        "Sample value 3",
+                    },
+                    new List&lt;object&gt;() 
+                    { 
+                        "Sample value 1",
+                        "Sample value 2",
+                        "Sample value 3",
+                    },
+                    new List&lt;object&gt;() 
+                    { 
+                        "Sample value 1",
+                        "Sample value 2",
+                        "Sample value 3",
+                    },
+                    new List&lt;object&gt;() 
+                    { 
+                        "Sample value 1",
+                        "Sample value 2",
+                        "Sample value 3",
+                    },
+                    new List&lt;object&gt;() 
+                    { 
+                        "Sample value 1",
+                        "Sample value 2",
+                        "Sample value 3",
+                    },
+                }
+        },
+    Layout = "headerLineOnly"
+});
+pdfmake.AddBodyText(new PdfMakeText()
+{
+    Text = "lightHorizontalLines",
+    FontSize = 14,
+    Bold = true,
+    Margin = new List&lt;int&gt;(){ 0, 20, 0, 0}
+});
+pdfmake.AddBodyTable(new PdfMakeTable&lt;List&lt;object&gt;&gt;()
+{
+    Style = new List&lt;string&gt;() { "tableExample" },
+    TableBody = new PdfMakeTableBody&lt;List&lt;object&gt;&gt;()
+        {
+            HeaderRows = 1,
+            Body = new List&lt;List&lt;object&gt;&gt;()
+                {
+                    new List&lt;object&gt;() 
+                    { 
+                        new PdfMakeText()
+                        {
+                            Text = "Header 1",
+                            Style = new List&lt;string&gt;() { "tableHeader" },
+                        },
+                        new PdfMakeText()
+                        {
+                            Text = "Header 2",
+                            Style = new List&lt;string&gt;() { "tableHeader" },
+                        },
+                        new PdfMakeText()
+                        {
+                            Text = "Header 3",
+                            Style = new List&lt;string&gt;() { "tableHeader" },
+                        }
+                    },
+                    new List&lt;object&gt;() 
+                    { 
+                        "Sample value 1",
+                        "Sample value 2",
+                        "Sample value 3",
+                    },
+                    new List&lt;object&gt;() 
+                    { 
+                        "Sample value 1",
+                        "Sample value 2",
+                        "Sample value 3",
+                    },
+                    new List&lt;object&gt;() 
+                    { 
+                        "Sample value 1",
+                        "Sample value 2",
+                        "Sample value 3",
+                    },
+                    new List&lt;object&gt;() 
+                    { 
+                        "Sample value 1",
+                        "Sample value 2",
+                        "Sample value 3",
+                    },
+                    new List&lt;object&gt;() 
+                    { 
+                        "Sample value 1",
+                        "Sample value 2",
+                        "Sample value 3",
+                    },
+                }
+        },
+    Layout = "lightHorizontalLines"
+});
+pdfmake.AddBodyText(new PdfMakeText()
+{
+    Text = "Optional border",
+    FontSize = 14,
+    Bold = true,
+    PageBreak = PageBreak.Before,
+    Margin = new List&lt;int&gt;(){ 0, 0, 0, 8}
+});
+pdfmake.AddBodyText("Each cell contains an optional border property: an array of 4 booleans for left border, top border, right border, bottom border.");
+pdfmake.AddBodyTable(new PdfMakeTable&lt;List&lt;object&gt;&gt;()
+{
+    Style = new List&lt;string&gt;() { "tableExample" },
+    TableBody = new PdfMakeTableBody&lt;List&lt;object&gt;&gt;()
+        {
+            HeaderRows = 1,
+            Body = new List&lt;List&lt;object&gt;&gt;()
+                {
+                    new List&lt;object&gt;() 
+                    { 
+                        new PdfMakeText()
+                        {
+                            Border = new List&lt;bool&gt;() { false, true, false, false },
+                            FillColor = "#eeeeee",
+                            Text = "border:\n[false, true, false, false]",
+                        },
+                        new PdfMakeText()
+                        {
+                            Border = new List&lt;bool&gt;() { false, false, false, false },
+                            FillColor = "#dddddd",
+                            Text = "border:\n[false, false, false, false]",
+                        },
+                        new PdfMakeText()
+                        {
+                            Border = new List&lt;bool&gt;() { true, true, true, true },
+                            FillColor = "#eeeeee",
+                            Text = "border:\n[true, true, true, true]",
+                        },
+                    },
+                    new List&lt;object&gt;() 
+                    { 
+                        new PdfMakeText()
+                        {
+                            RowSpan = 3,
+                            Border = new List&lt;bool&gt;() { true, true, true, true },
+                            FillColor = "#eeeeff",
+                            Text = "rowSpan: 3\n\nborder:\n[true, true, true, true]",
+                        },
+                        new PdfMakeText()
+                        {
+                            Border = null,
+                            FillColor = "#eeeeee",
+                            Text = "border:\nnull",
+                        },
+                        new PdfMakeText()
+                        {
+                            Border = new List&lt;bool&gt;() { true, false, false, false },
+                            FillColor = "#dddddd",
+                            Text = "border:\n[true, false, false, false]",
+                        },
+                    },
+                    new List&lt;object&gt;() 
+                    { 
+                        "",
+                        new PdfMakeText()
+                        {
+                            ColSpan = 2,
+                            Border = new List&lt;bool&gt;() { true, true, true, true },
+                            FillColor = "#eeffee",
+                            Text = "colSpan: 2\n\nborder:\n[true, true, true, true]",
+                        },
+                        ""
+                    },
+                    new List&lt;object&gt;() 
+                    { 
+                        "",
+                        new PdfMakeText()
+                        {
+                            Border = null,
+                            FillColor = "#eeeeee",
+                            Text = "border:\nnull",
+                        },
+                        new PdfMakeText()
+                        {
+                            Border = new List&lt;bool&gt;() { false, false, true, true },
+                            FillColor = "#dddddd",
+                            Text = "border:\n[false, false, true, true]",
+                        },
+                    }
+                }
+        },
+    Layout = new { defaultBorder = (bool?)false }
+});
+pdfmake.AddBodyText("For every cell without a border property, whether it has all borders or not is determined by layout.defaultBorder, which is false in the table above and true (by default) in the table below.");
+pdfmake.AddBodyTable(new PdfMakeTable&lt;List&lt;object&gt;&gt;()
+{
+    Style = new List&lt;string&gt;() { "tableExample" },
+    TableBody = new PdfMakeTableBody&lt;List&lt;object&gt;&gt;()
+        {
+            HeaderRows = 1,
+            Body = new List&lt;List&lt;object&gt;&gt;()
+                {
+                    new List&lt;object&gt;() 
+                    { 
+                        new PdfMakeText()
+                        {
+                            Border = new List&lt;bool&gt;() { false, false, false, false },
+                            FillColor = "#eeeeee",
+                            Text = "border:\n[false, false, false, false]",
+                        },
+                        new PdfMakeText()
+                        {
+                            FillColor = "#dddddd",
+                            Text = "border:\nnull",
+                        },
+                        new PdfMakeText()
+                        {
+                            FillColor = "#eeeeee",
+                            Text = "border:\nnull",
+                        },
+                    },
+                    new List&lt;object&gt;() 
+                    { 
+                        new PdfMakeText()
+                        {
+                            FillColor = "#dddddd",
+                            Text = "border:\nnull",
+                        },
+                        new PdfMakeText()
+                        {
+                            FillColor = "#eeeeee",
+                            Text = "border:\nnull",
+                        },
+                        new PdfMakeText()
+                        {
+                            Border = new List&lt;bool&gt;() { true, true, false, false },
+                            FillColor = "#dddddd",
+                            Text = "border:\n[true, true, false, false]",
+                        },
+                    }
+                }
+        },
+});
+pdfmake.AddBodyText("And some other examples with rowSpan/colSpan...");
+pdfmake.AddBodyTable(new PdfMakeTable&lt;List&lt;object&gt;&gt;()
+{
+    Style = new List&lt;string&gt;() { "tableExample" },
+    TableBody = new PdfMakeTableBody&lt;List&lt;object&gt;&gt;()
+        {
+            HeaderRows = 1,
+            Body = new List&lt;List&lt;object&gt;&gt;()
+                {
+                    new List&lt;object&gt;() 
+                    { 
+                        "",
+                        "column 1",
+                        "column 2",
+                        "column 3"
+                    },
+                    new List&lt;object&gt;() 
+                    { 
+                        "row 1",
+                        new PdfMakeText()
+                        {
+                            RowSpan = 3,
+                            ColSpan = 3,
+                            Border = new List&lt;bool&gt;() { true, true, true, true },
+                            FillColor = "#cccccc",
+                            Text = "rowSpan: 3\ncolSpan: 3\n\nborder:\n[true, true, true, true]",
+                        },
+                        "",
+                        ""
+                    },
+                    new List&lt;object&gt;()
+                    {
+                        "row 2",
+                        "",
+                        "",
+                        ""
+                    },
+                    new List&lt;object&gt;()
+                    {
+                        "row 3",
+                        "",
+                        "",
+                        ""
+                    }
+                }
+        },
+        Layout = new { defaultBorder = (bool?) false }
+});
+pdfmake.AddBodyTable(new PdfMakeTable&lt;List&lt;object&gt;&gt;()
+{
+    Style = new List&lt;string&gt;() { "tableExample" },
+    TableBody = new PdfMakeTableBody&lt;List&lt;object&gt;&gt;()
+        {
+            HeaderRows = 1,
+            Body = new List&lt;List&lt;object&gt;&gt;()
+                {
+                    new List&lt;object&gt;() 
+                    { 
+                        new PdfMakeText()
+                        {
+                            ColSpan = 3,
+                            Text = "colSpan: 3\n\nborder:\n[false, false, false, false]",
+                            FillColor = "#eeeeee",
+                            Border = new List&lt;bool&gt;() { false, false, false, false }
+                        },
+                        "",
+                        ""
+                    },
+                    new List&lt;object&gt;() 
+                    { 
+                        "border:\nnull",
+                        "border:\nnull",
+                        "border:\nnull",
+                    }
+                }
+        },
+});
+pdfmake.AddBodyTable(new PdfMakeTable&lt;List&lt;object&gt;&gt;()
+{
+    Style = new List&lt;string&gt;() { "tableExample" },
+    TableBody = new PdfMakeTableBody&lt;List&lt;object&gt;&gt;()
+        {
+            Body = new List&lt;List&lt;object&gt;&gt;()
+                {
+                    new List&lt;object&gt;() 
+                    { 
+                        new PdfMakeText()
+                        {
+                            RowSpan = 3,
+                            Text = "rowSpan: 3\n\nborder:\n[false, false, false, false]",
+                            FillColor = "#eeeeee",
+                            Border = new List&lt;bool&gt;() { false, false, false, false }
+                        },
+                        "border:\nnull",
+                        "border:\nnull",
+                    },
+                    new List&lt;object&gt;() 
+                    {
+                        "",
+                        "border:\nnull",
+                        "border:\nnull",
+                    },
+                    new List&lt;object&gt;() 
+                    {
+                        "",
+                        "border:\nnull",
+                        "border:\nnull",
+                    }
+                }
+        },
+});
+pdfmake.Styles = new
+{
+    header = new PdfMakeStyle() { FontSize = 18, Bold = true, Margin = new List&lt;int&gt;(){ 0, 0, 0, 10 } },
+    subheader = new PdfMakeStyle() { FontSize = 16, Bold = true, Margin = new List&lt;int&gt;(){ 0, 10, 0, 5 } },
+    tableExample = new PdfMakeStyle() { Margin = new List&lt;int&gt;(){ 0, 5, 0, 15 } },
+    tableHeader = new PdfMakeStyle() { Bold = true, FontSize = 13, Color = "black" },
+};
+//Get document definition
+pdfmake.GetDocumentDefinition(Formatting.Indented);
+//Button event code executing
+pdfmake.GetOpenInBrowser(false)
+</pre>
+<p>PdfMake Document Definition Output From PdfMakeNet</p>
+<pre class="preformatted">@GetDocumentDefinition()</pre>
+
+@functions{
+    [Inject] IPdfMake pdfmake { get; set; }
+    [Inject] IJSRuntime JSRuntime { get; set; }
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender)
+        {
+            pdfmake.AddBodyText(new PdfMakeText()
+            {
+                Text = "Tables",
+                Style = new List<string>() { "header" }
+            });
+            pdfmake.AddBodyText("Official documentation is in progress, this document is just a glimpse of what is possible with pdfmake and its layout engine.");
+            pdfmake.AddBodyText(new PdfMakeText()
+            {
+                Text = "A simple table (no headers, no width specified, no spans, no styling)",
+                Style = new List<string>() { "subheader" }
+            });
+            pdfmake.AddBodyText("The following table has nothing more than a body array");
+            pdfmake.AddBodyTable(new PdfMakeTable<List<string>>()
+            {
+                Style = new List<string>() { "tableExample" },
+                TableBody = new PdfMakeTableBody<List<string>>()
+                    {
+                        Body = new List<List<string>>()
+                            {
+                                new List<string>() { "Column 1", "Column 2", "Column 3" },
+                                new List<string>() { "One value goes here", "Another one here", "OK?"},
+                            }
+                    }
+            });
+            pdfmake.AddBodyText(new PdfMakeText()
+            {
+                Text = "A simple table with nested elements",
+                Style = new List<string>() { "subheader" }
+            });
+            pdfmake.AddBodyText("It is of course possible to nest any other type of nodes available in pdfmake inside table cells");
+            pdfmake.AddBodyTable(new PdfMakeTable<object>()
+            {
+                Style = new List<string>() { "tableExample" },
+                TableBody = new PdfMakeTableBody<object>()
+                {
+                    Body = new List<object>()
+                        {
+                            new List<string>() { "Column 1", "Column 2", "Column 3" },
+                            new List<object>() 
+                            { 
+                                new PdfMakeStack<object>()
+                                {
+                                    Stack = new List<object>()
+                                        {
+                                            "Let\'s try an unordered list",
+                                            new PdfMakeUnorderedList<string>()
+                                                {
+                                                    Ul = new List<string>() { "item 1", "item 2" }
+                                                }
+                                        }
+                                },
+                                new List<object>()
+                                {
+                                    "or a nested table",
+                                    new PdfMakeTable<List<string>>()
+                                    {
+                                        TableBody = new PdfMakeTableBody<List<string>>()
+                                            {
+                                                Body = new List<List<string>>()
+                                                    {
+                                                        new List<string>() { "Col 1", "Col 2", "Col 3"},
+                                                        new List<string>() { "1", "2", "3" },
+                                                        new List<string>() { "1", "2", "3" }
+                                                    }
+                                            }
+                                    }
+                                },
+                                new PdfMakeTexts<object>()
+                                {
+                                    Text = new List<object>()
+                                        {
+                                            "Inlines can be ",
+                                            new PdfMakeText() { Text = "styled\n", Italics = true },
+                                            new PdfMakeText() { Text = "easily as everywhere else", FontSize = 10 }
+                                        }
+                                }
+                            },
+                        }
+                }
+            });
+            pdfmake.AddBodyText(new PdfMakeText()
+            {
+                Text = "Defining column widths",
+                Style = new List<string>() { "subheader" }
+            });
+            pdfmake.AddBodyText("Tables support the same width definitions as standard columns:");
+            pdfmake.AddBodyUnorderedList(new PdfMakeUnorderedList<string>()
+            {
+               Bold = true,
+               Ul = new List<string>() 
+                   { 
+                       "auto", 
+                       "star", 
+                        "fixed value" 
+                    }
+            });
+            pdfmake.AddBodyTable(new PdfMakeTable<List<object>>()
+            {
+                Style = new List<string>() { "tableExample" },
+                TableBody = new PdfMakeTableBody<List<object>>()
+                    {
+                        Widths = new List<object>() { 100, "*", 200, "*" },
+                        Body = new List<List<object>>()
+                            {
+                                new List<object>() 
+                                    { 
+                                        "width=100", 
+                                        "star-sized", 
+                                        "width=200", 
+                                        "star-sized" 
+                                    },
+                                new List<object>() 
+                                    { 
+                                        "fixed-width cells have exactly the specified width", 
+                                        new PdfMakeText()
+                                        { 
+                                            Text= "nothing interesting here",
+                                            Italics = true ,
+                                            Color = "gray"
+                                        },
+                                        new PdfMakeText()
+                                        { 
+                                            Text= "nothing interesting here",
+                                            Italics = true ,
+                                            Color = "gray"
+                                        },
+                                        new PdfMakeText()
+                                        { 
+                                            Text= "nothing interesting here",
+                                            Italics = true ,
+                                            Color = "gray"
+                                        },
+                                    },
+                            }
+                    }
+            });
+            pdfmake.AddBodyTable(new PdfMakeTable<List<string>>()
+            {
+                Style = new List<string>() { "tableExample" },
+                TableBody = new PdfMakeTableBody<List<string>>()
+                    {
+                        Widths = new List<object>() { "*", "auto" },
+                        Body = new List<List<string>>()
+                            {
+                                new List<string>() 
+                                { 
+                                    "This is a star-sized column. The next column over, an auto-sized column, will wrap to accomodate all the text in this cell.",
+                                    "I am auto sized."
+                                },
+                            }
+                    }
+            });
+            pdfmake.AddBodyTable(new PdfMakeTable<List<object>>()
+            {
+                Style = new List<string>() { "tableExample" },
+                TableBody = new PdfMakeTableBody<List<object>>()
+                    {
+                        Widths = new List<object>() { "*", "auto" },
+                        Body = new List<List<object>>()
+                            {
+                                new List<object>() 
+                                { 
+                                    "This is a star-sized column. The next column over, an auto-sized column, will not wrap to accomodate all the text in this cell, because it has been given the noWrap style.",
+                                    new { text = "I am auto sized.", noWrap = true } 
+                                },
+                            },
+                    }
+            });
+            pdfmake.AddBodyText(new PdfMakeText()
+            {
+                Text = "Defining row heights",
+                Style = new List<string>() { "subheader" }
+            });
+            pdfmake.AddBodyTable(new PdfMakeTable<List<string>>()
+            {
+                Style = new List<string>() { "tableExample" },
+                TableBody = new PdfMakeTableBody<List<string>>()
+                    {
+                        Heights = new List<int>() { 20, 50 , 70 },
+                        Body = new List<List<string>>()
+                            {
+                                new List<string>() 
+                                { 
+                                    "row 1 with height 20",
+                                    "column B"
+                                },
+                                new List<string>() 
+                                { 
+                                    "row 2 with height 50",
+                                    "column B"
+                                },
+                                new List<string>() 
+                                { 
+                                    "row 3 with height 70",
+                                    "column B"
+                                },
+                            }
+                    }
+            });
+            pdfmake.AddBodyText("With same height:");
+            pdfmake.AddBodyTable(new PdfMakeTable<List<string>>()
+            {
+                Style = new List<string>() { "tableExample" },
+                TableBody = new PdfMakeTableBody<List<string>>()
+                    {
+                        Heights = 40,
+                        Body = new List<List<string>>()
+                            {
+                                new List<string>() 
+                                { 
+                                    "row 1",
+                                    "column B"
+                                },
+                                new List<string>() 
+                                { 
+                                    "row 2",
+                                    "column B"
+                                },
+                                new List<string>() 
+                                { 
+                                    "row 3",
+                                    "column B"
+                                },
+                            }
+                    }
+            });
+            pdfmake.AddBodyText(new PdfMakeText()
+            {
+                Text = "Column/row spans",
+                PageBreak = PageBreak.Before,
+                Style = new List<string>() { "subheader" }
+            });
+            pdfmake.AddBodyText(new PdfMakeText()
+            {
+                Text = "Each cell-element can set a rowSpan or colSpan"
+            });
+            pdfmake.AddBodyTable(new PdfMakeTable<List<object>>()
+            {
+                Style = new List<string>() { "tableExample" },
+                Color = "#444",
+                TableBody = new PdfMakeTableBody<List<object>>()
+                    {
+                        Widths = new List<object>() { 200, "auto", "auto" },
+                        HeaderRows = 2,
+                        Body = new List<List<object>>()
+                            {
+                                new List<object>()
+                                {
+                                    new PdfMakeText()
+                                    {
+                                        Text = "Header with Colspan = 2",
+                                        Style = new List<string>() { "tableHeader" },
+                                        Alignment = Alingment.Center,
+                                        ColSpan = 2
+                                    },
+                                    new {},
+                                    new PdfMakeText()
+                                    {
+                                        Text = "Header 3",
+                                        Style = new List<string>() { "tableHeader" },
+                                        Alignment = Alingment.Center
+                                    }
+                                },
+                                new List<object>() 
+                                { 
+                                    new PdfMakeText()
+                                    {
+                                        Text = "Header 1",
+                                        Style = new List<string>() { "tableHeader" },
+                                        Alignment = Alingment.Center
+                                    },
+                                    new PdfMakeText()
+                                    {
+                                        Text = "Header 2",
+                                        Style = new List<string>() { "tableHeader" },
+                                        Alignment = Alingment.Center
+                                    },
+                                    new PdfMakeText()
+                                    {
+                                        Text = "Header 3",
+                                        Style = new List<string>() { "tableHeader" },
+                                        Alignment = Alingment.Center
+                                    },
+                                },
+                                new List<object>() 
+                                { 
+                                    "Sample value 1",
+                                    "Sample value 2",
+                                    "Sample value 3",
+                                },
+                                new List<object>() 
+                                { 
+                                    new PdfMakeText()
+                                    {
+                                        RowSpan = 3,
+                                        Text = "rowSpan set to 3\nLorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor"
+                                    },
+                                    "Sample value 2",
+                                    "Sample value 3",
+                                },
+                                new List<object>() 
+                                { 
+                                    "",
+                                    "Sample value 2",
+                                    "Sample value 3",
+                                },
+                                new List<object>() 
+                                { 
+                                    "Sample value 1",
+                                    "Sample value 2",
+                                    "Sample value 3",
+                                },
+                                new List<object>() 
+                                { 
+                                    "Sample value 1",
+                                    new PdfMakeText()
+                                    {
+                                        ColSpan = 2,
+                                        RowSpan = 2,
+                                        Text = "Both:\nrowSpan and colSpan\ncan be defined at the same time"
+                                    },
+                                    "",
+                                },
+                                new List<object>() 
+                                { 
+                                    "Sample value 1",
+                                    "",
+                                    "",
+                                },
+                            }
+                    }
+            });
+            pdfmake.AddBodyText(new PdfMakeText()
+            {
+                Text = "Headers",
+                PageBreak = PageBreak.Before,
+                Style = new List<string>() { "subheader" }
+            });
+            pdfmake.AddBodyText("You can declare how many rows should be treated as a header. Headers are automatically repeated on the following pages");
+            pdfmake.AddBodyText(new PdfMakeTexts<string>()
+            {
+                Text = new List<string>()
+                    {
+                        "It is also possible to set keepWithHeaderRows to make sure there will be no page-break between the header and these rows. Take a look at the document-definition and play with it. If you set it to one, the following table will automatically start on the next page, since there\'s not enough space for the first row to be rendered here"
+                    },
+                Color = "gray",
+                Italics = true
+            });
+            pdfmake.AddBodyTable(new PdfMakeTable<List<object>>()
+            {
+                Style = new List<string>() { "tableExample" },
+                TableBody = new PdfMakeTableBody<List<object>>()
+                    {
+                        HeaderRows = 1,
+                        Body = new List<List<object>>()
+                            {
+                                new List<object>() 
+                                { 
+                                    new PdfMakeText()
+                                    {
+                                        Text = "Header 1",
+                                        Style = new List<string>() { "tableHeader" },
+                                    },
+                                    new PdfMakeText()
+                                    {
+                                        Text = "Header 2",
+                                        Style = new List<string>() { "tableHeader" },
+                                    },
+                                    new PdfMakeText()
+                                    {
+                                        Text = "Header 3",
+                                        Style = new List<string>() { "tableHeader" },
+                                    }
+                                },
+                                new List<object>() 
+                                { 
+                                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                                }
+                            }
+                    }
+            });
+            pdfmake.AddBodyText(new PdfMakeText()
+            {
+                Text = "Styling tables",
+                Style = new List<string>() { "subheader" }
+            });
+            pdfmake.AddBodyText("You can provide a custom styler for the table. Currently it supports:");
+            pdfmake.AddBodyUnorderedList(new PdfMakeUnorderedList<string>()
+            {
+                Ul = new List<string>()
+                    {
+                        "line widths",
+                        "line colors",
+                        "cell paddings",
+                    },
+            });
+            pdfmake.AddBodyText("with more options coming soon...\n\npdfmake currently has a few predefined styles (see them on the next page)");
+            pdfmake.AddBodyText(new PdfMakeText()
+            {
+                Text = "noBorders",
+                FontSize = 14,
+                Bold = true,
+                PageBreak = PageBreak.Before,
+                Margin = new List<int>(){ 0, 0, 0, 0}
+            });
+            pdfmake.AddBodyTable(new PdfMakeTable<List<object>>()
+            {
+                Style = new List<string>() { "tableExample" },
+                TableBody = new PdfMakeTableBody<List<object>>()
+                    {
+                        HeaderRows = 1,
+                        Body = new List<List<object>>()
+                            {
+                                new List<object>() 
+                                { 
+                                    new PdfMakeText()
+                                    {
+                                        Text = "Header 1",
+                                        Style = new List<string>() { "tableHeader" },
+                                    },
+                                    new PdfMakeText()
+                                    {
+                                        Text = "Header 2",
+                                        Style = new List<string>() { "tableHeader" },
+                                    },
+                                    new PdfMakeText()
+                                    {
+                                        Text = "Header 3",
+                                        Style = new List<string>() { "tableHeader" },
+                                    }
+                                },
+                                new List<object>() 
+                                { 
+                                    "Sample value 1",
+                                    "Sample value 2",
+                                    "Sample value 3",
+                                },
+                                new List<object>() 
+                                { 
+                                    "Sample value 1",
+                                    "Sample value 2",
+                                    "Sample value 3",
+                                },
+                                new List<object>() 
+                                { 
+                                    "Sample value 1",
+                                    "Sample value 2",
+                                    "Sample value 3",
+                                },
+                                new List<object>() 
+                                { 
+                                    "Sample value 1",
+                                    "Sample value 2",
+                                    "Sample value 3",
+                                },
+                                new List<object>() 
+                                { 
+                                    "Sample value 1",
+                                    "Sample value 2",
+                                    "Sample value 3",
+                                },
+                            }
+                    },
+                Layout = "noBorders"
+            });
+            pdfmake.AddBodyText(new PdfMakeText()
+            {
+                Text = "headerLineOnly",
+                FontSize = 14,
+                Bold = true,
+                Margin = new List<int>(){ 0, 20, 0, 0}
+            });
+            pdfmake.AddBodyTable(new PdfMakeTable<List<object>>()
+            {
+                Style = new List<string>() { "tableExample" },
+                TableBody = new PdfMakeTableBody<List<object>>()
+                    {
+                        HeaderRows = 1,
+                        Body = new List<List<object>>()
+                            {
+                                new List<object>() 
+                                { 
+                                    new PdfMakeText()
+                                    {
+                                        Text = "Header 1",
+                                        Style = new List<string>() { "tableHeader" },
+                                    },
+                                    new PdfMakeText()
+                                    {
+                                        Text = "Header 2",
+                                        Style = new List<string>() { "tableHeader" },
+                                    },
+                                    new PdfMakeText()
+                                    {
+                                        Text = "Header 3",
+                                        Style = new List<string>() { "tableHeader" },
+                                    }
+                                },
+                                new List<object>() 
+                                { 
+                                    "Sample value 1",
+                                    "Sample value 2",
+                                    "Sample value 3",
+                                },
+                                new List<object>() 
+                                { 
+                                    "Sample value 1",
+                                    "Sample value 2",
+                                    "Sample value 3",
+                                },
+                                new List<object>() 
+                                { 
+                                    "Sample value 1",
+                                    "Sample value 2",
+                                    "Sample value 3",
+                                },
+                                new List<object>() 
+                                { 
+                                    "Sample value 1",
+                                    "Sample value 2",
+                                    "Sample value 3",
+                                },
+                                new List<object>() 
+                                { 
+                                    "Sample value 1",
+                                    "Sample value 2",
+                                    "Sample value 3",
+                                },
+                            }
+                    },
+                Layout = "headerLineOnly"
+            });
+            pdfmake.AddBodyText(new PdfMakeText()
+            {
+                Text = "lightHorizontalLines",
+                FontSize = 14,
+                Bold = true,
+                Margin = new List<int>(){ 0, 20, 0, 0}
+            });
+            pdfmake.AddBodyTable(new PdfMakeTable<List<object>>()
+            {
+                Style = new List<string>() { "tableExample" },
+                TableBody = new PdfMakeTableBody<List<object>>()
+                    {
+                        HeaderRows = 1,
+                        Body = new List<List<object>>()
+                            {
+                                new List<object>() 
+                                { 
+                                    new PdfMakeText()
+                                    {
+                                        Text = "Header 1",
+                                        Style = new List<string>() { "tableHeader" },
+                                    },
+                                    new PdfMakeText()
+                                    {
+                                        Text = "Header 2",
+                                        Style = new List<string>() { "tableHeader" },
+                                    },
+                                    new PdfMakeText()
+                                    {
+                                        Text = "Header 3",
+                                        Style = new List<string>() { "tableHeader" },
+                                    }
+                                },
+                                new List<object>() 
+                                { 
+                                    "Sample value 1",
+                                    "Sample value 2",
+                                    "Sample value 3",
+                                },
+                                new List<object>() 
+                                { 
+                                    "Sample value 1",
+                                    "Sample value 2",
+                                    "Sample value 3",
+                                },
+                                new List<object>() 
+                                { 
+                                    "Sample value 1",
+                                    "Sample value 2",
+                                    "Sample value 3",
+                                },
+                                new List<object>() 
+                                { 
+                                    "Sample value 1",
+                                    "Sample value 2",
+                                    "Sample value 3",
+                                },
+                                new List<object>() 
+                                { 
+                                    "Sample value 1",
+                                    "Sample value 2",
+                                    "Sample value 3",
+                                },
+                            }
+                    },
+                Layout = "lightHorizontalLines"
+            });
+            pdfmake.AddBodyText(new PdfMakeText()
+            {
+                Text = "Optional border",
+                FontSize = 14,
+                Bold = true,
+                PageBreak = PageBreak.Before,
+                Margin = new List<int>(){ 0, 0, 0, 8}
+            });
+            pdfmake.AddBodyText("Each cell contains an optional border property: an array of 4 booleans for left border, top border, right border, bottom border.");
+            pdfmake.AddBodyTable(new PdfMakeTable<List<object>>()
+            {
+                Style = new List<string>() { "tableExample" },
+                TableBody = new PdfMakeTableBody<List<object>>()
+                    {
+                        HeaderRows = 1,
+                        Body = new List<List<object>>()
+                            {
+                                new List<object>() 
+                                { 
+                                    new PdfMakeText()
+                                    {
+                                        Border = new List<bool>() { false, true, false, false },
+                                        FillColor = "#eeeeee",
+                                        Text = "border:\n[false, true, false, false]",
+                                    },
+                                    new PdfMakeText()
+                                    {
+                                        Border = new List<bool>() { false, false, false, false },
+                                        FillColor = "#dddddd",
+                                        Text = "border:\n[false, false, false, false]",
+                                    },
+                                    new PdfMakeText()
+                                    {
+                                        Border = new List<bool>() { true, true, true, true },
+                                        FillColor = "#eeeeee",
+                                        Text = "border:\n[true, true, true, true]",
+                                    },
+                                },
+                                new List<object>() 
+                                { 
+                                    new PdfMakeText()
+                                    {
+                                        RowSpan = 3,
+                                        Border = new List<bool>() { true, true, true, true },
+                                        FillColor = "#eeeeff",
+                                        Text = "rowSpan: 3\n\nborder:\n[true, true, true, true]",
+                                    },
+                                    new PdfMakeText()
+                                    {
+                                        Border = null,
+                                        FillColor = "#eeeeee",
+                                        Text = "border:\nnull",
+                                    },
+                                    new PdfMakeText()
+                                    {
+                                        Border = new List<bool>() { true, false, false, false },
+                                        FillColor = "#dddddd",
+                                        Text = "border:\n[true, false, false, false]",
+                                    },
+                                },
+                                new List<object>() 
+                                { 
+                                    "",
+                                    new PdfMakeText()
+                                    {
+                                        ColSpan = 2,
+                                        Border = new List<bool>() { true, true, true, true },
+                                        FillColor = "#eeffee",
+                                        Text = "colSpan: 2\n\nborder:\n[true, true, true, true]",
+                                    },
+                                    ""
+                                },
+                                new List<object>() 
+                                { 
+                                    "",
+                                    new PdfMakeText()
+                                    {
+                                        Border = null,
+                                        FillColor = "#eeeeee",
+                                        Text = "border:\nnull",
+                                    },
+                                    new PdfMakeText()
+                                    {
+                                        Border = new List<bool>() { false, false, true, true },
+                                        FillColor = "#dddddd",
+                                        Text = "border:\n[false, false, true, true]",
+                                    },
+                                }
+                            }
+                    },
+                Layout = new { defaultBorder = (bool?)false }
+            });
+            pdfmake.AddBodyText("For every cell without a border property, whether it has all borders or not is determined by layout.defaultBorder, which is false in the table above and true (by default) in the table below.");
+            pdfmake.AddBodyTable(new PdfMakeTable<List<object>>()
+            {
+                Style = new List<string>() { "tableExample" },
+                TableBody = new PdfMakeTableBody<List<object>>()
+                    {
+                        HeaderRows = 1,
+                        Body = new List<List<object>>()
+                            {
+                                new List<object>() 
+                                { 
+                                    new PdfMakeText()
+                                    {
+                                        Border = new List<bool>() { false, false, false, false },
+                                        FillColor = "#eeeeee",
+                                        Text = "border:\n[false, false, false, false]",
+                                    },
+                                    new PdfMakeText()
+                                    {
+                                        FillColor = "#dddddd",
+                                        Text = "border:\nnull",
+                                    },
+                                    new PdfMakeText()
+                                    {
+                                        FillColor = "#eeeeee",
+                                        Text = "border:\nnull",
+                                    },
+                                },
+                                new List<object>() 
+                                { 
+                                    new PdfMakeText()
+                                    {
+                                        FillColor = "#dddddd",
+                                        Text = "border:\nnull",
+                                    },
+                                    new PdfMakeText()
+                                    {
+                                        FillColor = "#eeeeee",
+                                        Text = "border:\nnull",
+                                    },
+                                    new PdfMakeText()
+                                    {
+                                        Border = new List<bool>() { true, true, false, false },
+                                        FillColor = "#dddddd",
+                                        Text = "border:\n[true, true, false, false]",
+                                    },
+                                }
+                            }
+                    },
+            });
+            pdfmake.AddBodyText("And some other examples with rowSpan/colSpan...");
+            pdfmake.AddBodyTable(new PdfMakeTable<List<object>>()
+            {
+                Style = new List<string>() { "tableExample" },
+                TableBody = new PdfMakeTableBody<List<object>>()
+                    {
+                        HeaderRows = 1,
+                        Body = new List<List<object>>()
+                            {
+                                new List<object>() 
+                                { 
+                                    "",
+                                    "column 1",
+                                    "column 2",
+                                    "column 3"
+                                },
+                                new List<object>() 
+                                { 
+                                    "row 1",
+                                    new PdfMakeText()
+                                    {
+                                        RowSpan = 3,
+                                        ColSpan = 3,
+                                        Border = new List<bool>() { true, true, true, true },
+                                        FillColor = "#cccccc",
+                                        Text = "rowSpan: 3\ncolSpan: 3\n\nborder:\n[true, true, true, true]",
+                                    },
+                                    "",
+                                    ""
+                                },
+                                new List<object>()
+                                {
+                                    "row 2",
+                                    "",
+                                    "",
+                                    ""
+                                },
+                                new List<object>()
+                                {
+                                    "row 3",
+                                    "",
+                                    "",
+                                    ""
+                                }
+                            }
+                    },
+                    Layout = new { defaultBorder = (bool?) false }
+            });
+            pdfmake.AddBodyTable(new PdfMakeTable<List<object>>()
+            {
+                Style = new List<string>() { "tableExample" },
+                TableBody = new PdfMakeTableBody<List<object>>()
+                    {
+                        HeaderRows = 1,
+                        Body = new List<List<object>>()
+                            {
+                                new List<object>() 
+                                { 
+                                    new PdfMakeText()
+                                    {
+                                        ColSpan = 3,
+                                        Text = "colSpan: 3\n\nborder:\n[false, false, false, false]",
+                                        FillColor = "#eeeeee",
+                                        Border = new List<bool>() { false, false, false, false }
+                                    },
+                                    "",
+                                    ""
+                                },
+                                new List<object>() 
+                                { 
+                                    "border:\nnull",
+                                    "border:\nnull",
+                                    "border:\nnull",
+                                }
+                            }
+                    },
+            });
+            pdfmake.AddBodyTable(new PdfMakeTable<List<object>>()
+            {
+                Style = new List<string>() { "tableExample" },
+                TableBody = new PdfMakeTableBody<List<object>>()
+                    {
+                        Body = new List<List<object>>()
+                            {
+                                new List<object>() 
+                                { 
+                                    new PdfMakeText()
+                                    {
+                                        RowSpan = 3,
+                                        Text = "rowSpan: 3\n\nborder:\n[false, false, false, false]",
+                                        FillColor = "#eeeeee",
+                                        Border = new List<bool>() { false, false, false, false }
+                                    },
+                                    "border:\nnull",
+                                    "border:\nnull",
+                                },
+                                new List<object>() 
+                                {
+                                    "",
+                                    "border:\nnull",
+                                    "border:\nnull",
+                                },
+                                new List<object>() 
+                                {
+                                    "",
+                                    "border:\nnull",
+                                    "border:\nnull",
+                                }
+                            }
+                    },
+            });
+            pdfmake.Styles = new
+            {
+                header = new PdfMakeStyle() { FontSize = 18, Bold = true, Margin = new List<int>(){ 0, 0, 0, 10 } },
+                subheader = new PdfMakeStyle() { FontSize = 16, Bold = true, Margin = new List<int>(){ 0, 10, 0, 5 } },
+                tableExample = new PdfMakeStyle() { Margin = new List<int>(){ 0, 5, 0, 15 } },
+                tableHeader = new PdfMakeStyle() { Bold = true, FontSize = 13, Color = "black" },
+            };
+            StateHasChanged();
+        }
+    }
+    public string GetDocumentDefinition()
+    {
+        return pdfmake.GetDocumentDefinition(Formatting.Indented);
+    }
+    public async Task OpenInNewTab()
+    {
+        await JSRuntime.InvokeVoidAsync("eval", pdfmake.GetOpenInBrowser(false));
+    }
+}
