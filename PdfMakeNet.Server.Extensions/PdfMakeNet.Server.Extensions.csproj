@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <PackageReleaseNotes>Implemented SVG's and WaterMark. Removed Microsoft.AspNetCore.Mvc dependency to another project as server side only extensions.</PackageReleaseNotes>
-    <AssemblyVersion>0.1.0.5</AssemblyVersion>
+    <PackageReleaseNotes>Minor fixes.</PackageReleaseNotes>
+    <AssemblyVersion>0.1.0.6</AssemblyVersion>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <Authors>Anthony G. Rivera Cosme</Authors>
@@ -12,8 +12,8 @@
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/arivera12/PdfMakeNet</PackageProjectUrl>
     <RepositoryUrl>https://github.com/arivera12/PdfMakeNet</RepositoryUrl>
-    <Version>1.0.5</Version>
-    <FileVersion>0.1.0.5</FileVersion>
+    <Version>1.0.6</Version>
+    <FileVersion>0.1.0.6</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
